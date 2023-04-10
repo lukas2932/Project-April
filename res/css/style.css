@@ -1,0 +1,10 @@
+
+#main{
+	display: grid;
+	width: 40%;
+	height: 800px;
+	grid-template-columns: auto auto auto auto auto auto auto auto;
+}
+.box{
+	border: 1px solid black;
+}
