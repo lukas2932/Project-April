@@ -66,9 +66,10 @@
 #start_button{
 	display: none;
 	font-size: 32px;
-}
-#start_button p{
 	margin-top: 6px;
 	margin-bottom: 0px;
 	cursor: pointer;
+}
+.selected{
+	background-color: lightblue !important;
 }
