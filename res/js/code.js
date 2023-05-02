@@ -846,15 +846,20 @@ window.onload = () => {
         if(counter_one <= 0 && counter_two <= 0 && counter_three <= 0){
             start_button.style.display = "block";
             clearInterval(start_interval);
+            [...boxes].forEach((box) => {
+                box.onclick = () => {
+                    box.style.backgroundColor = dataset.color;
+                }
+            })
         }
     },1)
-}
-start_button.onclick = () => {
-    for(let i = 0; i<= boxes.length; i++){
-        let is_selected = window.getComputedStyle(boxes[i]);
-        if(is_selected.backgroundColor !== "rgb(255, 255, 255)"){
-            boxes[i].classList.add('selected')
-        }
+    start_button.onclick = () => {
+        [...boxes].forEach((box) => {
+            let is_selected = window.getComputedStyle(box)
+            if(is_selected.backgroundColor === "rgb(45, 84, 255)" || is_selected.backgroundColor === "rgb(255, 165, 0)" || is_selected.backgroundColor === "rgb(0, 0, 0)"){
+                box.classList.add('selected')
+            }
+        })
     }
 }
 
