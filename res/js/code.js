@@ -71,6 +71,8 @@ const smallShip = document.getElementById("smallShip");
 const mediumShip = document.getElementById("mediumShip");
 const longShip = document.getElementById("longShip");
 
+const info = document.getElementById("info");
+
 const start_button = document.getElementById("start_button");
 
 const selectedClass = document.getElementsByClassName("selected");
@@ -157,7 +159,11 @@ window.onload = () => {
             [...boxes].forEach((box) => {
 
                 box.onclick = () => {
-                    box.style.backgroundColor = "rgb(45,84,255)";
+                    let is_selected_1 = window.getComputedStyle(box)
+                    if(is_selected_1.backgroundColor === "rgb(0, 0, 0)" || is_selected_1.backgroundColor === "rgb(45, 84, 255)" || is_selected_1.backgroundColor === ""){
+                        console.log(is_selected_1.backgroundColor)
+                        info.innerHTML = "This box is already taken."
+                    }else if(is_selected_1.backgroundColor === "rgb(255, 255, 255)" || is_selected_1.backgroundColor === "rgba(0, 0, 0, 0)"){
                     counter_two--;
                     mediumShip.innerHTML = counter_two;
 
@@ -440,6 +446,7 @@ window.onload = () => {
                         boxes[70].style.backgroundColor = "rgb(45,84,255)";
                     }
                 }
+            }
             })
             smallShip.addEventListener('click', () => {
                 mediumShip.style.border = "none";
