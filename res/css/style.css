@@ -1,4 +1,12 @@
 
+html,
+body{
+	background-image: url(/res/img/40198-art-painting-military-navy-weapons-vehicles-ships-boats-ocean-sea-sky-clouds-aircraft-airplane-battle-war-fighter.jpg);
+	background-size: cover;
+	background-position: center;
+	position: relative;
+	z-index: -10 !important;
+}
 #main{
 	display: flex;
 	width: 650px;
@@ -7,13 +15,15 @@
 	justify-content: center;
 	align-items: center;
 	gap: 10px;
+	z-index: -1;
 }
 .box{
-	border: 1px solid rgb(0,0,0);
 	width: 80px;
 	height: 80px;
 	overflow: hidden;
 	border-radius: 5em 5em;
+	box-shadow: 0 1px 15px;
+	cursor: pointer;
 }
 #shipsTab{
 	position: relative;
@@ -65,8 +75,10 @@
 	cursor: pointer;
 	border-radius: 5em 5em;
 }
-#info p{
+#info{
 	margin: 4px;
+	font-family: 'Courier New', Courier, monospace;
+	font-size: 32px;
 }
 #start_button{
 	display: none;
@@ -95,4 +107,5 @@
 	font-family: 'Courier New', Courier, monospace;
 	cursor: pointer;
 	display: none;
+	position: absolute
 }
