@@ -96,25 +96,13 @@ window.onload = () => {
         let s_interval = setInterval(() => {
             if(counter_one <= 0){
                 smallShip.style.display = "none";
-                [...boxes].forEach((box) => {
-                    box.onclick = () => {
-                        let temporarly = window.getComputedStyle(box)
-                        if(temporarly.backgroundColor === "rgb(0, 0, 0)"){
-                            box.style.backgroundColor = "rgb(0, 0, 0)"
-                        }else if(temporarly.backgroundColor === "rgb(45, 84, 255)"){
-                            box.style.backgroundColor = "rgb(45, 84, 255)"
-                        }else if(temporarly.backgroundColor === "rgb(255, 165, 0)"){
-                            box.style.backgroundColor = "rgb(255, 165, 0)"
-                        }else{
-                            box.style.backgroundColor = "rgb(255, 255, 255)";
-                        }
-                    }
-                })
+                main.style.zIndex = "-1";
                 clearInterval(s_interval);
             }
         },1)
         if(!selected){
             smallShip.style.border = "5px solid yellow";
+            main.style.zIndex = "1";
             selected = true;
             [...boxes].forEach((box) => {
                 box.onclick = () => {
@@ -132,6 +120,7 @@ window.onload = () => {
         else{
             smallShip.style.border = "none";
             selected = false;
+            main.style.zIndex = "-1";
             [...boxes].forEach((box) => {
                 box.onclick = () => {
                     box.style.backgroundColor = "white";
@@ -145,28 +134,15 @@ window.onload = () => {
         let m_interval = setInterval(() => {
             if(counter_two <= 0){
                 mediumShip.style.display = "none";
-                [...boxes].forEach((box) => {
-                    box.onclick = () => {
-                        let temporarly = window.getComputedStyle(box)
-                        if(temporarly.backgroundColor === "rgb(0, 0, 0)"){
-                            box.style.backgroundColor = "rgb(0, 0, 0)"
-                        }else if(temporarly.backgroundColor === "rgb(45, 84, 255)"){
-                            box.style.backgroundColor = "rgb(45, 84, 255)"
-                        }else if(temporarly.backgroundColor === "rgb(255, 165, 0)"){
-                            box.style.backgroundColor = "rgb(255, 165, 0)"
-                        }else{
-                            box.style.backgroundColor = "rgb(255, 255, 255)";
-                        }
-                    }
-                })
+                main.style.zIndex = "-1";
                 clearInterval(m_interval);
             }
         },1)
         if(!selected){
             mediumShip.style.border = "5px solid yellow";
+            main.style.zIndex = "1";
             selected = true;
             [...boxes].forEach((box) => {
-
                 box.onclick = () => {
                     let is_selected_1 = window.getComputedStyle(box)
                     if(is_selected_1.backgroundColor === "rgb(0, 0, 0)" || is_selected_1.backgroundColor === "rgb(45, 84, 255)" || is_selected_1.backgroundColor === "rgb(255, 165, 0)"){
@@ -466,6 +442,7 @@ window.onload = () => {
         else{
             mediumShip.style.border = "none";
             selected = false;
+            main.style.zIndex = "-1";
             [...boxes].forEach((box) => {
                 box.onclick = () => {
                     box.style.backgroundColor = "white";
@@ -478,26 +455,14 @@ window.onload = () => {
         let l_interval = setInterval(() => {
             if(counter_three <= 0){
                 longShip.style.display = "none";
-                [...boxes].forEach((box) => {
-                    box.onclick = () => {
-                        let temporarly = window.getComputedStyle(box)
-                        if(temporarly.backgroundColor === "rgb(0, 0, 0)"){
-                            box.style.backgroundColor = "rgb(0, 0, 0)"
-                        }else if(temporarly.backgroundColor === "rgb(45, 84, 255)"){
-                            box.style.backgroundColor = "rgb(45, 84, 255)"
-                        }else if(temporarly.backgroundColor === "rgb(255, 165, 0)"){
-                            box.style.backgroundColor = "rgb(255, 165, 0)"
-                        }else{
-                            box.style.backgroundColor = "rgb(255, 255, 255)";
-                        }
-                    }
-                })
+                main.style.zIndex = "-1";
                 clearInterval(l_interval);
             }
         },1)
         if(!selected){
             longShip.style.border = "5px solid yellow";
             selected = true;
+            main.style.zIndex = "1";
             [...boxes].forEach((box) => {
                 box.onclick = () => {
                     let is_selected_1 = window.getComputedStyle(box);
@@ -872,6 +837,7 @@ window.onload = () => {
         else{
             longShip.style.border = "none";
             selected = false;
+            main.style.zIndex = "-1";
             [...boxes].forEach((box) => {
                 box.onclick = () => {
                     box.style.backgroundColor = "white";
@@ -887,6 +853,7 @@ window.onload = () => {
     },1)
     start_button.onclick = () => {
         enemyBoats.style.display = "block";
+        main.style.zIndex = "1";
         enemyBoats.onclick = () => {
             enemyBoats.style.zIndex = "-1";
             [...boxes].forEach((box) => {
@@ -897,7 +864,7 @@ window.onload = () => {
             setTimeout(() => {
                 [...boxes].forEach((box) => {
                     if(box.classList.contains('enemy') === true){
-                        box.style.backgroundColor = "rgb(255, 255, 255)"
+                        box.style.background = "none"
                     }
                     enemyBoats.style.zIndex = "1";
                 })
@@ -920,7 +887,7 @@ window.onload = () => {
                 box.style.backgroundColor = temporarly.backgroundColor;
             }
             if(box.classList.contains('smallShip') === true || box.classList.contains('mediumShip') === true || box.classList.contains('longShip') === true){
-                box.style.backgroundColor = "rgb(255, 255, 255)"
+                box.style.background = "none"
             }
         })
         
@@ -975,23 +942,24 @@ window.onload = () => {
         console.log(array)
         start_button.style.display = "none";
 
-        info.innerHTML = "The oponent has chosen a boxes.";
+        info.innerHTML = "The enemy has chosen a boxes.";
         setTimeout(() => {
             info.innerHTML = "Now it's your turn.";
             [...boxes].forEach((box) => {
                 box.addEventListener('click', () => {
-                    main.style.zIndex = "-1 ";
                     if(box.classList.contains('enemy') === true){
                         box.classList.add('hit');
+                        box.classList.remove('enemy');
                         box.style.backgroundColor = "rgb(255, 0, 0, 0.4)";
-                        info.innerHTML = "You hit an oponent!"
+                        info.innerHTML = "You hit an oponent!";
                     }else{
+                        main.style.zIndex = "-1 ";
                         info.innerHTML = "Miss";
                         box.classList.add('missed');
                         box.style.backgroundColor = "rgba(0, 0, 0, 0.4)"
                         setTimeout(() => {
                             info.innerHTML = "Now it's enemy turn.";
-                        }, 500)
+                        }, 1000)
                         setTimeout(() => {
                             [...boxes].forEach((box) => {
                                 if(box.classList.contains('smallShip') === true){
@@ -1003,8 +971,17 @@ window.onload = () => {
                                 if(box.classList.contains('longShip') === true){
                                     box.style.backgroundColor = "rgb(255, 165, 0)"
                                 }
-                                if(box.classList.contains('missed') === true){
-                                    box.style.backgroundColor = "rgb(255, 255, 255)";
+                                if(box.classList.contains('missed') === true && box.classList.contains('longShip') === true){
+                                    box.style.backgroundColor = "rgb(255, 165, 0)"
+                                }
+                                if(box.classList.contains('missed') === true && box.classList.contains('mediumShip') === true){
+                                    box.style.backgroundColor = "rgb(45, 84, 255)"
+                                }
+                                if(box.classList.contains('missed') === true && box.classList.contains('smallShip') === true){
+                                    box.style.backgroundColor = "rgb(0, 0, 0)";
+                                }
+                                if(box.classList.contains('missed') === true && box.classList.contains('smallShip') === false && box.classList.contains('mediumShip') === false && box.classList.contains('longShip') === false){
+                                    box.style.background = "none"
                                 }
                                 if(box.classList.contains('enemyMissed') === true){
                                     box.style.backgroundColor = "rgba(0, 0, 0, 0.4)"
@@ -1012,8 +989,17 @@ window.onload = () => {
                                 if(box.classList.contains('enemyHit') === true){
                                     box.style.backgroundColor = "rgba(255, 0, 0, 0.4)";
                                 }
-                                if(box.classList.contains('hit') === true){
-                                    box.style.backgroundColor = "rgb(255, 255, 255)";
+                                if(box.classList.contains('hit') === true && box.classList.contains('longShip') === true){
+                                    box.style.backgroundColor = "rgb(255, 165, 0)"
+                                }
+                                if(box.classList.contains('hit') === true && box.classList.contains('mediumShip') === true){
+                                    box.style.backgroundColor = "rgb(45, 84, 255)"
+                                }
+                                if(box.classList.contains('hit') === true && box.classList.contains('smallShip') === true){
+                                    box.style.backgroundColor = "rgb(0, 0, 0)";
+                                }
+                                if(box.classList.contains('hit') === true && box.classList.contains('smallShip') === false && box.classList.contains('mediumShip') === false && box.classList.contains('longShip') === false){
+                                    box.style.background = "none"
                                 }
                             });
                         }, 1000)
@@ -1023,6 +1009,14 @@ window.onload = () => {
                             if(boxes[randomNum].classList.contains('smallShip') === true || boxes[randomNum].classList.contains('mediumShip') === true || boxes[randomNum].classList.contains('longShip') === true){
                                 boxes[randomNum].classList.add('enemyHit');
                                 boxes[randomNum].style.backgroundColor = "rgba(255, 0, 0, 0.4)";
+                                let isEnemyWinner = false;
+                                while(isEnemyWinner === false){
+                                    for(let i = 0; i <= 69; i++){
+                                        if(boxes[i].classList.contains('smallShip') === true && boxes[i].classList.contains('mediumShip') === true && boxes[i].classList.contains('longShip') === true){
+                                            isEnemyWinner = true;
+                                        }
+                                    }
+                                }
                             }else{
                                 boxes[randomNum].classList.add('enemyMissed');
                                 boxes[randomNum].style.backgroundColor = "rgba(0, 0, 0, 0.4)";
@@ -1033,19 +1027,19 @@ window.onload = () => {
                             main.style.zIndex = "1 ";
                             [...boxes].forEach((box) => {
                                 if(box.classList.contains('smallShip') === true || box.classList.contains('mediumShip') === true || box.classList.contains('longShip') === true){
-                                    box.style.backgroundColor = "rgb(255, 255, 255)"
+                                    box.style.background = "none"
                                 }
                                 if(box.classList.contains('missed') === true){
                                     box.style.backgroundColor = "rgba(0, 0, 0, 0.4)"
                                 }
                                 if(box.classList.contains('enemyMissed') === true){
-                                    box.style.backgroundColor = "rgb(255, 255, 255)"
+                                    box.style.background = "none"
                                 }
                                 if(box.classList.contains('hit') === true){
-                                    boxes[randomNum].style.backgroundColor = "rgba(255, 0, 0, 0.4)";
+                                    box.style.backgroundColor = "rgba(255, 0, 0, 0.4)";
                                 }
                             })
-                        }, 5000)
+                        }, 3500)
                     }
                 },{once : true})
             })
