@@ -77,7 +77,9 @@ const info = document.getElementById("info");
 
 const start_button = document.getElementById("start_button");
 
+let rotateLinearButton = document.getElementById("rotateLinearButton");
 let selected = false;
+let rotateSelected = false;
 
 let counter_one = 3;
 let counter_two = 2;
@@ -86,6 +88,7 @@ let counter_three = 1;
 let counter_ai_one = 3;
 let counter_ai_two = 2;
 let counter_ai_three = 1;
+
 
 window.onload = () => {
     smallShip.innerHTML = counter_one;
@@ -136,303 +139,86 @@ window.onload = () => {
                 mediumShip.style.display = "none";
                 main.style.zIndex = "-1";
                 clearInterval(m_interval);
+                rotateLinearButton.style.display = "none"
             }
         },1)
         if(!selected){
             mediumShip.style.border = "5px solid yellow";
             main.style.zIndex = "1";
             selected = true;
+            rotateLinearButton.style.display = "block";
+            rotateLinearButton.onclick = () => {
+                rotateLinearButton.style.backgroundColor = "rgba(0, 0, 0, 0.4)";
+                rotateLinearButton.style.border = "1px solid black";
+                [...boxes].forEach((box) => {
+                    box.onclick = () => {  
+                        let is_selected_1 = window.getComputedStyle(box) 
+                        if(is_selected_1.backgroundColor === "rgb(0, 0, 0)" || is_selected_1.backgroundColor === "rgb(45, 84, 255)" || is_selected_1.backgroundColor === "rgb(255, 165, 0)"){
+                            console.log(is_selected_1.backgroundColor)
+                            info.innerHTML = "This box is already taken."
+                        }else if(is_selected_1.backgroundColor === "rgb(255, 255, 255)" || is_selected_1.backgroundColor === "rgba(0, 0, 0, 0)"){
+                            let postition1 = Number(box.dataset.number)
+                            counter_two--;
+                            mediumShip.innerHTML = counter_two;
+                            box.style.backgroundColor = "rgb(45, 84, 255)"
+                            boxes[postition1 + 7].style.backgroundColor = "rgb(45, 84, 255)"
+                        }
+                    }
+                })
+                rotateLinearButton.addEventListener('click', () => {
+                    rotateLinearButton.style.background = "none";
+                    rotateLinearButton.style.border = "none";
+                    [...boxes].forEach((box) => {
+                        box.onclick = () => {   
+                            let is_selected_1 = window.getComputedStyle(box)
+                            if(is_selected_1.backgroundColor === "rgb(0, 0, 0)" || is_selected_1.backgroundColor === "rgb(45, 84, 255)" || is_selected_1.backgroundColor === "rgb(255, 165, 0)"){
+                                console.log(is_selected_1.backgroundColor)
+                                info.innerHTML = "This box is already taken."
+                            }else if(is_selected_1.backgroundColor === "rgb(255, 255, 255)" || is_selected_1.backgroundColor === "rgba(0, 0, 0, 0)"){
+                                let postition1 = Number(box.dataset.number)
+                                counter_two--;
+                                mediumShip.innerHTML = counter_two;
+                                box.style.backgroundColor = "rgb(45, 84, 255)"
+                                boxes[postition1 + 1].style.backgroundColor = "rgb(45, 84, 255)"
+                            }
+                        }
+                    })
+                }, {once : true})
+            }
             [...boxes].forEach((box) => {
-                box.onclick = () => {
+                box.onclick = () => {   
                     let is_selected_1 = window.getComputedStyle(box)
                     if(is_selected_1.backgroundColor === "rgb(0, 0, 0)" || is_selected_1.backgroundColor === "rgb(45, 84, 255)" || is_selected_1.backgroundColor === "rgb(255, 165, 0)"){
                         console.log(is_selected_1.backgroundColor)
                         info.innerHTML = "This box is already taken."
                     }else if(is_selected_1.backgroundColor === "rgb(255, 255, 255)" || is_selected_1.backgroundColor === "rgba(0, 0, 0, 0)"){
-                    counter_two--;
-                    mediumShip.innerHTML = counter_two;
-                    box.style.backgroundColor = "rgb(45, 84, 255)"
-
-                    if(box.dataset.number == 0){
-                        boxes[1].style.backgroundColor = "rgb(45, 84, 255)";
-                    }
-                    if(box.dataset.number == 1){
-                        boxes[2].style.backgroundColor = "rgb(45, 84, 255)";
-                    }
-                
-                    if(box.dataset.number == 2){
-                        boxes[3].style.backgroundColor = "rgb(45, 84, 255)";
-                    }
-                
-                    if(box.dataset.number == 3){
-                        boxes[4].style.backgroundColor = "rgb(45, 84, 255)";
-                    }
-                
-                    if(box.dataset.number == 4){
-                        boxes[5].style.backgroundColor = "rgb(45, 84, 255)";
-                    }
-                
-                    if(box.dataset.number == 5){
-                        boxes[6].style.backgroundColor = "rgb(45, 84, 255)";
-                    }
-                
-                    if(box.dataset.number == 6){
-                        boxes[7].style.backgroundColor = "rgb(45, 84, 255)";
-                    }
-                
-                    if(box.dataset.number == 7){
-                        boxes[8].style.backgroundColor = "rgb(45, 84, 255)";
-                    }
-                
-                    if(box.dataset.number == 8){
-                        boxes[9].style.backgroundColor = "rgb(45, 84, 255)";
-                    }
-                
-                    if(box.dataset.number == 9){
-                        boxes[10].style.backgroundColor = "rgb(45, 84, 255)";
-                    }
-                
-                    if(box.dataset.number == 10){
-                        boxes[11].style.backgroundColor = "rgb(45, 84, 255)";
-                    }
-                
-                    if(box.dataset.number == 11){
-                        boxes[12].style.backgroundColor = "rgb(45, 84, 255)";
-                    }
-                
-                    if(box.dataset.number == 12){
-                        boxes[13].style.backgroundColor = "rgb(45, 84, 255)";
-                    }
-                
-                    if(box.dataset.number == 13){
-                        boxes[14].style.backgroundColor = "rgb(45, 84, 255)";
-                    }
-                
-                    if(box.dataset.number == 14){
-                        boxes[15].style.backgroundColor = "rgb(45, 84, 255)";
-                    }
-                
-                    if(box.dataset.number == 15){
-                        boxes[16].style.backgroundColor = "rgb(45, 84, 255)";
-                    }
-                
-                    if(box.dataset.number == 16){
-                        boxes[17].style.backgroundColor = "rgb(45, 84, 255)";
-                    }
-                
-                    if(box.dataset.number == 17){
-                        boxes[18].style.backgroundColor = "rgb(45, 84, 255)";
-                    }
-                
-                    if(box.dataset.number == 18){
-                        boxes[19].style.backgroundColor = "rgb(45, 84, 255)";
-                    }
-                
-                    if(box.dataset.number == 19){
-                        boxes[20].style.backgroundColor = "rgb(45, 84, 255)";
-                    }
-                
-                    if(box.dataset.number == 20){
-                        boxes[21].style.backgroundColor = "rgb(45, 84, 255)";
-                    }
-                
-                    if(box.dataset.number == 21){
-                        boxes[22].style.backgroundColor = "rgb(45, 84, 255)";
-                    }
-                
-                    if(box.dataset.number == 22){
-                        boxes[23].style.backgroundColor = "rgb(45, 84, 255)";
-                    }
-                
-                    if(box.dataset.number == 23){
-                        boxes[24].style.backgroundColor = "rgb(45, 84, 255)";
-                    }
-                
-                    if(box.dataset.number == 24){
-                        boxes[25].style.backgroundColor = "rgb(45, 84, 255)";
-                    }
-                
-                    if(box.dataset.number == 25){
-                        boxes[26].style.backgroundColor = "rgb(45, 84, 255)";
-                    }
-                
-                    if(box.dataset.number == 26){
-                        boxes[27].style.backgroundColor = "rgb(45, 84, 255)";
-                    }
-                
-                    if(box.dataset.number == 27){
-                        boxes[28].style.backgroundColor = "rgb(45, 84, 255)";
-                    }
-                
-                    if(box.dataset.number == 28){
-                        boxes[29].style.backgroundColor = "rgb(45, 84, 255)";
-                    }
-                
-                    if(box.dataset.number == 29){
-                        boxes[30].style.backgroundColor = "rgb(45, 84, 255)";
-                    }
-                
-                    if(box.dataset.number == 30){
-                        boxes[31].style.backgroundColor = "rgb(45, 84, 255)";
-                    }
-                
-                    if(box.dataset.number == 31){
-                        boxes[32].style.backgroundColor = "rgb(45, 84, 255)";
-                    }
-                
-                    if(box.dataset.number == 32){
-                        boxes[33].style.backgroundColor = "rgb(45, 84, 255)";
-                    }
-                
-                    if(box.dataset.number == 33){
-                        boxes[34].style.backgroundColor = "rgb(45, 84, 255)";
-                    }
-                
-                    if(box.dataset.number == 34){
-                        boxes[35].style.backgroundColor = "rgb(45, 84, 255)";
-                    }
-                
-                    if(box.dataset.number == 35){
-                        boxes[36].style.backgroundColor = "rgb(45, 84, 255)";
-                    }
-                
-                    if(box.dataset.number == 36){
-                        boxes[37].style.backgroundColor = "rgb(45, 84, 255)";
-                    }
-                
-                    if(box.dataset.number == 37){
-                        boxes[38].style.backgroundColor = "rgb(45, 84, 255)";
-                    }
-                
-                    if(box.dataset.number == 38){
-                        boxes[39].style.backgroundColor = "rgb(45, 84, 255)";
-                    }
-                
-                    if(box.dataset.number == 39){
-                        boxes[40].style.backgroundColor = "rgb(45, 84, 255)";
-                    }
-                
-                    if(box.dataset.number == 40){
-                        boxes[41].style.backgroundColor = "rgb(45, 84, 255)";
-                    }
-                
-                    if(box.dataset.number == 41){
-                        boxes[42].style.backgroundColor = "rgb(45, 84, 255)";
-                    }
-                
-                    if(box.dataset.number == 42){
-                        boxes[43].style.backgroundColor = "rgb(45, 84, 255)";
-                    }
-                
-                    if(box.dataset.number == 43){
-                        boxes[44].style.backgroundColor = "rgb(45, 84, 255)";
-                    }
-                
-                    if(box.dataset.number == 44){
-                        boxes[45].style.backgroundColor = "rgb(45, 84, 255)";
-                    }
-                
-                    if(box.dataset.number == 45){
-                        boxes[46].style.backgroundColor = "rgb(45, 84, 255)";
-                    }
-                
-                    if(box.dataset.number == 46){
-                        boxes[47].style.backgroundColor = "rgb(45, 84, 255)";
-                    }
-                
-                    if(box.dataset.number == 47){
-                        boxes[48].style.backgroundColor = "rgb(45, 84, 255)";
-                    }
-                
-                    if(box.dataset.number == 48){
-                        boxes[49].style.backgroundColor = "rgb(45, 84, 255)";
-                    }
-                
-                    if(box.dataset.number == 49){
-                        boxes[50].style.backgroundColor = "rgb(45, 84, 255)";
-                    }
-                
-                    if(box.dataset.number == 50){
-                        boxes[51].style.backgroundColor = "rgb(45, 84, 255)";
-                    }
-                
-                    if(box.dataset.number == 51){
-                        boxes[52].style.backgroundColor = "rgb(45, 84, 255)";
-                    }
-                
-                    if(box.dataset.number == 52){
-                        boxes[53].style.backgroundColor = "rgb(45, 84, 255)";
-                    }
-                
-                    if(box.dataset.number == 53){
-                        boxes[54].style.backgroundColor = "rgb(45, 84, 255)";
-                    }
-                
-                    if(box.dataset.number == 54){
-                        boxes[55].style.backgroundColor = "rgb(45, 84, 255)";
-                    }
-                
-                    if(box.dataset.number == 55){
-                        boxes[56].style.backgroundColor = "rgb(45, 84, 255)";
-                    }
-                
-                    if(box.dataset.number == 56){
-                        boxes[57].style.backgroundColor = "rgb(45, 84, 255)";
-                    }
-                
-                    if(box.dataset.number == 57){
-                        boxes[58].style.backgroundColor = "rgb(45, 84, 255)";
-                    }
-                
-                    if(box.dataset.number == 58){
-                        boxes[59].style.backgroundColor = "rgb(45, 84, 255)";
-                    }
-                
-                    if(box.dataset.number == 59){
-                        boxes[60].style.backgroundColor = "rgb(45, 84, 255)";
-                    }
-                
-                    if(box.dataset.number == 60){
-                        boxes[61].style.backgroundColor = "rgb(45, 84, 255)";
-                    }
-                
-                    if(box.dataset.number == 61){
-                        boxes[62].style.backgroundColor = "rgb(45, 84, 255)";
-                    }
-                
-                    if(box.dataset.number == 62){
-                        boxes[63].style.backgroundColor = "rgb(45, 84, 255)";
-                    }
-                
-                    if(box.dataset.number == 63){
-                        boxes[64].style.backgroundColor = "rgb(45, 84, 255)";
-                    }
-                
-                    if(box.dataset.number == 64){
-                        boxes[65].style.backgroundColor = "rgb(45, 84, 255)";
-                    }
-                
-                    if(box.dataset.number == 65){
-                        boxes[66].style.backgroundColor = "rgb(45, 84, 255)";
-                    }
-                
-                    if(box.dataset.number == 66){
-                        boxes[67].style.backgroundColor = "rgb(45, 84, 255)";
-                    }
-                
-                    if(box.dataset.number == 67){
-                        boxes[68].style.backgroundColor = "rgb(45, 84, 255)";
-                    }
-                
-                    if(box.dataset.number == 68){
-                        boxes[69].style.backgroundColor = "rgb(45, 84, 255)";
-                    }
-                
-                    if(box.dataset.number == 69){
-                        boxes[70].style.backgroundColor = "rgb(45, 84, 255)";
+                        let postition1 = Number(box.dataset.number)
+                        counter_two--;
+                        mediumShip.innerHTML = counter_two;
+                        box.style.backgroundColor = "rgb(45, 84, 255)"
+                        boxes[postition1 + 1].style.backgroundColor = "rgb(45, 84, 255)"
                     }
                 }
-            }
+
+            //Zde jsem skoncil
+                box.onmouseover = () => {
+                    let temporarly_one = window.getComputedStyle(box);
+                    let num_one = Number(box.dataset.number) + 1;
+                    let temporarly_two = window.getComputedStyle(boxes[num_one]) 
+
+                    if(temporarly_one.backgroundColor === "rgba(0, 0, 0, 0)" && temporarly_two.backgroundColor === "rgba(0, 0, 0, 0)"){
+                        box.style.backgroundColor = "rgba(45, 84, 255, 0.4)";
+                        boxes[Number(box.dataset.number) + 1].style.backgroundColor = "rgba(45, 84, 255, 0.4)"
+                        box.addEventListener('mouseout', () => {
+                            box.style.background = "none";
+                            boxes[Number(box.dataset.number) + 1].style.background = "none";
+                        }, {once : true})
+                    }
+                    box.onclick = () =>{
+                        box.style.backgroundColor = "rgb(45, 84, 255)";
+                        boxes[Number(box.dataset.number) + 1].style.backgroundColor = "rgb(45, 84, 255)";
+                    }
+                }
             })
             smallShip.addEventListener('click', () => {
                 mediumShip.style.border = "none";
@@ -440,9 +226,12 @@ window.onload = () => {
             }, {once : true});
         }
         else{
+            rotateLinearButton.style.display = "none"
             mediumShip.style.border = "none";
             selected = false;
             main.style.zIndex = "-1";
+            rotateLinearButton.style.background = "none";
+            rotateLinearButton.style.border = "none";
             [...boxes].forEach((box) => {
                 box.onclick = () => {
                     box.style.backgroundColor = "white";
@@ -457,370 +246,67 @@ window.onload = () => {
                 longShip.style.display = "none";
                 main.style.zIndex = "-1";
                 clearInterval(l_interval);
+                rotateLinearButton.style.display = "none";
             }
         },1)
         if(!selected){
             longShip.style.border = "5px solid yellow";
             selected = true;
             main.style.zIndex = "1";
+            rotateLinearButton.style.display = "block";
+            rotateLinearButton.onclick = () => {
+                rotateLinearButton.style.backgroundColor = "rgba(0, 0, 0, 0.4)";
+                rotateLinearButton.style.border = "1px solid black";
+                [...boxes].forEach((box) => {
+                    box.onclick = () => {   
+                        let is_selected_1 = window.getComputedStyle(box)
+                        if(is_selected_1.backgroundColor === "rgb(0, 0, 0)" || is_selected_1.backgroundColor === "rgb(45, 84, 255)" || is_selected_1.backgroundColor === "rgb(255, 165, 0)"){
+                            console.log(is_selected_1.backgroundColor)
+                            info.innerHTML = "This box is already taken."
+                        }else if(is_selected_1.backgroundColor === "rgb(255, 255, 255)" || is_selected_1.backgroundColor === "rgba(0, 0, 0, 0)"){
+                            let postition2 = Number(box.dataset.number)
+                            counter_three--;
+                            longShip.innerHTML = counter_two;
+                            box.style.backgroundColor = "rgb(255, 165, 0)"
+                            boxes[postition2 + 7].style.backgroundColor = "rgb(255, 165, 0)"
+                            boxes[postition2 + 14].style.backgroundColor = "rgb(255, 165, 0)"
+                        }
+                    }
+                })
+                rotateLinearButton.addEventListener('click', () => {
+                    rotateLinearButton.style.background = "none";
+                    rotateLinearButton.style.border = "none";
+                    [...boxes].forEach((box) => {
+                        box.onclick = () => {   
+                            let is_selected_1 = window.getComputedStyle(box)
+                            if(is_selected_1.backgroundColor === "rgb(0, 0, 0)" || is_selected_1.backgroundColor === "rgb(45, 84, 255)" || is_selected_1.backgroundColor === "rgb(255, 165, 0)"){
+                                console.log(is_selected_1.backgroundColor)
+                                info.innerHTML = "This box is already taken."
+                            }else if(is_selected_1.backgroundColor === "rgb(255, 255, 255)" || is_selected_1.backgroundColor === "rgba(0, 0, 0, 0)"){
+                                let postition2 = Number(box.dataset.number)
+                                counter_three--;
+                                longShip.innerHTML = counter_two;
+                                box.style.backgroundColor = "rgb(255, 165, 0)";
+                                boxes[postition2 + 1].style.backgroundColor = "rgb(255, 165, 0)";
+                                boxes[postition2 + 2].style.backgroundColor = "rgb(255, 165, 0)";
+                            }
+                        }
+                    })
+                }, {once : true})
+            }
+            
             [...boxes].forEach((box) => {
                 box.onclick = () => {
                     let is_selected_1 = window.getComputedStyle(box);
                     if(is_selected_1.backgroundColor === "rgb(0, 0, 0)" || is_selected_1.backgroundColor === "rgb(45, 84, 255)" || is_selected_1.backgroundColor === "rgb(255, 165, 0)"){
                         info.innerHTML = "This box is already taken.";
                     }else if(is_selected_1.backgroundColor === "rgb(255, 255, 255)" || is_selected_1.backgroundColor === "rgba(0, 0, 0, 0)"){
-    
-                    box.style.backgroundColor = "rgb(255, 165, 0)";
-                    counter_three--;
-                    longShip.innerHTML = counter_three;
-
-                    if(box.dataset.number == 0){
-                        boxes[1].style.backgroundColor = "rgb(255, 165, 0)";
-                        boxes[2].style.backgroundColor = "rgb(255, 165, 0)";
-                    }
-                    if(box.dataset.number == 1){
-                        boxes[2].style.backgroundColor = "rgb(255, 165, 0)";
-                        boxes[3].style.backgroundColor = "rgb(255, 165, 0)";
-                    }
-                
-                    if(box.dataset.number == 2){
-                        boxes[3].style.backgroundColor = "rgb(255, 165, 0)";
-                        boxes[4].style.backgroundColor = "rgb(255, 165, 0)";
-                    }
-                
-                    if(box.dataset.number == 3){
-                        boxes[4].style.backgroundColor = "rgb(255, 165, 0)";
-                        boxes[5].style.backgroundColor = "rgb(255, 165, 0)";
-                    }
-                
-                    if(box.dataset.number == 4){
-                        boxes[5].style.backgroundColor = "rgb(255, 165, 0)";
-                        boxes[6].style.backgroundColor = "rgb(255, 165, 0)";
-                    }
-                
-                    if(box.dataset.number == 5){
-                        boxes[6].style.backgroundColor = "rgb(255, 165, 0)";
-                        boxes[7].style.backgroundColor = "rgb(255, 165, 0)";
-                    }
-                
-                    if(box.dataset.number == 6){
-                        boxes[7].style.backgroundColor = "rgb(255, 165, 0)";
-                        boxes[8].style.backgroundColor = "rgb(255, 165, 0)";
-                    }
-                
-                    if(box.dataset.number == 7){
-                        boxes[8].style.backgroundColor = "rgb(255, 165, 0)";
-                        boxes[9].style.backgroundColor = "rgb(255, 165, 0)";
-                    }
-                
-                    if(box.dataset.number == 8){
-                        boxes[9].style.backgroundColor = "rgb(255, 165, 0)";
-                        boxes[10].style.backgroundColor = "rgb(255, 165, 0)";
-                    }
-                
-                    if(box.dataset.number == 9){
-                        boxes[10].style.backgroundColor = "rgb(255, 165, 0)";
-                        boxes[11].style.backgroundColor = "rgb(255, 165, 0)";
-                    }
-                
-                    if(box.dataset.number == 10){
-                        boxes[11].style.backgroundColor = "rgb(255, 165, 0)";
-                        boxes[12].style.backgroundColor = "rgb(255, 165, 0)";
-                    }
-                
-                    if(box.dataset.number == 11){
-                        boxes[12].style.backgroundColor = "rgb(255, 165, 0)";
-                        boxes[13].style.backgroundColor = "rgb(255, 165, 0)";
-                    }
-                
-                    if(box.dataset.number == 12){
-                        boxes[13].style.backgroundColor = "rgb(255, 165, 0)";
-                        boxes[14].style.backgroundColor = "rgb(255, 165, 0)";
-                    }
-                
-                    if(box.dataset.number == 13){
-                        boxes[14].style.backgroundColor = "rgb(255, 165, 0)";
-                        boxes[15].style.backgroundColor = "rgb(255, 165, 0)";
-                    }
-                
-                    if(box.dataset.number == 14){
-                        boxes[15].style.backgroundColor = "rgb(255, 165, 0)";
-                        boxes[16].style.backgroundColor = "rgb(255, 165, 0)";
-                    }
-                
-                    if(box.dataset.number == 15){
-                        boxes[16].style.backgroundColor = "rgb(255, 165, 0)";
-                        boxes[17].style.backgroundColor = "rgb(255, 165, 0)";
-                    }
-                
-                    if(box.dataset.number == 16){
-                        boxes[17].style.backgroundColor = "rgb(255, 165, 0)";
-                        boxes[18].style.backgroundColor = "rgb(255, 165, 0)";
-                    }
-                
-                    if(box.dataset.number == 17){
-                        boxes[18].style.backgroundColor = "rgb(255, 165, 0)";
-                        boxes[19].style.backgroundColor = "rgb(255, 165, 0)";
-                    }
-                
-                    if(box.dataset.number == 18){
-                        boxes[19].style.backgroundColor = "rgb(255, 165, 0)";
-                        boxes[20].style.backgroundColor = "rgb(255, 165, 0)";
-                    }
-                
-                    if(box.dataset.number == 19){
-                        boxes[20].style.backgroundColor = "rgb(255, 165, 0)";
-                        boxes[21].style.backgroundColor = "rgb(255, 165, 0)";
-                    }
-                
-                    if(box.dataset.number == 20){
-                        boxes[21].style.backgroundColor = "rgb(255, 165, 0)";
-                        boxes[22].style.backgroundColor = "rgb(255, 165, 0)";
-                    }
-                
-                    if(box.dataset.number == 21){
-                        boxes[22].style.backgroundColor = "rgb(255, 165, 0)";
-                        boxes[23].style.backgroundColor = "rgb(255, 165, 0)";
-                    }
-                
-                    if(box.dataset.number == 22){
-                        boxes[23].style.backgroundColor = "rgb(255, 165, 0)";
-                        boxes[24].style.backgroundColor = "rgb(255, 165, 0)";
-                    }
-                
-                    if(box.dataset.number == 23){
-                        boxes[24].style.backgroundColor = "rgb(255, 165, 0)";
-                        boxes[25].style.backgroundColor = "rgb(255, 165, 0)";
-                    }
-                
-                    if(box.dataset.number == 24){
-                        boxes[25].style.backgroundColor = "rgb(255, 165, 0)";
-                        boxes[26].style.backgroundColor = "rgb(255, 165, 0)";
-                    }
-                
-                    if(box.dataset.number == 25){
-                        boxes[26].style.backgroundColor = "rgb(255, 165, 0)";
-                        boxes[27].style.backgroundColor = "rgb(255, 165, 0)";
-                    }
-                
-                    if(box.dataset.number == 26){
-                        boxes[27].style.backgroundColor = "rgb(255, 165, 0)";
-                        boxes[28].style.backgroundColor = "rgb(255, 165, 0)";
-                    }
-                
-                    if(box.dataset.number == 27){
-                        boxes[28].style.backgroundColor = "rgb(255, 165, 0)";
-                        boxes[29].style.backgroundColor = "rgb(255, 165, 0)";
-                    }
-                
-                    if(box.dataset.number == 28){
-                        boxes[29].style.backgroundColor = "rgb(255, 165, 0)";
-                        boxes[30].style.backgroundColor = "rgb(255, 165, 0)";
-                    }
-                
-                    if(box.dataset.number == 29){
-                        boxes[30].style.backgroundColor = "rgb(255, 165, 0)";
-                        boxes[31].style.backgroundColor = "rgb(255, 165, 0)";
-                    }
-                
-                    if(box.dataset.number == 30){
-                        boxes[31].style.backgroundColor = "rgb(255, 165, 0)";
-                        boxes[32].style.backgroundColor = "rgb(255, 165, 0)";
-                    }
-                
-                    if(box.dataset.number == 31){
-                        boxes[32].style.backgroundColor = "rgb(255, 165, 0)";
-                        boxes[33].style.backgroundColor = "rgb(255, 165, 0)";
-                    }
-                
-                    if(box.dataset.number == 32){
-                        boxes[33].style.backgroundColor = "rgb(255, 165, 0)";
-                        boxes[34].style.backgroundColor = "rgb(255, 165, 0)";
-                    }
-                
-                    if(box.dataset.number == 33){
-                        boxes[34].style.backgroundColor = "rgb(255, 165, 0)";
-                        boxes[35].style.backgroundColor = "rgb(255, 165, 0)";
-                    }
-                
-                    if(box.dataset.number == 34){
-                        boxes[35].style.backgroundColor = "rgb(255, 165, 0)";
-                        boxes[36].style.backgroundColor = "rgb(255, 165, 0)";
-                    }
-                
-                    if(box.dataset.number == 35){
-                        boxes[36].style.backgroundColor = "rgb(255, 165, 0)";
-                        boxes[37].style.backgroundColor = "rgb(255, 165, 0)";
-                    }
-                
-                    if(box.dataset.number == 36){
-                        boxes[37].style.backgroundColor = "rgb(255, 165, 0)";
-                        boxes[38].style.backgroundColor = "rgb(255, 165, 0)";
-                    }
-                
-                    if(box.dataset.number == 37){
-                        boxes[38].style.backgroundColor = "rgb(255, 165, 0)";
-                        boxes[39].style.backgroundColor = "rgb(255, 165, 0)";
-                    }
-                
-                    if(box.dataset.number == 38){
-                        boxes[39].style.backgroundColor = "rgb(255, 165, 0)";
-                        boxes[40].style.backgroundColor = "rgb(255, 165, 0)";
-                    }
-                
-                    if(box.dataset.number == 39){
-                        boxes[40].style.backgroundColor = "rgb(255, 165, 0)";
-                        boxes[41].style.backgroundColor = "rgb(255, 165, 0)";
-                    }
-                
-                    if(box.dataset.number == 40){
-                        boxes[41].style.backgroundColor = "rgb(255, 165, 0)";
-                        boxes[42].style.backgroundColor = "rgb(255, 165, 0)";
-                    }
-                
-                    if(box.dataset.number == 41){
-                        boxes[42].style.backgroundColor = "rgb(255, 165, 0)";
-                        boxes[43].style.backgroundColor = "rgb(255, 165, 0)";
-                    }
-                
-                    if(box.dataset.number == 42){
-                        boxes[43].style.backgroundColor = "rgb(255, 165, 0)";
-                        boxes[44].style.backgroundColor = "rgb(255, 165, 0)";
-                    }
-                
-                    if(box.dataset.number == 43){
-                        boxes[44].style.backgroundColor = "rgb(255, 165, 0)";
-                        boxes[45].style.backgroundColor = "rgb(255, 165, 0)";
-                    }
-                
-                    if(box.dataset.number == 44){
-                        boxes[45].style.backgroundColor = "rgb(255, 165, 0)";
-                        boxes[46].style.backgroundColor = "rgb(255, 165, 0)";
-                    }
-                
-                    if(box.dataset.number == 45){
-                        boxes[46].style.backgroundColor = "rgb(255, 165, 0)";
-                        boxes[47].style.backgroundColor = "rgb(255, 165, 0)";
-                    }
-                
-                    if(box.dataset.number == 46){
-                        boxes[47].style.backgroundColor = "rgb(255, 165, 0)";
-                        boxes[48].style.backgroundColor = "rgb(255, 165, 0)";
-                    }
-                
-                    if(box.dataset.number == 47){
-                        boxes[48].style.backgroundColor = "rgb(255, 165, 0)";
-                        boxes[49].style.backgroundColor = "rgb(255, 165, 0)";
-                    }
-                
-                    if(box.dataset.number == 48){
-                        boxes[49].style.backgroundColor = "rgb(255, 165, 0)";
-                        boxes[50].style.backgroundColor = "rgb(255, 165, 0)";
-                    }
-                
-                    if(box.dataset.number == 49){
-                        boxes[50].style.backgroundColor = "rgb(255, 165, 0)";
-                        boxes[51].style.backgroundColor = "rgb(255, 165, 0)";
-                    }
-                
-                    if(box.dataset.number == 50){
-                        boxes[51].style.backgroundColor = "rgb(255, 165, 0)";
-                        boxes[52].style.backgroundColor = "rgb(255, 165, 0)";
-                    }
-                
-                    if(box.dataset.number == 51){
-                        boxes[52].style.backgroundColor = "rgb(255, 165, 0)";
-                        boxes[53].style.backgroundColor = "rgb(255, 165, 0)";
-                    }
-                
-                    if(box.dataset.number == 52){
-                        boxes[53].style.backgroundColor = "rgb(255, 165, 0)";
-                        boxes[54].style.backgroundColor = "rgb(255, 165, 0)";
-                    }
-                
-                    if(box.dataset.number == 53){
-                        boxes[54].style.backgroundColor = "rgb(255, 165, 0)";
-                        boxes[55].style.backgroundColor = "rgb(255, 165, 0)";
-                    }
-                
-                    if(box.dataset.number == 54){
-                        boxes[55].style.backgroundColor = "rgb(255, 165, 0)";
-                        boxes[56].style.backgroundColor = "rgb(255, 165, 0)";
-                    }
-                
-                    if(box.dataset.number == 55){
-                        boxes[56].style.backgroundColor = "rgb(255, 165, 0)";
-                        boxes[57].style.backgroundColor = "rgb(255, 165, 0)";
-                    }
-                
-                    if(box.dataset.number == 56){
-                        boxes[57].style.backgroundColor = "rgb(255, 165, 0)";
-                        boxes[58].style.backgroundColor = "rgb(255, 165, 0)";
-                    }
-                
-                    if(box.dataset.number == 57){
-                        boxes[58].style.backgroundColor = "rgb(255, 165, 0)";
-                        boxes[59].style.backgroundColor = "rgb(255, 165, 0)";
-                    }
-                
-                    if(box.dataset.number == 58){
-                        boxes[59].style.backgroundColor = "rgb(255, 165, 0)";
-                        boxes[60].style.backgroundColor = "rgb(255, 165, 0)";
-                    }
-                
-                    if(box.dataset.number == 59){
-                        boxes[60].style.backgroundColor = "rgb(255, 165, 0)";
-                        boxes[61].style.backgroundColor = "rgb(255, 165, 0)";
-                    }
-                
-                    if(box.dataset.number == 60){
-                        boxes[61].style.backgroundColor = "rgb(255, 165, 0)";
-                        boxes[62].style.backgroundColor = "rgb(255, 165, 0)";
-                    }
-                
-                    if(box.dataset.number == 61){
-                        boxes[62].style.backgroundColor = "rgb(255, 165, 0)";
-                        boxes[63].style.backgroundColor = "rgb(255, 165, 0)";
-                    }
-                
-                    if(box.dataset.number == 62){
-                        boxes[63].style.backgroundColor = "rgb(255, 165, 0)";
-                        boxes[64].style.backgroundColor = "rgb(255, 165, 0)";
-                    }
-                
-                    if(box.dataset.number == 63){
-                        boxes[64].style.backgroundColor = "rgb(255, 165, 0)";
-                        boxes[65].style.backgroundColor = "rgb(255, 165, 0)";
-                    }
-                
-                    if(box.dataset.number == 64){
-                        boxes[65].style.backgroundColor = "rgb(255, 165, 0)";
-                        boxes[66].style.backgroundColor = "rgb(255, 165, 0)";
-                    }
-                
-                    if(box.dataset.number == 65){
-                        boxes[66].style.backgroundColor = "rgb(255, 165, 0)";
-                        boxes[67].style.backgroundColor = "rgb(255, 165, 0)";
-                    }
-                
-                    if(box.dataset.number == 66){
-                        boxes[67].style.backgroundColor = "rgb(255, 165, 0)";
-                        boxes[68].style.backgroundColor = "rgb(255, 165, 0)";
-                    }
-                
-                    if(box.dataset.number == 67){
-                        boxes[68].style.backgroundColor = "rgb(255, 165, 0)";
-                        boxes[69].style.backgroundColor = "rgb(255, 165, 0)";
-                    }
-                
-                    if(box.dataset.number == 68){
-                        boxes[69].style.backgroundColor = "rgb(255, 165, 0)";
-                        boxes[70].style.backgroundColor = "rgb(255, 165, 0)";
-                    }
-                
-                    if(box.dataset.number == 69){
-                        boxes[70].style.backgroundColor = "rgb(255, 165, 0)";
-                    }
+                        let temporarly2 = Number(box.dataset.number);
+                        box.style.backgroundColor = "rgb(255, 165, 0)";
+                        boxes[temporarly2 + 1].style.backgroundColor = "rgb(255, 165, 0)";
+                        boxes[temporarly2 + 2].style.backgroundColor = "rgb(255, 165, 0)";
+                        counter_three--;
+                        longShip.innerHTML = counter_three;
                 }
             }
             })
@@ -838,6 +324,9 @@ window.onload = () => {
             longShip.style.border = "none";
             selected = false;
             main.style.zIndex = "-1";
+            rotateLinearButton.style.display = "none";
+            rotateLinearButton.style.background = "none";
+            rotateLinearButton.style.border = "none";
             [...boxes].forEach((box) => {
                 box.onclick = () => {
                     box.style.backgroundColor = "white";
