@@ -852,6 +852,9 @@ window.onload = () => {
         }
     },1)
     start_button.onclick = () => {
+        let isPlayerWinnerCounter = 10;
+        let isEnemyWinnerCounter = 10;
+
         enemyBoats.style.display = "block";
         main.style.zIndex = "1";
         enemyBoats.onclick = () => {
@@ -952,6 +955,7 @@ window.onload = () => {
                         box.classList.remove('enemy');
                         box.style.backgroundColor = "rgb(255, 0, 0, 0.4)";
                         info.innerHTML = "You hit an oponent!";
+                        isPlayerWinnerCounter--;
                     }else{
                         main.style.zIndex = "-1 ";
                         info.innerHTML = "Miss";
@@ -1009,14 +1013,7 @@ window.onload = () => {
                             if(boxes[randomNum].classList.contains('smallShip') === true || boxes[randomNum].classList.contains('mediumShip') === true || boxes[randomNum].classList.contains('longShip') === true){
                                 boxes[randomNum].classList.add('enemyHit');
                                 boxes[randomNum].style.backgroundColor = "rgba(255, 0, 0, 0.4)";
-                                let isEnemyWinner = false;
-                                while(isEnemyWinner === false){
-                                    for(let i = 0; i <= 69; i++){
-                                        if(boxes[i].classList.contains('smallShip') === true && boxes[i].classList.contains('mediumShip') === true && boxes[i].classList.contains('longShip') === true){
-                                            isEnemyWinner = true;
-                                        }
-                                    }
-                                }
+                                isEnemyWinnerCounter--;
                             }else{
                                 boxes[randomNum].classList.add('enemyMissed');
                                 boxes[randomNum].style.backgroundColor = "rgba(0, 0, 0, 0.4)";
@@ -1043,6 +1040,17 @@ window.onload = () => {
                     }
                 },{once : true})
             })
+            let winner = setInterval(() => {
+                if(isPlayerWinnerCounter <= 0){
+                    info.innerHTML = "You won the game.";
+                    clearInterval(winner);
+                    main.style.zIndex
+                }
+                if(isEnemyWinnerCounter <= 0){
+                    info.innerHTML = "The enemy won the game. You lost.";
+                    clearInterval(winner);
+                }
+            }, 10)
         }, 1500)
     }
 }
