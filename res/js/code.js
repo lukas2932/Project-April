@@ -210,6 +210,7 @@ window.onload = () => {
                         box.style.backgroundColor = "rgba(45, 84, 255, 0.4)";
                         boxes[Number(box.dataset.number) + 1].style.backgroundColor = "rgba(45, 84, 255, 0.4)"
                         box.addEventListener('mouseout', () => {
+                            //Zde musim nastavit if, pokud je to modre, nebo svetle modre(bile)
                             box.style.background = "none";
                             boxes[Number(box.dataset.number) + 1].style.background = "none";
                         }, {once : true})
