@@ -113,13 +113,7 @@ body{
 	display: none;
 	position: absolute
 }
-#rotateLinearButton{
-	font-size: 32px;
-	font-family: 'Courier New', Courier, monospace;
-	cursor: pointer;
-	display: none;
-}
-#rotateVerticalButton{
+#rotateButton{
 	font-size: 32px;
 	font-family: 'Courier New', Courier, monospace;
 	cursor: pointer;
