@@ -49,7 +49,9 @@ body{
 	justify-content: center;
 	color: white;
 	cursor: pointer;
+	font-family: 'Courier New', Courier, monospace;
 	border-radius: 5em 5em;
+
 }
 #mediumShip{
 	width: 160px;
@@ -61,6 +63,7 @@ body{
 	justify-content: center;
 	color: white;
 	cursor: pointer;
+	font-family: 'Courier New', Courier, monospace;
 	border-radius: 5em 5em;
 }
 #longShip{
@@ -73,6 +76,7 @@ body{
 	justify-content: center;
 	color: white;
 	cursor: pointer;
+	font-family: 'Courier New', Courier, monospace;
 	border-radius: 5em 5em;
 }
 #info{
@@ -108,4 +112,16 @@ body{
 	cursor: pointer;
 	display: none;
 	position: absolute
+}
+#rotateLinearButton{
+	font-size: 32px;
+	font-family: 'Courier New', Courier, monospace;
+	cursor: pointer;
+	display: none;
+}
+#rotateVerticalButton{
+	font-size: 32px;
+	font-family: 'Courier New', Courier, monospace;
+	cursor: pointer;
+	display: none;
 }
