@@ -178,21 +178,30 @@ window.onload = () => {
         
                             if(temporarly_one.backgroundColor === "rgba(0, 0, 0, 0)" && temporarly_two.backgroundColor === "rgba(0, 0, 0, 0)"){
                                 box.style.backgroundColor = "rgba(45, 84, 255, 0.4)";
+                                box.style.borderBottomLeftRadius = "1em";
+                                box.style.borderBottomRightRadius = "1em";
                                 boxes[Number(box.dataset.number) + 7].style.backgroundColor = "rgba(45, 84, 255, 0.4)"
+                                boxes[Number(box.dataset.number) + 7].style.borderTopLeftRadius = "1em"
+                                boxes[Number(box.dataset.number) + 7].style.borderTopRightRadius = "1em"
                                 box.addEventListener('mouseout', () => {
                                     if(temporarly_one.backgroundColor === "rgb(45, 84, 255)" && temporarly_two.backgroundColor === "rgb(45, 84, 255)"){
                                         box.style.backgroundColor = "rgb(45, 84, 255)";
                                         boxes[Number(box.dataset.number) + 7].style.background = "rgb(45, 84, 255)";
                                     }else{
                                         box.style.background = "none";
+                                        box.style.borderRadius = "10em 10em";
                                         boxes[Number(box.dataset.number) + 7].style.background = "none";
+                                        boxes[Number(box.dataset.number) + 7].style.borderRadius = "10em 10em";
                                     }
                                 }, {once : true})
                             }
                             if(temporarly_one.backgroundColor === "rgba(0, 0, 0, 0)" && temporarly_two.backgroundColor !== "rgba(0, 0, 0, 0)"){
                                 box.style.backgroundColor = "rgba(45, 84, 255, 0.4)";
+                                box.style.borderBottomLeftRadius = "1em";
+                                box.style.borderBottomRightRadius = "1em";
                                 box.addEventListener('mouseout', () => {
                                     box.style.background = "none";
+                                    box.style.borderRadius = "10em 10em";
                                 })
                             }
                             box.onclick = () =>{
@@ -207,9 +216,11 @@ window.onload = () => {
                                     box.style.backgroundColor = "rgb(45, 84, 255)";
                                     box.style.borderBottomLeftRadius = "1em";
                                     box.style.borderBottomRightRadius = "1em";
+                                    box.classList.add('firstPartOfMediumShipVertical');
                                     boxes[Number(box.dataset.number) + 7].style.backgroundColor = "rgb(45, 84, 255)";
                                     boxes[Number(box.dataset.number) + 7].style.borderTopLeftRadius = "1em";
                                     boxes[Number(box.dataset.number) + 7].style.borderTopRightRadius = "1em";
+                                    boxes[Number(box.dataset.number) + 7].classList.add('lastPartOfMediumShipVertical');
                                     counter_two--;
                                     mediumShip.innerHTML = counter_two;
                                 }
@@ -228,21 +239,30 @@ window.onload = () => {
         
                             if(temporarly_one.backgroundColor === "rgba(0, 0, 0, 0)" && temporarly_two.backgroundColor === "rgba(0, 0, 0, 0)"){
                                 box.style.backgroundColor = "rgba(45, 84, 255, 0.4)";
-                                boxes[Number(box.dataset.number) + 1].style.backgroundColor = "rgba(45, 84, 255, 0.4)"
+                                box.style.borderTopRightRadius = "1em";
+                                box.style.borderBottomRightRadius = "1em";
+                                boxes[Number(box.dataset.number) + 1].style.backgroundColor = "rgba(45, 84, 255, 0.4)";
+                                boxes[Number(box.dataset.number) + 1].style.borderTopLeftRadius = "1em";
+                                boxes[Number(box.dataset.number) + 1].style.borderBottomLeftRadius = "1em";
                                 box.addEventListener('mouseout', () => {
                                     if(temporarly_one.backgroundColor === "rgb(45, 84, 255)" && temporarly_two.backgroundColor === "rgb(45, 84, 255)"){
                                         box.style.backgroundColor = "rgb(45, 84, 255)";
                                         boxes[Number(box.dataset.number) + 1].style.background = "rgb(45, 84, 255)";
                                     }else{
                                         box.style.background = "none";
+                                        box.style.borderRadius = "10em 10em";
                                         boxes[Number(box.dataset.number) + 1].style.background = "none";
+                                        boxes[Number(box.dataset.number) + 1].style.borderRadius = "10em 10em";
                                     }
                                 }, {once : true})
                             }
                             if(temporarly_one.backgroundColor === "rgba(0, 0, 0, 0)" && temporarly_two.backgroundColor !== "rgba(0, 0, 0, 0)"){
                                 box.style.backgroundColor = "rgba(45, 84, 255, 0.4)";
+                                box.style.borderTopRightRadius = "1em";
+                                box.style.borderBottomRightRadius = "1em";
                                 box.addEventListener('mouseout', () => {
                                     box.style.background = "none";
+                                    box.style.borderRadius = "10em 10em"
                                 })
                             }
                             box.onclick = () =>{
@@ -257,9 +277,11 @@ window.onload = () => {
                                     box.style.backgroundColor = "rgb(45, 84, 255)";
                                     box.style.borderTopRightRadius = "1em";
                                     box.style.borderBottomRightRadius = "1em";
+                                    box.classList.add('firstPartOfMediumShipLinear');
                                     boxes[Number(box.dataset.number) + 1].style.backgroundColor = "rgb(45, 84, 255)";
                                     boxes[Number(box.dataset.number) + 1].style.borderTopLeftRadius = "1em";
                                     boxes[Number(box.dataset.number) + 1].style.borderBottomLeftRadius = "1em";
+                                    boxes[Number(box.dataset.number) + 1].classList.add('lastPartOfMediumShipLinear');
                                     counter_two--;
                                     mediumShip.innerHTML = counter_two;
                                 }
@@ -276,21 +298,30 @@ window.onload = () => {
 
                     if(temporarly_one.backgroundColor === "rgba(0, 0, 0, 0)" && temporarly_two.backgroundColor === "rgba(0, 0, 0, 0)"){
                         box.style.backgroundColor = "rgba(45, 84, 255, 0.4)";
-                        boxes[Number(box.dataset.number) + 1].style.backgroundColor = "rgba(45, 84, 255, 0.4)"
+                        box.style.borderTopRightRadius = "1em";
+                        box.style.borderBottomRightRadius = "1em";
+                        boxes[Number(box.dataset.number) + 1].style.backgroundColor = "rgba(45, 84, 255, 0.4)";
+                        boxes[Number(box.dataset.number) + 1].style.borderTopLeftRadius = "1em";
+                        boxes[Number(box.dataset.number) + 1].style.borderBottomLeftRadius = "1em";
                         box.addEventListener('mouseout', () => {
                             if(temporarly_one.backgroundColor === "rgb(45, 84, 255)" && temporarly_two.backgroundColor === "rgb(45, 84, 255)"){
                                 box.style.backgroundColor = "rgb(45, 84, 255)";
                                 boxes[Number(box.dataset.number) + 1].style.background = "rgb(45, 84, 255)";
                             }else{
                                 box.style.background = "none";
+                                box.style.borderRadius = "10em 10em";
                                 boxes[Number(box.dataset.number) + 1].style.background = "none";
+                                boxes[Number(box.dataset.number) + 1].style.borderRadius = "10em 10em";
                             }
                         }, {once : true})
                     }
                     if(temporarly_one.backgroundColor === "rgba(0, 0, 0, 0)" && temporarly_two.backgroundColor !== "rgba(0, 0, 0, 0)"){
                         box.style.backgroundColor = "rgba(45, 84, 255, 0.4)";
+                        box.style.borderTopRightRadius = "1em 1em";
+                        box.style.borderBottomRightRadius = "1em 1em";
                         box.addEventListener('mouseout', () => {
                             box.style.background = "none";
+                            box.style.borderRadius = "10em 10em"
                         })
                     }
                     box.onclick = () =>{
@@ -305,9 +336,11 @@ window.onload = () => {
                             box.style.backgroundColor = "rgb(45, 84, 255)";
                             box.style.borderTopRightRadius = "1em";
                             box.style.borderBottomRightRadius = "1em";
+                            box.classList.add('firstPartOfMediumShipLinear');
                             boxes[Number(box.dataset.number) + 1].style.backgroundColor = "rgb(45, 84, 255)";
                             boxes[Number(box.dataset.number) + 1].style.borderTopLeftRadius = "1em";
                             boxes[Number(box.dataset.number) + 1].style.borderBottomLeftRadius = "1em";
+                            boxes[Number(box.dataset.number) + 1].classList.add('lastPartOfMediumShipLinear');
                             counter_two--;
                             mediumShip.innerHTML = counter_two;
                         }
@@ -358,8 +391,13 @@ window.onload = () => {
         
                             if(temporarly_one.backgroundColor === "rgba(0, 0, 0, 0)" && temporarly_two.backgroundColor === "rgba(0, 0, 0, 0)" && temporarly_three.backgroundColor === "rgba(0, 0, 0, 0)"){
                                 box.style.backgroundColor = "rgba(255, 165, 0, 0.4)";
+                                box.style.borderBottomLeftRadius = "1em";
+                                box.style.borderBottomRightRadius = "1em";
                                 boxes[Number(box.dataset.number) + 7].style.backgroundColor = "rgba(255, 165, 0, 0.4)";
+                                boxes[Number(box.dataset.number) + 7].style.borderRadius = "1em";
                                 boxes[Number(box.dataset.number) + 14].style.backgroundColor = "rgba(255, 165, 0, 0.4)";
+                                boxes[Number(box.dataset.number) + 14].style.borderTopLeftRadius = "1em";
+                                boxes[Number(box.dataset.number) + 14].style.borderTopRightRadius = "1em";
                                 box.addEventListener('mouseout', () => {
                                     if(temporarly_one.backgroundColor === "rgb(255, 165, 0)" && temporarly_two.backgroundColor === "rgb(255, 165, 0)" && temporarly_three.backgroundColor === "rgb(255, 165, 0)"){
                                         box.style.backgroundColor = "rgb(255, 165, 0)";
@@ -367,29 +405,48 @@ window.onload = () => {
                                         boxes[Number(box.dataset.number) + 14].style.background = "rgb(255, 165, 0)";
                                     }else{
                                         box.style.background = "none";
+                                        box.style.borderRadius = "10em";
                                         boxes[Number(box.dataset.number) + 7].style.background = "none";
+                                        boxes[Number(box.dataset.number) + 7].style.borderRadius = "10em 10em";
                                         boxes[Number(box.dataset.number) + 14].style.background = "none";
+                                        boxes[Number(box.dataset.number) + 14].style.borderRadius = "10em 10em";
                                     }
                                 }, {once : true})
                             }
                             if(temporarly_one.backgroundColor === "rgba(0, 0, 0, 0)" && temporarly_two.backgroundColor !== "rgba(0, 0, 0, 0)" &&  temporarly_three.backgroundColor !== "rgba(0, 0, 0, 0)"){
                                 box.style.backgroundColor = "rgba(255, 165, 0, 0.4)";
+                                box.style.borderBottomLeftRadius = "1em";
+                                box.style.borderBottomRightRadius = "1em";
                                 box.addEventListener('mouseout', () => {
                                     box.style.background = "none";
+                                    box.style.borderRadius = "10em";
                                 })
                             }
                             if(temporarly_one.backgroundColor === "rgba(0, 0, 0, 0)" && temporarly_two.backgroundColor === "rgba(0, 0, 0, 0)" && temporarly_three.backgroundColor !== "rgba(0, 0, 0, 0)"){
-                                box.style.backgroundColor = "rgba(255, 165, 0, 0.4)"
-                                boxes[Number(box.dataset.number) + 7].style.backgroundColor = "rgba(255, 165, 0, 0.4)"
+                                box.style.backgroundColor = "rgba(255, 165, 0, 0.4)";
+                                box.style.borderBottomLeftRadius = "1em";
+                                box.style.borderBottomRightRadius = "1em";
+                                boxes[Number(box.dataset.number) + 7].style.backgroundColor = "rgba(255, 165, 0, 0.4)";
+                                boxes[Number(box.dataset.number) + 7].style.borderRadius = "1em 1em";
                                 box.addEventListener('mouseout', () => {
                                     box.style.background = "none";
+                                    box.style.borderRadius = "10em 10em";
                                     boxes[Number(box.dataset.number) + 7].style.background = "none";
+                                    boxes[Number(box.dataset.number) + 7].style.borderRadius = "10em 10em";
                                 })
                             }
                             if(temporarly_one.backgroundColor === "rgba(0, 0, 0, 0)" && temporarly_two.backgroundColor !== "rgba(0, 0, 0, 0)" && temporarly_three.backgroundColor === "rgba(0, 0, 0, 0)"){
-                                box.style.backgroundColor = "rgba(255, 165, 0, 0.4)"
+                                box.style.backgroundColor = "rgba(255, 165, 0, 0.4)";
+                                box.style.borderBottomLeftRadius = "1em";
+                                box.style.borderBottomRightRadius = "1em";
+                                boxes[Number(box.dataset.number) + 14].style.backgroundColor = "rgba(255, 165, 0, 0.4)";
+                                boxes[Number(box.dataset.number) + 14].style.borderTopLeftRadius = "1em";
+                                boxes[Number(box.dataset.number) + 14].style.borderTopRightRadius = "1em";
                                 box.addEventListener('mouseout', () => {
                                     box.style.background = "none";
+                                    box.style.borderRadius = "10em 10em";
+                                    boxes[Number(box.dataset.number) + 14].style.background = "none";
+                                    boxes[Number(box.dataset.number) + 14].style.borderRadius = "10em 10em";
                                 })
                             }
                             box.onclick = () =>{
@@ -405,14 +462,17 @@ window.onload = () => {
                                     box.style.backgroundColor = "rgb(255, 165, 0)";
                                     box.style.borderBottomLeftRadius = "1em";
                                     box.style.borderBottomRightRadius = "1em";
+                                    box.classList.add('firstPartOfLongShipVertical');
                                     boxes[Number(box.dataset.number) + 7].style.backgroundColor = "rgb(255, 165, 0)";
                                     boxes[Number(box.dataset.number) + 7].style.borderBottomLeftRadius = "1em";
                                     boxes[Number(box.dataset.number) + 7].style.borderBottomRightRadius = "1em";
                                     boxes[Number(box.dataset.number) + 7].style.borderTopRightRadius = "1em";
                                     boxes[Number(box.dataset.number) + 7].style.borderTopLeftRadius = "1em";
+                                    boxes[Number(box.dataset.number) + 7].classList.add('centerPartOfLongShipVertical');
                                     boxes[Number(box.dataset.number) + 14].style.backgroundColor = "rgb(255, 165, 0)";
                                     boxes[Number(box.dataset.number) + 14].style.borderTopLeftRadius = "1em";
                                     boxes[Number(box.dataset.number) + 14].style.borderTopRightRadius = "1em";
+                                    boxes[Number(box.dataset.number) + 14].classList.add('lastPartOfLongShipVertical');
                                     counter_three--;
                                     longShip.innerHTML = counter_three;
                                 }
@@ -423,6 +483,7 @@ window.onload = () => {
                     rotateSelected = false;
                     rotateButton.style.border = "none"
                     rotateButton.style.background = "none";
+            
                     [...boxes].forEach((box) => {
                         box.onmouseover = () => {
                             let temporarly_one = window.getComputedStyle(box);
@@ -433,8 +494,13 @@ window.onload = () => {
         
                             if(temporarly_one.backgroundColor === "rgba(0, 0, 0, 0)" && temporarly_two.backgroundColor === "rgba(0, 0, 0, 0)" && temporarly_three.backgroundColor === "rgba(0, 0, 0, 0)"){
                                 box.style.backgroundColor = "rgba(255, 165, 0, 0.4)";
+                                box.style.borderTopRightRadius = "1em";
+                                box.style.borderBottomRightRadius = "1em";
                                 boxes[Number(box.dataset.number) + 1].style.backgroundColor = "rgba(255, 165, 0, 0.4)";
+                                boxes[Number(box.dataset.number) + 1].style.borderRadius = "1em 1em";
                                 boxes[Number(box.dataset.number) + 2].style.backgroundColor = "rgba(255, 165, 0, 0.4)";
+                                boxes[Number(box.dataset.number) + 2].style.borderBottomLeftRadius = "1em";
+                                boxes[Number(box.dataset.number) + 2].style.borderTopLeftRadius = "1em";
                                 box.addEventListener('mouseout', () => {
                                     if(temporarly_one.backgroundColor === "rgb(255, 165, 0)" && temporarly_two.backgroundColor === "rgb(255, 165, 0)" && temporarly_three.backgroundColor === "rgb(255, 165, 0)"){
                                         box.style.backgroundColor = "rgb(255, 165, 0)";
@@ -442,29 +508,48 @@ window.onload = () => {
                                         boxes[Number(box.dataset.number) + 2].style.background = "rgb(255, 165, 0)";
                                     }else{
                                         box.style.background = "none";
+                                        box.style.borderRadius = "10em 10em";
                                         boxes[Number(box.dataset.number) + 1].style.background = "none";
+                                        boxes[Number(box.dataset.number) + 1].style.borderRadius = "10em 10em";
                                         boxes[Number(box.dataset.number) + 2].style.background = "none";
+                                        boxes[Number(box.dataset.number) + 2].style.borderRadius = "10em 10em";
                                     }
                                 }, {once : true})
                             }
                             if(temporarly_one.backgroundColor === "rgba(0, 0, 0, 0)" && temporarly_two.backgroundColor !== "rgba(0, 0, 0, 0)" &&  temporarly_three.backgroundColor !== "rgba(0, 0, 0, 0)"){
                                 box.style.backgroundColor = "rgba(255, 165, 0, 0.4)";
+                                box.style.borderTopRightRadius = "1em";
+                                box.style.borderBottomRightRadius = "1em";
                                 box.addEventListener('mouseout', () => {
                                     box.style.background = "none";
+                                    box.style.borderRadius = "10em 10em";
                                 })
                             }
                             if(temporarly_one.backgroundColor === "rgba(0, 0, 0, 0)" && temporarly_two.backgroundColor === "rgba(0, 0, 0, 0)" && temporarly_three.backgroundColor !== "rgba(0, 0, 0, 0)"){
-                                box.style.backgroundColor = "rgba(255, 165, 0, 0.4)"
-                                boxes[Number(box.dataset.number) + 1].style.backgroundColor = "rgba(255, 165, 0, 0.4)"
+                                box.style.backgroundColor = "rgba(255, 165, 0, 0.4)";
+                                box.style.borderTopRightRadius = "1em";
+                                box.style.borderBottomRightRadius = "1em";
+                                boxes[Number(box.dataset.number) + 1].style.backgroundColor = "rgba(255, 165, 0, 0.4)";
+                                boxes[Number(box.dataset.number) + 1].style.borderRadius = "10em";
                                 box.addEventListener('mouseout', () => {
                                     box.style.background = "none";
+                                    box.style.borderRadius = "10em 10em";
                                     boxes[Number(box.dataset.number) + 1].style.background = "none";
+                                    boxes[Number(box.dataset.number) + 1].style.borderRadius = "10em 10em";
                                 })
                             }
                             if(temporarly_one.backgroundColor === "rgba(0, 0, 0, 0)" && temporarly_two.backgroundColor !== "rgba(0, 0, 0, 0)" && temporarly_three.backgroundColor === "rgba(0, 0, 0, 0)"){
-                                box.style.backgroundColor = "rgba(255, 165, 0, 0.4)"
+                                box.style.backgroundColor = "rgba(255, 165, 0, 0.4)";
+                                box.style.borderTopRightRadius = "1em";
+                                box.style.borderBottomRightRadius = "1em";
+                                boxes[Number(box.dataset.number) + 2].style.backgroundColor = "rgba(255, 165, 0, 0.4)";
+                                boxes[Number(box.dataset.number) + 2].style.borderTopLeftRadius = "1em";
+                                boxes[Number(box.dataset.number) + 2].style.borderBottomLeftRadius = "1em";
                                 box.addEventListener('mouseout', () => {
                                     box.style.background = "none";
+                                    box.style.borderRadius = "10em 10em";
+                                    boxes[Number(box.dataset.number) + 2].style.background = "none";
+                                    boxes[Number(box.dataset.number) + 2].style.borderRadius = "10em 10em";
                                 })
                             }
                             box.onclick = () =>{
@@ -479,15 +564,15 @@ window.onload = () => {
                                 }else{
                                     box.style.backgroundColor = "rgb(255, 165, 0)";
                                     box.style.borderTopRightRadius = "1em"
-                                    box.style.borderBottomRightRadius = "1em"
+                                    box.style.borderBottomRightRadius = "1em";
+                                    box.classList.add('firstPartOfLongShipLinear')
                                     boxes[Number(box.dataset.number) + 1].style.backgroundColor = "rgb(255, 165, 0)";
-                                    boxes[Number(box.dataset.number) + 1].style.borderTopLeftRadius = "1em";
-                                    boxes[Number(box.dataset.number) + 1].style.borderBottomLeftRadius = "1em";
-                                    boxes[Number(box.dataset.number) + 1].style.borderTopRightRadius = "1em";
-                                    boxes[Number(box.dataset.number) + 1].style.borderBottomRightRadius = "1em";
+                                    boxes[Number(box.dataset.number) + 1].style.borderRadius = "1em";
+                                    boxes[Number(box.dataset.number) + 1].classList.add('centerPartOfLongShipLinear');
                                     boxes[Number(box.dataset.number) + 2].style.backgroundColor = "rgb(255, 165, 0)";
                                     boxes[Number(box.dataset.number) + 2].style.borderTopLeftRadius = "1em";
                                     boxes[Number(box.dataset.number) + 2].style.borderBottomLeftRadius = "1em";
+                                    boxes[Number(box.dataset.number) + 2].classList.add('lastPartOfLongShipLinear')
                                     counter_three--;
                                     longShip.innerHTML = counter_three;
                                 }
@@ -507,8 +592,13 @@ window.onload = () => {
 
                     if(temporarly_one.backgroundColor === "rgba(0, 0, 0, 0)" && temporarly_two.backgroundColor === "rgba(0, 0, 0, 0)" && temporarly_three.backgroundColor === "rgba(0, 0, 0, 0)"){
                         box.style.backgroundColor = "rgba(255, 165, 0, 0.4)";
+                        box.style.borderTopRightRadius = "1em";
+                        box.style.borderBottomRightRadius = "1em";
                         boxes[Number(box.dataset.number) + 1].style.backgroundColor = "rgba(255, 165, 0, 0.4)";
+                        boxes[Number(box.dataset.number) + 1].style.borderRadius = "1em 1em";
                         boxes[Number(box.dataset.number) + 2].style.backgroundColor = "rgba(255, 165, 0, 0.4)";
+                        boxes[Number(box.dataset.number) + 2].style.borderBottomLeftRadius = "1em";
+                        boxes[Number(box.dataset.number) + 2].style.borderTopLeftRadius = "1em";
                         box.addEventListener('mouseout', () => {
                             if(temporarly_one.backgroundColor === "rgb(255, 165, 0)" && temporarly_two.backgroundColor === "rgb(255, 165, 0)" && temporarly_three.backgroundColor === "rgb(255, 165, 0)"){
                                 box.style.backgroundColor = "rgb(255, 165, 0)";
@@ -516,29 +606,48 @@ window.onload = () => {
                                 boxes[Number(box.dataset.number) + 2].style.background = "rgb(255, 165, 0)";
                             }else{
                                 box.style.background = "none";
+                                box.style.borderRadius = "10em 10em";
                                 boxes[Number(box.dataset.number) + 1].style.background = "none";
+                                boxes[Number(box.dataset.number) + 1].style.borderRadius = "10em 10em";
                                 boxes[Number(box.dataset.number) + 2].style.background = "none";
+                                boxes[Number(box.dataset.number) + 2].style.borderRadius = "10em 10em";
                             }
                         }, {once : true})
                     }
                     if(temporarly_one.backgroundColor === "rgba(0, 0, 0, 0)" && temporarly_two.backgroundColor !== "rgba(0, 0, 0, 0)" &&  temporarly_three.backgroundColor !== "rgba(0, 0, 0, 0)"){
                         box.style.backgroundColor = "rgba(255, 165, 0, 0.4)";
+                        box.style.borderTopRightRadius = "1em";
+                        box.style.borderBottomRightRadius = "1em";
                         box.addEventListener('mouseout', () => {
                             box.style.background = "none";
+                            box.style.borderRadius = "10em 10em";
                         })
                     }
                     if(temporarly_one.backgroundColor === "rgba(0, 0, 0, 0)" && temporarly_two.backgroundColor === "rgba(0, 0, 0, 0)" && temporarly_three.backgroundColor !== "rgba(0, 0, 0, 0)"){
-                        box.style.backgroundColor = "rgba(255, 165, 0, 0.4)"
-                        boxes[Number(box.dataset.number) + 1].style.backgroundColor = "rgba(255, 165, 0, 0.4)"
+                        box.style.backgroundColor = "rgba(255, 165, 0, 0.4)";
+                        box.style.borderTopRightRadius = "1em";
+                        box.style.borderBottomRightRadius = "1em";
+                        boxes[Number(box.dataset.number) + 1].style.backgroundColor = "rgba(255, 165, 0, 0.4)";
+                        boxes[Number(box.dataset.number) + 1].style.borderRadius = "10em";
                         box.addEventListener('mouseout', () => {
                             box.style.background = "none";
+                            box.style.borderRadius = "10em 10em";
                             boxes[Number(box.dataset.number) + 1].style.background = "none";
+                            boxes[Number(box.dataset.number) + 1].style.borderRadius = "10em 10em";
                         })
                     }
                     if(temporarly_one.backgroundColor === "rgba(0, 0, 0, 0)" && temporarly_two.backgroundColor !== "rgba(0, 0, 0, 0)" && temporarly_three.backgroundColor === "rgba(0, 0, 0, 0)"){
-                        box.style.backgroundColor = "rgba(255, 165, 0, 0.4)"
+                        box.style.backgroundColor = "rgba(255, 165, 0, 0.4)";
+                        box.style.borderTopRightRadius = "1em";
+                        box.style.borderBottomRightRadius = "1em";
+                        boxes[Number(box.dataset.number) + 2].style.backgroundColor = "rgba(255, 165, 0, 0.4)";
+                        boxes[Number(box.dataset.number) + 2].style.borderTopLeftRadius = "1em";
+                        boxes[Number(box.dataset.number) + 2].style.borderBottomLeftRadius = "1em";
                         box.addEventListener('mouseout', () => {
                             box.style.background = "none";
+                            box.style.borderRadius = "10em 10em";
+                            boxes[Number(box.dataset.number) + 2].style.background = "none";
+                            boxes[Number(box.dataset.number) + 2].style.borderRadius = "10em 10em";
                         })
                     }
                     box.onclick = () =>{
@@ -553,15 +662,15 @@ window.onload = () => {
                         }else{
                             box.style.backgroundColor = "rgb(255, 165, 0)";
                             box.style.borderTopRightRadius = "1em"
-                            box.style.borderBottomRightRadius = "1em"
+                            box.style.borderBottomRightRadius = "1em";
+                            box.classList.add('firstPartOfLongShipLinear');
                             boxes[Number(box.dataset.number) + 1].style.backgroundColor = "rgb(255, 165, 0)";
-                            boxes[Number(box.dataset.number) + 1].style.borderTopLeftRadius = "1em";
-                            boxes[Number(box.dataset.number) + 1].style.borderBottomLeftRadius = "1em";
-                            boxes[Number(box.dataset.number) + 1].style.borderTopRightRadius = "1em";
-                            boxes[Number(box.dataset.number) + 1].style.borderBottomRightRadius = "1em";
+                            boxes[Number(box.dataset.number) + 1].style.borderRadius = "1em";
+                            boxes[Number(box.dataset.number) + 1].classList.add('centerPartOfLongShipLinear');
                             boxes[Number(box.dataset.number) + 2].style.backgroundColor = "rgb(255, 165, 0)";
                             boxes[Number(box.dataset.number) + 2].style.borderTopLeftRadius = "1em";
                             boxes[Number(box.dataset.number) + 2].style.borderBottomLeftRadius = "1em";
+                            boxes[Number(box.dataset.number) + 2].classList.add('lastPartOfLongShipLinear');
                             counter_three--;
                             longShip.innerHTML = counter_three;
                         }
@@ -593,6 +702,7 @@ window.onload = () => {
             clearInterval(start_interval);
         }
     },1)
+    
     start_button.onclick = () => {
         let isPlayerWinnerCounter = 10;
         let isEnemyWinnerCounter = 10;
