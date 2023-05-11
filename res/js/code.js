@@ -2,73 +2,6 @@ const boxes = document.getElementsByClassName("box");
 const main = document.getElementById("main");
 const enemyBoats = document.getElementById("enemyBoats");
 
-const box_0 = document.getElementById("box_0");
-const box_1 = document.getElementById("box_1");
-const box_2 = document.getElementById("box_2");
-const box_3 = document.getElementById("box_3");
-const box_4 = document.getElementById("box_4");
-const box_5 = document.getElementById("box_5");
-const box_6 = document.getElementById("box_6");
-const box_7 = document.getElementById("box_7");
-const box_8 = document.getElementById("box_8");
-const box_9 = document.getElementById("box_9");
-const box_10 = document.getElementById("box_10");
-const box_11 = document.getElementById("box_11");
-const box_12 = document.getElementById("box_12");
-const box_13 = document.getElementById("box_13");
-const box_14 = document.getElementById("box_14");
-const box_15 = document.getElementById("box_15");
-const box_16 = document.getElementById("box_16");
-const box_17 = document.getElementById("box_17");
-const box_18 = document.getElementById("box_18");
-const box_19 = document.getElementById("box_19");
-const box_20 = document.getElementById("box_20");
-const box_21 = document.getElementById("box_21");
-const box_22 = document.getElementById("box_22");
-const box_23 = document.getElementById("box_23");
-const box_24 = document.getElementById("box_24");
-const box_25 = document.getElementById("box_25");
-const box_26 = document.getElementById("box_26");
-const box_27 = document.getElementById("box_27");
-const box_28 = document.getElementById("box_28");
-const box_29 = document.getElementById("box_29");
-const box_30 = document.getElementById("box_30");
-const box_31 = document.getElementById("box_31");
-const box_32 = document.getElementById("box_32");
-const box_33 = document.getElementById("box_33");
-const box_34 = document.getElementById("box_34");
-const box_35 = document.getElementById("box_35");
-const box_36 = document.getElementById("box_36");
-const box_37 = document.getElementById("box_37");
-const box_38 = document.getElementById("box_38");
-const box_39 = document.getElementById("box_39");
-const box_40 = document.getElementById("box_40");
-const box_41 = document.getElementById("box_41");
-const box_42 = document.getElementById("box_42");
-const box_43 = document.getElementById("box_43");
-const box_44 = document.getElementById("box_44");
-const box_45 = document.getElementById("box_45");
-const box_46 = document.getElementById("box_46");
-const box_47 = document.getElementById("box_47");
-const box_48 = document.getElementById("box_48");
-const box_49 = document.getElementById("box_49");
-const box_50 = document.getElementById("box_50");
-const box_51 = document.getElementById("box_51");
-const box_52 = document.getElementById("box_52");
-const box_53 = document.getElementById("box_53");
-const box_54 = document.getElementById("box_54");
-const box_55 = document.getElementById("box_55");
-const box_56 = document.getElementById("box_56");
-const box_57 = document.getElementById("box_57");
-const box_58 = document.getElementById("box_58");
-const box_59 = document.getElementById("box_59");
-const box_60 = document.getElementById("box_60");
-const box_61 = document.getElementById("box_61");
-const box_62 = document.getElementById("box_62");
-const box_63 = document.getElementById("box_63");
-const box_64 = document.getElementById("box_64");
-const box_65 = document.getElementById("box_65");
-
 const smallShip = document.getElementById("smallShip");
 const mediumShip = document.getElementById("mediumShip");
 const longShip = document.getElementById("longShip");
@@ -840,6 +773,22 @@ window.onload = () => {
                                 if(box.classList.contains('smallShip') === true){
                                     box.style.backgroundColor = "rgb(0, 0, 0)"
                                 }
+                                if(box.classList.contains('firstPartOfMediumShipLinear')){
+                                    box.style.borderTopRightRadius = "1em";
+                                    box.style.borderBottomRightRadius = "1em";
+                                }
+                                if(box.classList.contains('lastPartOfMediumShipLinear')){
+                                    box.style.borderTopLeftRadius = "1em";
+                                    box.style.borderBottomLeftRadius = "1em";
+                                }
+                                if(box.classList.contains('firstPartOfMediumShipVertical')){
+                                    box.style.borderBottomLeftRadius = "1em";
+                                    box.style.borderBottomRightRadius = "1em";
+                                }
+                                if(box.classList.contains('lastPartOfMediumShipVertical')){
+                                    box.style.borderTopLeftRadius = "1em";
+                                    box.style.borderTopRightRadius = "1em";
+                                }
                                 if(box.classList.contains('mediumShip') === true){
                                     box.style.backgroundColor = "rgb(45, 84, 255)"
                                 }
@@ -926,7 +875,7 @@ window.onload = () => {
     }
 }
 
-//Chci udelat lode z kulicek pri tahu soupere
+//Chci udelat obrysy aby vypadali jako lode
 //Chci udelat lepsi Ai, aby konfirgurovalo lode i vertikalne 
 //Chci vylepsit hover pri hrani
 
