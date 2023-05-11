@@ -926,7 +926,7 @@ window.onload = () => {
     }
 }
 
-//Chci udelat obrysy aby vypadali jako lode
+//Chci udelat lode z kulicek pri tahu soupere
 //Chci udelat lepsi Ai, aby konfirgurovalo lode i vertikalne 
 //Chci vylepsit hover pri hrani
 
