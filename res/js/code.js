@@ -13,12 +13,23 @@ const indicator = document.getElementById("indicator");
 
 const rotateButton = document.getElementById("rotateButton");
 
+const smallEnemyBoat = document.getElementById("smallEnemyBoat");
+const mediumEnemyBoat = document.getElementById("mediumEnemyBoat");
+const longEnemyBoat = document.getElementById("longEnemyBoat");
+const boatsTitle = document.getElementById("boatsTitle");
+
+const texts = document.getElementById("texts");
+
 let selected = false;
 let rotateSelected = false 
 
 let counter_one = 3;
 let counter_two = 3;
 let counter_three = 2;
+
+let small_enemy_boat_counter = 0;
+let medium_enemy_boat_counter = 0;
+let long_enemy_boat_counter = 0;
 
 
 window.onload = () => {
@@ -96,6 +107,7 @@ window.onload = () => {
             main.style.zIndex = "1";
             selected = true;
             rotateButton.style.display = "block";
+            texts.style.justifyContent = "center";
             rotateButton.onclick = () => {
                 if(!rotateSelected){
                     rotateSelected = true;
@@ -289,6 +301,7 @@ window.onload = () => {
         else{
             rotateButton.style.display = "none"
             mediumShip.style.border = "none";
+            texts.style.justifyContent = "space-between";
             selected = false;
             main.style.zIndex = "-1";
             rotateButton.style.background = "none";
@@ -310,6 +323,7 @@ window.onload = () => {
             selected = true;
             main.style.zIndex = "1";
             rotateButton.style.display = "block";
+            texts.style.justifyContent = "center";
             rotateButton.onclick = () => {
                 if(!rotateSelected){
                     [...boxes].forEach((box) => {
@@ -623,6 +637,7 @@ window.onload = () => {
         }
         else{
             longShip.style.border = "none";
+            texts.style.justifyContent = "space-between";
             selected = false;
             main.style.zIndex = "-1";
             rotateButton.style.display = "none";
@@ -638,10 +653,11 @@ window.onload = () => {
     },1)
     
     start_button.onclick = () => {
-        let isPlayerWinnerCounter = 10;
-        let isEnemyWinnerCounter = 10;
+        let isPlayerWinnerCounter = 15;
+        let isEnemyWinnerCounter = 15;
 
         enemyBoats.style.display = "block";
+        texts.style.justifyContent = "space-between";
         main.style.zIndex = "-1";
         indicator.style.display = "block";
         enemyBoats.onclick = () => {
@@ -702,8 +718,10 @@ window.onload = () => {
                 let randomNum = Math.floor(Math.random() * (69 - 0 + 1) + 0);
                 if(array.includes(randomNum) === false){
                     boxes[randomNum].classList.add('enemy');
+                    boxes[randomNum].classList.add('smallShipEnemy');
                     array.push(randomNum);
                     console.log(randomNum)
+                    small_enemy_boat_counter++;
                 }else{
                     i--;
                 }
@@ -719,18 +737,24 @@ window.onload = () => {
                     if(randomNum1 === 1 && randomNum !== 6 && randomNum !== 13 && randomNum !== 20 && randomNum !== 27 && randomNum !== 34 && randomNum !== 41 && randomNum !== 48 && randomNum !== 55 && randomNum !== 62 && randomNum !== 69){
                         console.log(randomNum1);
                         boxes[randomNum].classList.add('enemy');
+                        boxes[randomNum].classList.add('enemy_first_part_of_medium_ship_linear')
                         let numSecond = randomNum + 1;
                         boxes[numSecond].classList.add('enemy');
+                        boxes[numSecond].classList.add('enemy_last_part_of_medium_ship_linear');
                         array.push(randomNum);
                         array.push(numSecond);
+                        medium_enemy_boat_counter++;
                     }
                     if(randomNum1 === 2 && randomNum < 63){
                         console.log(randomNum1);
                         boxes[randomNum].classList.add('enemy');
+                        boxes[randomNum].classList.add('enemy_first_part_of_medium_ship_vertical');
                         let numSecond = randomNum + 7;
                         boxes[numSecond].classList.add('enemy');
+                        boxes[numSecond].classList.add('enemy_last_part_of_medium_ship_vertical');
                         array.push(randomNum);
                         array.push(numSecond);
+                        medium_enemy_boat_counter++;
                     }
                 }else{
                     j--;
@@ -742,33 +766,40 @@ window.onload = () => {
                     j--;
                     continue;
                 }
-                boxes[randomNum].classList.add('enemy');
                 if(array.includes(randomNum) === false && array.includes(randomNum + 1) === false && array.includes(randomNum + 2) === false && array.includes(randomNum + 7) === false && array.includes(randomNum + 14) === false){ 
                     let randomNum1 = Math.floor(Math.random() * (2 - 1 + 1) + 2);
                     if(randomNum1 === 1 && randomNum !== 6 && randomNum !== 13 && randomNum !== 20 && randomNum !== 27 && randomNum !== 34 && randomNum !== 41 && randomNum !== 48 && randomNum !== 55 && randomNum !== 62 && randomNum !== 69
                         && randomNum !== 5 && randomNum !== 12 && randomNum !== 19 && randomNum !== 26 && randomNum !== 33 && randomNum!== 40 && randomNum !== 47 && randomNum !== 54 && randomNum !== 61 && randomNum !== 68){
                         console.log(randomNum1)
                         boxes[randomNum].classList.add('enemy');
+                        boxes[randomNum].classList.add('enemy_first_part_of_long_ship_linear');
                         let numSecond = randomNum + 1;
                         boxes[numSecond].classList.add('enemy');
+                        boxes[numSecond].classList.add('enemy_center_part_of_long_ship_linear');
                         array.push(numSecond);
                         let numThird = numSecond + 1;
                         boxes[numThird].classList.add('enemy');
+                        boxes[numThird].classList.add('enemy_last_part_of_long_ship_linear');
                         array.push(randomNum);
                         array.push(numSecond);
                         array.push(numThird);
+                        long_enemy_boat_counter++;
                     }
                     if(randomNum1 === 2 && randomNum < 56){
                         console.log(randomNum1)
                         boxes[randomNum].classList.add('enemy');
+                        boxes[randomNum].classList.add('enemy_first_part_of_long_ship_vertical');
                         let numSecond = randomNum + 7;
                         boxes[numSecond].classList.add('enemy');
+                        boxes[numSecond].classList.add('enemy_center_part_of_long_ship_vertical');
                         array.push(numSecond);
                         let numThird = numSecond + 7;
                         boxes[numThird].classList.add('enemy');
+                        boxes[numThird].classList.add('enemy_last_part_of_long_ship_vertical');
                         array.push(randomNum);
                         array.push(numSecond);
                         array.push(numThird);
+                        long_enemy_boat_counter++;
                     }
                 }else{
                     j--;
@@ -787,23 +818,63 @@ window.onload = () => {
                     if(box.classList.contains('enemy') === true){
                         box.classList.remove('enemy');
                     }
+                    if(box.classList.contains('smallShipEnemy') === true){
+                        box.classList.remove('smallShipEnemy');
+                    }
+                    if(box.classList.contains('enemy_first_part_of_medium_ship_linear') === true){
+                        box.classList.remove('enemy_first_part_of_medium_ship_linear');
+                    }
+                    if(box.classList.contains('enemy_last_part_of_medium_ship_linear') === true){
+                        box.classList.remove('enemy_last_part_of_medium_ship_linear');
+                    }
+                    if(box.classList.contains('enemy_first_part_of_medium_ship_vertical') === true){
+                        box.classList.remove('enemy_first_part_of_medium_ship_vertical');
+                    }
+                    if(box.classList.contains('enemy_last_part_of_medium_ship_vertical') === true){
+                        box.classList.remove('enemy_last_part_of_medium_ship_vertical');
+                    }
+                    if(box.classList.contains('enemy_first_part_of_long_ship_linear') === true){
+                        box.classList.remove('enemy_first_part_of_long_ship_linear');
+                    }
+                    if(box.classList.contains('enemy_center_part_of_long_ship_linear') === true){
+                        box.classList.remove('enemy_center_part_of_long_ship_linear');
+                    }
+                    if(box.classList.contains('enemy_last_part_of_long_ship_linear') === true){
+                        box.classList.remove('enemy_last_part_of_long_ship_linear');
+                    }
+                    if(box.classList.contains('enemy_first_part_of_long_ship_vertical') === true){
+                        box.classList.remove('enemy_first_part_of_long_ship_vertical');
+                    }
+                    if(box.classList.contains('enemy_center_part_of_long_ship_vertical') === true){
+                        box.classList.remove('enemy_center_part_of_long_ship_vertical');
+                    }
+                    if(box.classList.contains('enemy_last_part_of_long_ship_vertical') === true){
+                        box.classList.remove('enemy_last_part_of_long_ship_vertical');
+                    }
                 })
                 array.length = 0;
                 counter_ai = 0;
                 i--;
+                small_enemy_boat_counter = 0;
+                medium_enemy_boat_counter = 0;
+                long_enemy_boat_counter = 0;
             }
         }
         console.log(array)
         start_button.style.display = "none";
 
         info.innerHTML = "The enemy has chosen a boxes.";
+        boatsTitle.innerHTML = "Enemy Boats";
+        smallEnemyBoat.innerHTML = "Small ships : " + small_enemy_boat_counter;
+        mediumEnemyBoat.innerHTML = "Medium ships: " + medium_enemy_boat_counter;
+        longEnemyBoat.innerHTML = "Long ships: " + long_enemy_boat_counter;
         setTimeout(() => {
             info.innerHTML = "Now it's your turn.";
             main.style.zIndex = "1";
             [...boxes].forEach((box) => {
                 box.onmouseover = () => {
                     if(box.classList.contains('hit') === false || box.classList.contains('missed') === false){
-                        box.style.color = "rgba(255, 0, 0, 0.4)"
+                        box.style.color = "rgba(255, 0, 0, 0.3)"
                         box.addEventListener( 'mouseout',() => {
                             box.style.color = "black";
                         }, {once : true})
@@ -824,6 +895,197 @@ window.onload = () => {
                         if(box.classList.contains('hit')){
                             box.style.color = "rgba(255, 0, 0, 0.2)"
                         }
+                        if(box.classList.contains('smallShipEnemy') === true){
+                            box.style.backgroundColor = "rgb(255, 0, 0, 0.55)";
+                            box.style.animation = "destroyed_boat_animation 1.5s forwards infinite";
+                            box.classList.add('DestroyedSmallShipEnemy');
+                            small_enemy_boat_counter--;
+                            smallEnemyBoat.innerHTML = "Small ships: " + small_enemy_boat_counter;
+                        }
+                        if(box.classList.contains('enemy_first_part_of_medium_ship_linear') === true){
+                            if(boxes[Number(box.dataset.number) + 1].classList.contains('enemy_last_part_of_medium_ship_linear') === true && boxes[Number(box.dataset.number) + 1].classList.contains('hit') === true){
+                                box.style.borderTopRightRadius = "1em";
+                                box.style.borderBottomRightRadius = "1em";
+                                box.classList.add('destroyed_enemy_first_part_of_medium_ship_linear');
+                                box.style.backgroundColor = "rgb(255, 0, 0, 0.55)";
+                                box.style.animation = "destroyed_boat_animation 1.5s forwards infinite";
+                                boxes[Number(box.dataset.number) + 1].style.borderTopLeftRadius = "1em";
+                                boxes[Number(box.dataset.number) + 1].style.borderBottomLeftRadius = "1em";
+                                boxes[Number(box.dataset.number) + 1].classList.add('destroyed_enemy_last_part_of_medium_ship_linear')
+                                boxes[Number(box.dataset.number) + 1].style.backgroundColor = "rgb(255, 0, 0, 0.55)";
+                                boxes[Number(box.dataset.number) + 1].style.animation = "destroyed_boat_animation 1.5s forwards infinite";
+                                medium_enemy_boat_counter--;
+                                mediumEnemyBoat.innerHTML = "Medium ships: " + medium_enemy_boat_counter;
+                            }
+                        }
+                        if(box.classList.contains('enemy_last_part_of_medium_ship_linear') === true){
+                            if(boxes[Number(box.dataset.number) - 1].classList.contains('enemy_first_part_of_medium_ship_linear') === true && boxes[Number(box.dataset.number) - 1].classList.contains('hit') === true){
+                                box.style.borderTopLeftRadius = "1em";
+                                box.style.borderBottomLeftRadius = "1em";
+                                box.style.backgroundColor = "rgb(255, 0, 0, 0.55)";
+                                box.style.animation = "destroyed_boat_animation 1.5s forwards infinite";
+                                box.classList.add('destroyed_enemy_last_part_of_medium_ship_linear')
+                                boxes[Number(box.dataset.number) - 1].style.borderTopRightRadius = "1em";
+                                boxes[Number(box.dataset.number) - 1].style.borderBottomRightRadius = "1em";
+                                boxes[Number(box.dataset.number) - 1].style.backgroundColor = "rgb(255, 0, 0, 0.55)";
+                                boxes[Number(box.dataset.number) - 1].style.animation = "destroyed_boat_animation 1.5s forwards infinite";
+                                boxes[Number(box.dataset.number) - 1].classList.add('destroyed_enemy_first_part_of_medium_ship_linear')
+                                medium_enemy_boat_counter--;
+                                mediumEnemyBoat.innerHTML = "Medium ships: " + medium_enemy_boat_counter;
+                            }
+                        }
+                        if(box.classList.contains('enemy_first_part_of_medium_ship_vertical') === true){
+                            if(boxes[Number(box.dataset.number) + 7].classList.contains('enemy_last_part_of_medium_ship_vertical') === true && boxes[Number(box.dataset.number) + 7].classList.contains('hit') === true){
+                                box.style.borderBottomRightRadius = "1em";
+                                box.style.borderBottomLeftRadius = "1em";
+                                box.style.backgroundColor = "rgb(255, 0, 0, 0.55)";
+                                box.style.animation = "destroyed_boat_animation 1.5s forwards infinite";
+                                box.classList.add('destroyed_enemy_first_part_of_medium_ship_vertical')
+                                boxes[Number(box.dataset.number) + 7].style.borderTopLeftRadius = "1em";
+                                boxes[Number(box.dataset.number) + 7].style.borderTopRightRadius = "1em";
+                                boxes[Number(box.dataset.number) + 7].style.backgroundColor = "rgb(255, 0, 0, 0.55)";
+                                boxes[Number(box.dataset.number) + 7].style.animation = "destroyed_boat_animation 1.5s forwards infinite";
+                                boxes[Number(box.dataset.number) + 7].classList.add('destroyed_enemy_last_part_of_medium_ship_vertical')
+                                medium_enemy_boat_counter--;
+                                mediumEnemyBoat.innerHTML = "Medium ships: " + medium_enemy_boat_counter;
+                            }
+                        }
+                        if(box.classList.contains('enemy_last_part_of_medium_ship_vertical') === true){
+                            if(boxes[Number(box.dataset.number) - 7].classList.contains('enemy_first_part_of_medium_ship_vertical') === true && boxes[Number(box.dataset.number) - 7].classList.contains('hit') === true){
+                                box.style.borderTopRightRadius = "1em";
+                                box.style.borderTopLeftRadius = "1em";
+                                box.style.backgroundColor = "rgb(255, 0, 0, 0.55)";
+                                box.style.animation = "destroyed_boat_animation 1.5s forwards infinite";
+                                box.classList.add('destroyed_enemy_last_part_of_medium_ship_vertical')
+                                boxes[Number(box.dataset.number) - 7].style.borderBottomLeftRadius = "1em";
+                                boxes[Number(box.dataset.number) - 7].style.borderBottomRightRadius = "1em";
+                                boxes[Number(box.dataset.number) - 7].style.backgroundColor = "rgb(255, 0, 0, 0.55)";
+                                boxes[Number(box.dataset.number) - 7].style.animation = "destroyed_boat_animation 1.5s forwards infinite";
+                                boxes[Number(box.dataset.number) - 7].classList.add('destroyed_enemy_first_part_of_medium_ship_vertical')
+                                medium_enemy_boat_counter--;
+                                mediumEnemyBoat.innerHTML = "Medium ships: " + medium_enemy_boat_counter;
+                            }
+                        }
+                        if(box.classList.contains('enemy_first_part_of_long_ship_linear') === true){
+                            if(boxes[Number(box.dataset.number) + 1].classList.contains('enemy_center_part_of_long_ship_linear') === true && boxes[Number(box.dataset.number) + 1].classList.contains('hit') === true && boxes[Number(box.dataset.number) + 2].classList.contains('enemy_last_part_of_long_ship_linear') === true && boxes[Number(box.dataset.number) + 2].classList.contains('hit') === true){
+                                box.style.borderTopRightRadius = "1em";
+                                box.style.borderBottomRightRadius = "1em";
+                                box.style.backgroundColor = "rgb(255, 0, 0, 0.55)";
+                                box.style.animation = "destroyed_boat_animation 1.5s forwards infinite";
+                                box.classList.add('destroyed_enemy_first_part_of_long_ship_linear');
+                                boxes[Number(box.dataset.number) + 1].style.borderRadius = "1em";
+                                boxes[Number(box.dataset.number) + 1].style.backgroundColor = "rgb(255, 0, 0, 0.55)";
+                                boxes[Number(box.dataset.number) + 1].style.animation = "destroyed_boat_animation 1.5s forwards infinite";
+                                boxes[Number(box.dataset.number) + 1].classList.add('destroyed_enemy_center_part_of_long_ship_linear');
+                                boxes[Number(box.dataset.number) + 2].classList.add('destroyed_enemy_last_part_of_long_ship_linear');
+                                boxes[Number(box.dataset.number) + 2].style.borderTopLeftRadius = "1em";
+                                boxes[Number(box.dataset.number) + 2].style.borderBottomLeftRadius = "1em";
+                                boxes[Number(box.dataset.number) + 2].style.backgroundColor = "rgb(255, 0, 0, 0.55)";
+                                boxes[Number(box.dataset.number) + 2].style.animation = "destroyed_boat_animation 1.5s forwards infinite";
+                                long_enemy_boat_counter--;
+                                longEnemyBoat.innerHTML = "Long ships: " + long_enemy_boat_counter;
+                            }
+                        }
+                        if(box.classList.contains('enemy_center_part_of_long_ship_linear') === true){
+                            if(boxes[Number(box.dataset.number) - 1].classList.contains('enemy_first_part_of_long_ship_linear') === true && boxes[Number(box.dataset.number) - 1].classList.contains('hit') === true && boxes[Number(box.dataset.number) + 1].classList.contains('enemy_last_part_of_long_ship_linear') === true && boxes[Number(box.dataset.number) + 1].classList.contains('hit') === true){
+                                box.style.borderRadius = "1em";
+                                box.style.backgroundColor = "rgb(255, 0, 0, 0.55)";
+                                box.style.animation = "destroyed_boat_animation 1.5s forwards infinite";
+                                box.classList.add('destroyed_enemy_center_part_of_long_ship_linear');
+                                boxes[Number(box.dataset.number) - 1].style.borderTopRightRadius = "1em";
+                                boxes[Number(box.dataset.number) - 1].style.borderBottomRightRadius = "1em";
+                                boxes[Number(box.dataset.number) - 1].style.backgroundColor = "rgb(255, 0, 0, 0.55)";
+                                boxes[Number(box.dataset.number) - 1].style.animation = "destroyed_boat_animation 1.5s forwards infinite";
+                                boxes[Number(box.dataset.number) - 1].classList.add('destroyed_enemy_first_part_of_long_ship_linear');
+                                boxes[Number(box.dataset.number) + 1].classList.add('destroyed_enemy_last_part_of_long_ship_linear');
+                                boxes[Number(box.dataset.number) + 1].style.borderTopLeftRadius = "1em";
+                                boxes[Number(box.dataset.number) + 1].style.borderBottomLeftRadius = "1em";
+                                boxes[Number(box.dataset.number) + 1].style.backgroundColor = "rgb(255, 0, 0, 0.55)";
+                                boxes[Number(box.dataset.number) + 1].style.animation = "destroyed_boat_animation 1.5s forwards infinite";
+                                long_enemy_boat_counter--;
+                                longEnemyBoat.innerHTML = "Long ships: " + long_enemy_boat_counter;
+                            }
+                        }
+                        if(box.classList.contains('enemy_last_part_of_long_ship_linear') === true){
+                            if(boxes[Number(box.dataset.number) - 1].classList.contains('enemy_center_part_of_long_ship_linear') === true && boxes[Number(box.dataset.number) - 1].classList.contains('hit') === true && boxes[Number(box.dataset.number) - 2].classList.contains('enemy_first_part_of_long_ship_linear') === true && boxes[Number(box.dataset.number) - 2].classList.contains('hit') === true){
+                                box.style.borderBottomLeftRadius = "1em";
+                                box.style.borderTopLeftRadius = "1em";
+                                box.style.backgroundColor = "rgb(255, 0, 0, 0.55)";
+                                box.style.animation = "destroyed_boat_animation 1.5s forwards infinite";
+                                box.classList.add('destroyed_enemy_last_part_of_long_ship_linear');
+                                boxes[Number(box.dataset.number) - 1].style.borderRadius = "1em";
+                                boxes[Number(box.dataset.number) - 1].style.backgroundColor = "rgb(255, 0, 0, 0.55)";
+                                boxes[Number(box.dataset.number) - 1].style.animation = "destroyed_boat_animation 1.5s forwards infinite";
+                                boxes[Number(box.dataset.number) - 1].classList.add('destroyed_enemy_center_part_of_long_ship_linear');
+                                boxes[Number(box.dataset.number) - 2].classList.add('destroyed_enemy_first_part_of_long_ship_linear');
+                                boxes[Number(box.dataset.number) - 2].style.borderTopRightRadius = "1em";
+                                boxes[Number(box.dataset.number) - 2].style.borderBottomRightRadius = "1em";
+                                boxes[Number(box.dataset.number) - 2].style.backgroundColor = "rgb(255, 0, 0, 0.55)";
+                                boxes[Number(box.dataset.number) - 2].style.animation = "destroyed_boat_animation 1.5s forwards infinite";
+                                long_enemy_boat_counter--;
+                                longEnemyBoat.innerHTML = "Long ships: " + long_enemy_boat_counter;
+                            }
+                        }
+                        if(box.classList.contains('enemy_first_part_of_long_ship_vertical') === true){
+                            if(boxes[Number(box.dataset.number) + 7].classList.contains('enemy_center_part_of_long_ship_vertical') === true && boxes[Number(box.dataset.number) + 7].classList.contains('hit') === true && boxes[Number(box.dataset.number) + 14].classList.contains('enemy_last_part_of_long_ship_vertical') === true && boxes[Number(box.dataset.number) + 14].classList.contains('hit') === true){
+                                box.style.borderBottomLeftRadius = "1em";
+                                box.style.borderBottomRightRadius = "1em";
+                                box.style.backgroundColor = "rgb(255, 0, 0, 0.55)";
+                                box.style.animation = "destroyed_boat_animation 1.5s forwards infinite";
+                                box.classList.add('destroyed_enemy_first_part_of_long_ship_vertical');
+                                boxes[Number(box.dataset.number) + 7].style.borderRadius = "1em";
+                                boxes[Number(box.dataset.number) + 7].style.backgroundColor = "1em";
+                                boxes[Number(box.dataset.number) + 7].style.animation = "destroyed_boat_animation 1.5s forwards infinite";
+                                boxes[Number(box.dataset.number) + 7].classList.add('destroyed_enemy_center_part_of_long_ship_vertical');
+                                boxes[Number(box.dataset.number) + 14].classList.add('destroyed_enemy_last_part_of_long_ship_vertical');
+                                boxes[Number(box.dataset.number) + 14].style.borderTopRightRadius = "1em";
+                                boxes[Number(box.dataset.number) + 14].style.borderTopLeftRadius = "1em";
+                                boxes[Number(box.dataset.number) + 14].style.backgroundColor = "rgb(255, 0, 0, 0.55)";
+                                boxes[Number(box.dataset.number) + 14].style.animation = "destroyed_boat_animation 1.5s forwards infinite";
+                                long_enemy_boat_counter--;
+                                longEnemyBoat.innerHTML = "Long ships: " + long_enemy_boat_counter;
+                            }
+                        }
+                        if(box.classList.contains('enemy_center_part_of_long_ship_vertical') === true){
+                            if(boxes[Number(box.dataset.number) + 7].classList.contains('enemy_last_part_of_long_ship_vertical') === true && boxes[Number(box.dataset.number) + 7].classList.contains('hit') === true && boxes[Number(box.dataset.number) - 7].classList.contains('enemy_first_part_of_long_ship_vertical') === true && boxes[Number(box.dataset.number) - 7].classList.contains('hit') === true){
+                                box.style.borderRadius = "1em";
+                                box.style.backgroundColor = "rgb(255, 0, 0, 0.55)";
+                                box.style.animation = "destroyed_boat_animation 1.5s forwards infinite";
+                                box.classList.add('destroyed_enemy_center_part_of_long_ship_vertical');
+                                boxes[Number(box.dataset.number) + 7].style.borderTopLeftRadius = "1em";
+                                boxes[Number(box.dataset.number) + 7].style.borderTopRightRadius = "1em";
+                                boxes[Number(box.dataset.number) + 7].style.backgroundColor = "rgb(255, 0, 0, 0.55)";
+                                boxes[Number(box.dataset.number) + 7].style.animation = "destroyed_boat_animation 1.5s forwards infinite";
+                                boxes[Number(box.dataset.number) + 7].classList.add('destroyed_enemy_last_part_of_long_ship_vertical');
+                                boxes[Number(box.dataset.number) - 7].classList.add('destroyed_enemy_first_part_of_long_ship_vertical');
+                                boxes[Number(box.dataset.number) - 7].style.borderBottomRightRadius = "1em";
+                                boxes[Number(box.dataset.number) - 7].style.borderBottomLeftRadius = "1em";
+                                boxes[Number(box.dataset.number) - 7].style.backgroundColor = "rgb(255, 0, 0, 0.55)";
+                                boxes[Number(box.dataset.number) - 7].style.animation = "destroyed_boat_animation 1.5s forwards infinite";
+                                long_enemy_boat_counter--;
+                                longEnemyBoat.innerHTML = "Long ships: " + long_enemy_boat_counter;
+                            }
+                        }
+                        if(box.classList.contains('enemy_last_part_of_long_ship_vertical') === true){
+                            if(boxes[Number(box.dataset.number) - 7].classList.contains('enemy_center_part_of_long_ship_vertical') === true && boxes[Number(box.dataset.number) - 7].classList.contains('hit') === true && boxes[Number(box.dataset.number) - 14].classList.contains('enemy_first_part_of_long_ship_vertical') === true && boxes[Number(box.dataset.number) - 14].classList.contains('hit') === true){
+                                box.style.borderTopLeftRadius = "1em";
+                                box.style.borderTopRightRadius = "1em";
+                                box.style.backgroundColor = "rgb(255, 0, 0, 0.55)";
+                                box.style.animation = "destroyed_boat_animation 1.5s forwards  infinite";
+                                box.classList.add('destroyed_enemy_last_part_of_long_ship_vertical');
+                                boxes[Number(box.dataset.number) - 7].style.borderRadius = "1em";
+                                boxes[Number(box.dataset.number) - 7].style.backgroundColor = "rgb(255, 0, 0, 0.55)";
+                                boxes[Number(box.dataset.number) - 7].style.animation = "destroyed_boat_animation 1.5s forwards infinite";
+                                boxes[Number(box.dataset.number) - 7].classList.add('destroyed_enemy_center_part_of_long_ship_vertical');
+                                boxes[Number(box.dataset.number) - 14].classList.add('destroyed_enemy_first_part_of_long_ship_vertical');
+                                boxes[Number(box.dataset.number) - 14].style.borderBottomRightRadius = "1em";
+                                boxes[Number(box.dataset.number) - 14].style.borderBottomLeftRadius = "1em";
+                                boxes[Number(box.dataset.number) - 14].style.backgroundColor = "rgb(255, 0, 0, 0.55)";
+                                boxes[Number(box.dataset.number) - 14].style.animation = "destroyed_boat_animation 1.5s forwards infinite";
+                                long_enemy_boat_counter--;
+                                longEnemyBoat.innerHTML = "Long ships: " + long_enemy_boat_counter;
+                            }
+                        }
                         isPlayerWinnerCounter--;
                     }else{
                         main.style.zIndex = "-1 ";
@@ -835,24 +1097,34 @@ window.onload = () => {
                         }, 1000)
                         setTimeout(() => {
                             [...boxes].forEach((box) => {
+                                box.style.animation = "none";
+                                box.style.color = "black";
                                 if(box.classList.contains('smallShip') === true){
                                     box.style.backgroundColor = "rgb(0, 0, 0)"
                                 }
                                 if(box.classList.contains('firstPartOfMediumShipLinear') === true){
                                     box.style.borderTopRightRadius = "1em";
                                     box.style.borderBottomRightRadius = "1em";
+                                    box.style.borderBottomLeftRadius = "10em";
+                                    box.style.borderTopLeftRadius = "10em"
                                 }
                                 if(box.classList.contains('lastPartOfMediumShipLinear') === true){
                                     box.style.borderTopLeftRadius = "1em";
                                     box.style.borderBottomLeftRadius = "1em";
+                                    box.style.borderBottomRightRadius = "10em";
+                                    box.style.borderTopRightRadius = "10em";
                                 }
                                 if(box.classList.contains('firstPartOfMediumShipVertical') === true){
                                     box.style.borderBottomLeftRadius = "1em";
                                     box.style.borderBottomRightRadius = "1em";
+                                    box.style.borderTopLeftRadius = "10em";
+                                    box.style.borderTopRightRadius = "10em";
                                 }
                                 if(box.classList.contains('lastPartOfMediumShipVertical') === true){
                                     box.style.borderTopLeftRadius = "1em";
                                     box.style.borderTopRightRadius = "1em";
+                                    box.style.borderBottomRightRadius = "10em";
+                                    box.style.borderBottomLeftRadius = "10em";
                                 }
                                 if(box.classList.contains('mediumShip') === true){
                                     box.style.backgroundColor = "rgb(45, 84, 255)"
@@ -863,6 +1135,8 @@ window.onload = () => {
                                 if(box.classList.contains('firstPartOfLongShipLinear') === true){
                                     box.style.borderTopRightRadius = "1em";
                                     box.style.borderBottomRightRadius = "1em";
+                                    box.style.borderTopLeftRadius = "10em";
+                                    box.style.borderBottomLeftRadius = "10em";
                                 }
                                 if(box.classList.contains('centerPartOfLongShipLinear') === true){
                                     box.style.borderRadius = "1em 1em";
@@ -870,10 +1144,14 @@ window.onload = () => {
                                 if(box.classList.contains('lastPartOfLongShipLinear') === true){
                                     box.style.borderTopLeftRadius = "1em";
                                     box.style.borderBottomLeftRadius = "1em";
+                                    box.style.borderBottomRightRadius = "10em";
+                                    box.style.borderTopRightRadius = "10em";
                                 }
                                 if(box.classList.contains('firstPartOfLongShipVertical')){
                                     box.style.borderBottomLeftRadius = "1em";
                                     box.style.borderBottomRightRadius = "1em";
+                                    box.style.borderTopRightRadius = "10em";
+                                    box.style.borderTopLeftRadius = "10em";
                                 }
                                 if(box.classList.contains('centerPartOfLongShipVertical')){
                                     box.style.borderRadius = "1em 1em";
@@ -881,6 +1159,8 @@ window.onload = () => {
                                 if(box.classList.contains('lastPartOfLongShipVertical')){
                                     box.style.borderTopLeftRadius = "1em";
                                     box.style.borderTopRightRadius = "1em";
+                                    box.style.borderBottomLeftRadius = "10em";
+                                    box.style.borderBottomRightRadius = "10em";
                                 }
                                 if(box.classList.contains('missed') === true && box.classList.contains('longShip') === true){
                                     box.style.backgroundColor = "rgb(255, 165, 0)"
@@ -912,6 +1192,10 @@ window.onload = () => {
                                 if(box.classList.contains('hit') === true && box.classList.contains('smallShip') === false && box.classList.contains('mediumShip') === false && box.classList.contains('longShip') === false){
                                     box.style.background = "none"
                                 }
+                                if(box.classList.contains('smallShip') === false && box.classList.contains('mediumShip') === false && box.classList.contains('longShip') === false){
+                                    box.style.borderRadius = "10em 10em";
+                                }
+                                
                             });
                         }, 1000)
                         setTimeout(() => {
@@ -972,6 +1256,67 @@ window.onload = () => {
                                 if(box.classList.contains('lastPartOfLongShipVertical')){
                                     box.style.borderRadius = "10em 10em"
                                 }
+                                if(box.classList.contains('destroyed_enemy_first_part_of_medium_ship_linear') === true){
+                                    box.style.borderTopRightRadius = "1em";
+                                    box.style.borderBottomRightRadius = "1em";
+                                    box.style.backgroundColor = "rgba(255, 0, 0, 0.55)";
+                                    box.style.animation = "destroyed_boat_animation 1.5s forwards infinite";
+                                }
+                                if(box.classList.contains('destroyed_enemy_last_part_of_medium_ship_linear') === true){
+                                    box.style.borderTopLeftRadius = "1em";
+                                    box.style.borderBottomLeftRadius = "1em";
+                                    box.style.backgroundColor = "rgba(255, 0, 0, 0.55)"
+                                    box.style.animation = "destroyed_boat_animation 1.5s forwards infinite";
+                                }
+                                if(box.classList.contains('destroyed_enemy_first_part_of_medium_ship_vertical') === true){
+                                    box.style.borderBottomLeftRadius = "1em";
+                                    box.style.borderBottomRightRadius = "1em";
+                                    box.style.backgroundColor = "rgba(255, 0, 0, 0.55)"
+                                    box.style.animation = "destroyed_boat_animation 1.5s forwards infinite";
+                                }
+                                if(box.classList.contains('destroyed_enemy_last_part_of_medium_ship_vertical') === true){
+                                    box.style.borderTopLeftRadius = "1em";
+                                    box.style.borderTopRightRadius = "1em";
+                                    box.style.backgroundColor = "rgba(255, 0, 0, 0.55)"
+                                    box.style.animation = "destroyed_boat_animation 1.5s forwards infinite";
+                                }
+                                if(box.classList.contains('destroyed_enemy_first_part_of_long_ship_linear') === true){
+                                    box.style.borderTopRightRadius = "1em";
+                                    box.style.borderBottomRightRadius = "1em";
+                                    box.style.backgroundColor = "rgba(255, 0, 0, 0.55)"
+                                    box.style.animation = "destroyed_boat_animation 1.5s forwards infinite";
+                                }
+                                if(box.classList.contains('destroyed_enemy_center_part_of_long_ship_linear') === true){
+                                    box.style.borderRadius = "1em";
+                                    box.style.backgroundColor = "rgba(255, 0, 0, 0.55)"
+                                    box.style.animation = "destroyed_boat_animation 1.5s forwards infinite";
+                                }
+                                if(box.classList.contains('destroyed_enemy_last_part_of_long_ship_linear') === true){
+                                    box.style.borderTopLeftRadius = "1em";
+                                    box.style.borderBottomLeftRadius = "1em";
+                                    box.style.backgroundColor = "rgba(255, 0, 0, 0.55)"
+                                    box.style.animation = "destroyed_boat_animation 1.5s forwards infinite";
+                                }
+                                if(box.classList.contains('destroyed_enemy_first_part_of_long_ship_vertical') === true){
+                                    box.style.borderBottomLeftRadius = "1em";
+                                    box.style.borderBottomRightRadius = "1em";
+                                    box.style.backgroundColor = "rgba(255, 0, 0, 0.55)"
+                                    box.style.animation = "destroyed_boat_animation 1.5s forwards infinite";
+                                }
+                                if(box.classList.contains('destroyed_enemy_center_part_of_long_ship_vertical') === true){
+                                    box.style.borderRadius = "1em";
+                                    box.style.backgroundColor = "rgba(255, 0, 0, 0.55)"
+                                    box.style.animation = "destroyed_boat_animation 1.5s forwards infinite";
+                                }
+                                if(box.classList.contains('destroyed_enemy_last_part_of_long_ship_vertical') === true){
+                                    box.style.borderTopLeftRadius = "1em";
+                                    box.style.borderTopRightRadius = "1em";
+                                    box.style.backgroundColor = "rgba(255, 0, 0, 0.55)"
+                                    box.style.animation = "destroyed_boat_animation 1.5s forwards infinite";
+                                }
+                                if(box.classList.contains('DestroyedSmallShipEnemy') === true){
+                                    box.style.animation = "destroyed_boat_animation 1.5s forwards infinite";
+                                }
                             })
                         }, 3500)
                     }
@@ -992,8 +1337,7 @@ window.onload = () => {
     }
 }
 
-//Animace na hit lode
 //Pole okolo lodi v konfiguraci, aby nebyly moc u sebe
-//Chci udelat, ze az se znici enemy lod, tak se odhali. Podobny chci udelat i u spojeneckych lodi, ale treba, ze to bude sede
-//Chci, aby se nedali davat jedna pulka lode na pravou stranu a jedna na levou u medium a long lode
+//Az se znici moje lod, tak zšedne
+//Udelat Play again
 
