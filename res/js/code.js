@@ -9,18 +9,16 @@ const longShip = document.getElementById("longShip");
 const info = document.getElementById("info");
 
 const start_button = document.getElementById("start_button");
+const indicator = document.getElementById("indicator");
 
-let rotateButton = document.getElementById("rotateButton");
+const rotateButton = document.getElementById("rotateButton");
+
 let selected = false;
 let rotateSelected = false 
 
 let counter_one = 3;
 let counter_two = 3;
 let counter_three = 2;
-
-let counter_ai_one = 3;
-let counter_ai_two = 2;
-let counter_ai_three = 1;
 
 
 window.onload = () => {
@@ -169,7 +167,7 @@ window.onload = () => {
                             let temporarly_one = window.getComputedStyle(box);
                             let num_one = Number(box.dataset.number) + 1;
                             let temporarly_two = window.getComputedStyle(boxes[num_one]) 
-        
+                            
                             if(temporarly_one.backgroundColor === "rgba(0, 0, 0, 0)" && temporarly_two.backgroundColor === "rgba(0, 0, 0, 0)"){
                                 box.style.backgroundColor = "rgba(45, 84, 255, 0.4)";
                                 box.style.borderTopRightRadius = "1em";
@@ -228,7 +226,10 @@ window.onload = () => {
                     let temporarly_one = window.getComputedStyle(box);
                     let num_one = Number(box.dataset.number) + 1;
                     let temporarly_two = window.getComputedStyle(boxes[num_one]) 
-
+                            
+                    if(temporarly_one.backgroundColor === "rgba(0, 0, 0, 0)" && Number(box.dataset.number) === 6){
+                        console.log(1)
+                    }
                     if(temporarly_one.backgroundColor === "rgba(0, 0, 0, 0)" && temporarly_two.backgroundColor === "rgba(0, 0, 0, 0)"){
                         box.style.backgroundColor = "rgba(45, 84, 255, 0.4)";
                         box.style.borderTopRightRadius = "1em";
@@ -642,6 +643,7 @@ window.onload = () => {
 
         enemyBoats.style.display = "block";
         main.style.zIndex = "-1";
+        indicator.style.display = "block";
         enemyBoats.onclick = () => {
             enemyBoats.style.zIndex = "-1";
             [...boxes].forEach((box) => {
@@ -658,6 +660,18 @@ window.onload = () => {
                 })
             }, 2000)
         }
+        let indicatorInterval = setInterval(() => {
+            let counter = 0;
+            for(let i = 0; i <= boxes.length - 1; i++){
+                if(boxes[i].classList.contains('enemy') === true){
+                    counter++;
+                }else{
+                    continue;
+                }
+            }
+            indicator.innerHTML = "Remaining enemy boxes: " + counter;
+
+        }, 10);
         [...boxes].forEach((box) => {
             let is_selected = window.getComputedStyle(box)
             if(is_selected.backgroundColor === "rgb(0, 0, 0)"){
@@ -681,50 +695,101 @@ window.onload = () => {
         })
         
         let array = [];
+        let counter_ai = 0;
 
-        for(let i = 1; i <= 3; i++){
-            let randomNum = Math.floor(Math.random() * (69 - 0 + 1) + 0);
-            if(array.includes(randomNum) === false){
-                boxes[randomNum].classList.add('enemy');
-                array.push(randomNum);
-            }else{
-                i--;
-            }
-        }
-        for(let i = 1; i <= 2; i++){
-            let randomNum = Math.floor(Math.random() * (69 - 0 + 1) + 0);
-            if(randomNum >= 68){
-                i--;
-                continue;
-            }
-            if(array.includes(randomNum) === false && array.includes(randomNum + 1) === false){
-                boxes[randomNum].classList.add('enemy');
-                let numSecond = randomNum + 1;
-                boxes[numSecond].classList.add('enemy');
-                array.push(randomNum);
-                array.push(numSecond);
-            }else{
-                i--;
-            }
-        }
         for(let i = 1; i <= 1; i++){
-            let randomNum = Math.floor(Math.random() * (69 - 0 + 1) + 0);
-            boxes[randomNum].classList.add('enemy');
-            if(randomNum >= 67){
-                i--;
-                continue;
+            for(let i = 1; i <= 3; i++){
+                let randomNum = Math.floor(Math.random() * (69 - 0 + 1) + 0);
+                if(array.includes(randomNum) === false){
+                    boxes[randomNum].classList.add('enemy');
+                    array.push(randomNum);
+                    console.log(randomNum)
+                }else{
+                    i--;
+                }
             }
-            if(array.includes(randomNum) === false && array.includes(randomNum + 1) === false && array.includes(randomNum + 2) === false){ 
+            for(let j = 1; j <= 3; j++){
+                let randomNum = Math.floor(Math.random() * (69 - 0 + 1) + 0);
+                if(randomNum >= 69){
+                    j--;
+                    continue;
+                }
+                if(array.includes(randomNum) === false && array.includes(randomNum + 1) === false && array.includes(randomNum + 7) === false){
+                    let randomNum1 = Math.floor(Math.random() * (2 - 1 + 1) + 1);
+                    if(randomNum1 === 1 && randomNum !== 6 && randomNum !== 13 && randomNum !== 20 && randomNum !== 27 && randomNum !== 34 && randomNum !== 41 && randomNum !== 48 && randomNum !== 55 && randomNum !== 62 && randomNum !== 69){
+                        console.log(randomNum1);
+                        boxes[randomNum].classList.add('enemy');
+                        let numSecond = randomNum + 1;
+                        boxes[numSecond].classList.add('enemy');
+                        array.push(randomNum);
+                        array.push(numSecond);
+                    }
+                    if(randomNum1 === 2 && randomNum < 63){
+                        console.log(randomNum1);
+                        boxes[randomNum].classList.add('enemy');
+                        let numSecond = randomNum + 7;
+                        boxes[numSecond].classList.add('enemy');
+                        array.push(randomNum);
+                        array.push(numSecond);
+                    }
+                }else{
+                    j--;
+                }
+            }
+            for(let j = 1; j <= 2; j++){
+                let randomNum = Math.floor(Math.random() * (69 - 0 + 1) + 0);
+                if(randomNum >= 68){
+                    j--;
+                    continue;
+                }
                 boxes[randomNum].classList.add('enemy');
-                let numSecond = randomNum + 1;
-                boxes[numSecond].classList.add('enemy');
-                array.push(numSecond);
-                let numThird = numSecond + 1;
-                boxes[numThird].classList.add('enemy');
-                array.push(randomNum);
-                array.push(numSecond);
-                array.push(numThird);
+                if(array.includes(randomNum) === false && array.includes(randomNum + 1) === false && array.includes(randomNum + 2) === false && array.includes(randomNum + 7) === false && array.includes(randomNum + 14) === false){ 
+                    let randomNum1 = Math.floor(Math.random() * (2 - 1 + 1) + 2);
+                    if(randomNum1 === 1 && randomNum !== 6 && randomNum !== 13 && randomNum !== 20 && randomNum !== 27 && randomNum !== 34 && randomNum !== 41 && randomNum !== 48 && randomNum !== 55 && randomNum !== 62 && randomNum !== 69
+                        && randomNum !== 5 && randomNum !== 12 && randomNum !== 19 && randomNum !== 26 && randomNum !== 33 && randomNum!== 40 && randomNum !== 47 && randomNum !== 54 && randomNum !== 61 && randomNum !== 68){
+                        console.log(randomNum1)
+                        boxes[randomNum].classList.add('enemy');
+                        let numSecond = randomNum + 1;
+                        boxes[numSecond].classList.add('enemy');
+                        array.push(numSecond);
+                        let numThird = numSecond + 1;
+                        boxes[numThird].classList.add('enemy');
+                        array.push(randomNum);
+                        array.push(numSecond);
+                        array.push(numThird);
+                    }
+                    if(randomNum1 === 2 && randomNum < 56){
+                        console.log(randomNum1)
+                        boxes[randomNum].classList.add('enemy');
+                        let numSecond = randomNum + 7;
+                        boxes[numSecond].classList.add('enemy');
+                        array.push(numSecond);
+                        let numThird = numSecond + 7;
+                        boxes[numThird].classList.add('enemy');
+                        array.push(randomNum);
+                        array.push(numSecond);
+                        array.push(numThird);
+                    }
+                }else{
+                    j--;
+                }
+            }
+            for(let j = 0; j <= boxes.length - 1; j++){
+                if(boxes[j].classList.contains('enemy') === true){
+                    counter_ai++;
+                }
+            }
+            if(counter_ai === 15){
+                console.log("Counter ai: " + counter_ai)
+                break;
             }else{
+                [...boxes].forEach((box) => {
+                    if(box.classList.contains('enemy') === true){
+                        box.classList.remove('enemy');
+                    }
+                })
+                array.length = 0;
+                counter_ai = 0;
                 i--;
             }
         }
@@ -738,7 +803,7 @@ window.onload = () => {
             [...boxes].forEach((box) => {
                 box.onmouseover = () => {
                     if(box.classList.contains('hit') === false || box.classList.contains('missed') === false){
-                        box.style.color = "rgba(255, 0, 0, 0.2)"
+                        box.style.color = "rgba(255, 0, 0, 0.4)"
                         box.addEventListener( 'mouseout',() => {
                             box.style.color = "black";
                         }, {once : true})
@@ -773,19 +838,19 @@ window.onload = () => {
                                 if(box.classList.contains('smallShip') === true){
                                     box.style.backgroundColor = "rgb(0, 0, 0)"
                                 }
-                                if(box.classList.contains('firstPartOfMediumShipLinear')){
+                                if(box.classList.contains('firstPartOfMediumShipLinear') === true){
                                     box.style.borderTopRightRadius = "1em";
                                     box.style.borderBottomRightRadius = "1em";
                                 }
-                                if(box.classList.contains('lastPartOfMediumShipLinear')){
+                                if(box.classList.contains('lastPartOfMediumShipLinear') === true){
                                     box.style.borderTopLeftRadius = "1em";
                                     box.style.borderBottomLeftRadius = "1em";
                                 }
-                                if(box.classList.contains('firstPartOfMediumShipVertical')){
+                                if(box.classList.contains('firstPartOfMediumShipVertical') === true){
                                     box.style.borderBottomLeftRadius = "1em";
                                     box.style.borderBottomRightRadius = "1em";
                                 }
-                                if(box.classList.contains('lastPartOfMediumShipVertical')){
+                                if(box.classList.contains('lastPartOfMediumShipVertical') === true){
                                     box.style.borderTopLeftRadius = "1em";
                                     box.style.borderTopRightRadius = "1em";
                                 }
@@ -794,6 +859,28 @@ window.onload = () => {
                                 }
                                 if(box.classList.contains('longShip') === true){
                                     box.style.backgroundColor = "rgb(255, 165, 0)"
+                                }
+                                if(box.classList.contains('firstPartOfLongShipLinear') === true){
+                                    box.style.borderTopRightRadius = "1em";
+                                    box.style.borderBottomRightRadius = "1em";
+                                }
+                                if(box.classList.contains('centerPartOfLongShipLinear') === true){
+                                    box.style.borderRadius = "1em 1em";
+                                }
+                                if(box.classList.contains('lastPartOfLongShipLinear') === true){
+                                    box.style.borderTopLeftRadius = "1em";
+                                    box.style.borderBottomLeftRadius = "1em";
+                                }
+                                if(box.classList.contains('firstPartOfLongShipVertical')){
+                                    box.style.borderBottomLeftRadius = "1em";
+                                    box.style.borderBottomRightRadius = "1em";
+                                }
+                                if(box.classList.contains('centerPartOfLongShipVertical')){
+                                    box.style.borderRadius = "1em 1em";
+                                }
+                                if(box.classList.contains('lastPartOfLongShipVertical')){
+                                    box.style.borderTopLeftRadius = "1em";
+                                    box.style.borderTopRightRadius = "1em";
                                 }
                                 if(box.classList.contains('missed') === true && box.classList.contains('longShip') === true){
                                     box.style.backgroundColor = "rgb(255, 165, 0)"
@@ -855,6 +942,36 @@ window.onload = () => {
                                 if(box.classList.contains('hit') === true){
                                     box.style.backgroundColor = "rgba(255, 0, 0, 0.4)";
                                 }
+                                if(box.classList.contains('firstPartOfMediumShipLinear') === true){
+                                    box.style.borderRadius = "10em 10em"
+                                }
+                                if(box.classList.contains('lastPartOfMediumShipLinear') === true){
+                                    box.style.borderRadius = "10em 10em"
+                                }
+                                if(box.classList.contains('firstPartOfMediumShipVertical') === true){
+                                    box.style.borderRadius = "10em 10em"
+                                }
+                                if(box.classList.contains('lastPartOfMediumShipVertical') === true){
+                                    box.style.borderRadius = "10em 10em"
+                                }
+                                if(box.classList.contains('firstPartOfLongShipLinear') === true){
+                                    box.style.borderRadius = "10em 10em"
+                                }
+                                if(box.classList.contains('centerPartOfLongShipLinear') === true){
+                                    box.style.borderRadius = "10em 10em"
+                                }
+                                if(box.classList.contains('lastPartOfLongShipLinear') === true){
+                                    box.style.borderRadius = "10em 10em"
+                                }
+                                if(box.classList.contains('firstPartOfLongShipVertical')){
+                                    box.style.borderRadius = "10em 10em"
+                                }
+                                if(box.classList.contains('centerPartOfLongShipVertical')){
+                                    box.style.borderRadius = "10em 10em"
+                                }
+                                if(box.classList.contains('lastPartOfLongShipVertical')){
+                                    box.style.borderRadius = "10em 10em"
+                                }
                             })
                         }, 3500)
                     }
@@ -875,7 +992,8 @@ window.onload = () => {
     }
 }
 
-//Chci udelat obrysy aby vypadali jako lode
-//Chci udelat lepsi Ai, aby konfirgurovalo lode i vertikalne 
-//Chci vylepsit hover pri hrani
+//Animace na hit lode
+//Pole okolo lodi v konfiguraci, aby nebyly moc u sebe
+//Chci udelat, ze az se znici enemy lod, tak se odhali. Podobny chci udelat i u spojeneckych lodi, ale treba, ze to bude sede
+//Chci, aby se nedali davat jedna pulka lode na pravou stranu a jedna na levou u medium a long lode
 
