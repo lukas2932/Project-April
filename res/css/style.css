@@ -107,15 +107,57 @@ body{
 
 }
 #enemyBoats{
-	align-self: flex-end;
 	font-family: 'Courier New', Courier, monospace;
 	cursor: pointer;
 	display: none;
-	position: absolute
+	position: absolute;
+	top: 10px;
 }
 #rotateButton{
 	font-size: 32px;
 	font-family: 'Courier New', Courier, monospace;
 	cursor: pointer;
 	display: none;
+}
+#texts{
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+}
+#indicator{
+	position: relative;
+	font-size: 25px;
+	font-family: 'Courier New', Courier, monospace;
+	text-align: center;
+	display: flex;
+}
+#boatCounter{
+	font-family: 'Courier New', Courier, monospace;
+	text-align: center;
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+#boatsTitle{
+	margin-bottom: 5px;
+	margin-top: 5px;
+}
+@keyframes destroyed_boat_animation{
+	0%{
+		color: rgba(255, 0, 0, 0.25)
+	}
+	25%{
+		color: rgba(255, 0, 0, 0.4)
+	}
+	50%{
+		color: rgba(255, 0, 0, 0.3)
+	}
+	75%{
+		color: rgba(255, 0, 0, 0.45);
+	}
+	100%{
+		color:rgba(255, 0, 0, 0.3)
+	}
 }
