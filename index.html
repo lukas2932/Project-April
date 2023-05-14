@@ -5,22 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./res/css/style.css" />
-    <title>Document</title>
+    <title>Battle Ships</title>
   </head>
   <body>
-    <div style = "display: flex; justify-content: center; flex-direction: column; align-items: center;">
-      <div id="info">ahoj</div>
-      <section id = "texts">
-        <div id="enemyBoats"><p>Show enemy boats</p></div>
-        <div id="rotateButton">Rotate</div>
-        <div id="indicator"></div>
-        <div id = "boatCounter">
-          <h1 id="boatsTitle"></h1>
-          <div id="smallEnemyBoat"></div>
-          <div id="mediumEnemyBoat"></div>
-          <div id="longEnemyBoat"></div>
-        </div>
-      </section>
+    <div style = "display: flex; justify-content: center; flex-direction: column; align-items: center; width: 100vw; height: 100vh;">
+      <div id="canvas"></div>
+      <div id="info">Choose your positions</div>
 		<header id="main">
         <div id="box_0" class="box" data-number="0"></div>
         <div id="box_1" class="box" data-number="1"></div>
@@ -93,13 +83,30 @@
         <div id="box_68" class="box" data-number="68"></div>
         <div id="box_69" class="box" data-number="69"></div>
 	  </header>
-	<div style="margin: 4px">
-		<p id="start_button">Start</p>
-	</div>
       <header id="shipsTab">
-        <div id="smallShip" data-color="black"></div>
-        <div id="mediumShip" data-color="rgb(45,84,255)"></div>
-        <div id="longShip" data-color="rgb(255, 165, 0)"></div>
+        <div id="words">
+          <div id="rotateButton">Rotate</div>
+          <div id="start_button">Start</div>
+          <div id="play_again_button"></div>
+        </div>
+        <div id="ships">
+          <section id = "texts">
+            <div id="enemyBoats"><p>Show enemy boats</p></div>
+            <div id="indicator"></div>
+            <div id = "boatCounter">
+              <h1 id="boatsTitle"></h1>
+              <div id="smallEnemyBoat"></div>
+              <div id="mediumEnemyBoat"></div>
+              <div id="longEnemyBoat"></div>
+            </div>
+          </section>
+          <p id="smallText">Small ship</p>
+          <div id="smallShip" data-color="black"></div>
+          <p id="mediumText">Medium ship</p>
+          <div id="mediumShip" data-color="rgb(45, 84, 255)"></div>
+          <p id="longText">Long ship</p>
+          <div id="longShip" data-color="rgb(255, 165, 0)"></div>
+        </div>
 	  </header>
   </div>
     <script src="/res/js/code.js"></script>
