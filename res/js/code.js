@@ -901,6 +901,7 @@ window.onload = () => {
         })
         
         let array = [];
+        let arrayEnemyMisses = [];
         let counter_ai = 0;
 
         for(let i = 1; i <= 1; i++){
@@ -1058,11 +1059,6 @@ window.onload = () => {
         smallEnemyBoat.innerHTML = "Small ships : " + small_enemy_boat_counter;
         mediumEnemyBoat.innerHTML = "Medium ships: " + medium_enemy_boat_counter;
         longEnemyBoat.innerHTML = "Long ships: " + long_enemy_boat_counter;
-
-        boatsTitle2.innerHTML = "Your boats";
-        smallEnemyBoat.innerHTML = "Small ships : " + small_boat_counter;
-        mediumEnemyBoat.innerHTML = "Medium ships: " + medium_boat_counter;
-        longEnemyBoat.innerHTML = "Long ships: " + long_boat_counter;
         setTimeout(() => {
             info.innerHTML = "Now it's your turn.";
             main.style.zIndex = "1";
@@ -1395,15 +1391,23 @@ window.onload = () => {
                             });
                         }, 1000)
                         setTimeout(() => {
-                            let randomNum = Math.floor(Math.random() * (69 - 0 + 1) + 0);
-                            console.log(randomNum);
-                            if(boxes[randomNum].classList.contains('smallShip') === true || boxes[randomNum].classList.contains('mediumShip') === true || boxes[randomNum].classList.contains('longShip') === true){
-                                boxes[randomNum].classList.add('enemyHit');
-                                boxes[randomNum].style.backgroundColor = "rgba(255, 0, 0, 0.4)";
-                                isEnemyWinnerCounter--;
-                            }else{
-                                boxes[randomNum].classList.add('enemyMissed');
-                                boxes[randomNum].style.backgroundColor = "rgba(0, 0, 0, 0.6)";
+                            for(let i = 1; i <= 1; i++){
+                                let randomNum = Math.floor(Math.random() * (69 - 0 + 1) + 0);
+                                console.log(randomNum);
+                                if(arrayEnemyMisses.includes(randomNum) === false){
+                                    if(boxes[randomNum].classList.contains('smallShip') === true || boxes[randomNum].classList.contains('mediumShip') === true || boxes[randomNum].classList.contains('longShip') === true){
+                                        boxes[randomNum].classList.add('enemyHit');
+                                        boxes[randomNum].style.backgroundColor = "rgba(255, 0, 0, 0.4)";
+                                        arrayEnemyMisses.push(randomNum);
+                                        isEnemyWinnerCounter--;
+                                    }else{
+                                        boxes[randomNum].classList.add('enemyMissed');
+                                        boxes[randomNum].style.backgroundColor = "rgba(0, 0, 0, 0.6)";
+                                        arrayEnemyMisses.push(randomNum);
+                                    }
+                                }else{
+                                    i--;
+                                }
                             }
                         }, 1500)
                         setTimeout(() => {
@@ -1551,4 +1555,3 @@ window.onload = () => {
 
 //Pole okolo lodi v konfiguraci, aby nebyly moc u sebe
 //Trochu zlepsit ai, aby se po urcitym kole strefilo do lode
-
