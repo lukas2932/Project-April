@@ -3,9 +3,10 @@ html,
 body{
 	background-image: url(/res/img/40198-art-painting-military-navy-weapons-vehicles-ships-boats-ocean-sea-sky-clouds-aircraft-airplane-battle-war-fighter.jpg);
 	background-size: cover;
-	background-position: center;
+	background-position: center center;
 	position: relative;
 	z-index: -10 !important;
+	background-color: rgba(255, 255, 255, 0.3);
 }
 #main{
 	display: flex;
@@ -16,6 +17,8 @@ body{
 	align-items: center;
 	gap: 10px;
 	z-index: -1;
+	position: relative;
+	left: -15%;
 }
 .box{
 	width: 80px;
@@ -25,19 +28,49 @@ body{
 	box-shadow: 0 1px 15px;
 	cursor: pointer;
 }
+#canvas{
+	position: absolute;
+	z-index: -8;
+	background-color: rgba(255, 255, 255, 0.3);
+	width: 102vw;
+	height: 102vh;	
+}
 #shipsTab{
-	position: relative;
-	margin-top: 35px;
-	border: 1px solid black;
-	width: 400px;
-	height: 300px;
+	position: absolute;
+	right: 15%;
+	width: 20%;
+	height: 500px;
 	display: flex;
 	flex-wrap: wrap;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
+	font-family: 'Courier New', Courier, monospace;
+	color:rgba(255, 255, 255, 0.75) ;
+}
+#ships{
+	height: 90%;
+	width: 100%;
+	display: flex;
 	flex-direction: column;
 	justify-content: space-evenly;
 	align-items: center;
-	gap: 10px;
-	border-radius: 1em 1em ;
+	border-radius: 1em 1em ;	
+	border: 3px solid rgba(0, 0, 0, 0.4);
+	background-color: rgba(0, 0, 0, 0.5);
+}
+#words{
+	height: 10%;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+#shipsTab p{
+	margin: 0;
+	position: relative;
+	bottom: -17px;
 }
 #smallShip{
 	width: 80px;
@@ -47,7 +80,8 @@ body{
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	color: white;
+	color: rgba(255, 255, 255, 0.75);
+	font-size: 25px;
 	cursor: pointer;
 	font-family: 'Courier New', Courier, monospace;
 	border-radius: 5em 5em;
@@ -61,7 +95,8 @@ body{
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	color: white;
+	color: rgba(255, 255, 255, 0.75);
+	font-size: 25px;
 	cursor: pointer;
 	font-family: 'Courier New', Courier, monospace;
 	border-radius: 5em 5em;
@@ -74,7 +109,8 @@ body{
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	color: white;
+	color: rgba(255, 255, 255, 0.75);
+	font-size: 25px;
 	cursor: pointer;
 	font-family: 'Courier New', Courier, monospace;
 	border-radius: 5em 5em;
@@ -83,8 +119,10 @@ body{
 	margin: 4px;
 	font-family: 'Courier New', Courier, monospace;
 	font-size: 32px;
+	position: relative;
+	left: -15%;
 }
-#start_button{
+#start_button, #play_again_button{
 	display: none;
 	font-size: 32px;
 	margin-top: 6px;
@@ -118,11 +156,15 @@ body{
 	font-family: 'Courier New', Courier, monospace;
 	cursor: pointer;
 	display: none;
+	position: relative;
 }
 #texts{
 	width: 100%;
-	display: flex;
-	justify-content: space-between;
+	height: 100%;
+	display: none;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
 }
 #indicator{
 	position: relative;
@@ -130,6 +172,8 @@ body{
 	font-family: 'Courier New', Courier, monospace;
 	text-align: center;
 	display: flex;
+	top: -50px;
+	padding: 10px;
 }
 #boatCounter{
 	font-family: 'Courier New', Courier, monospace;
@@ -139,6 +183,7 @@ body{
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	top: 50px;
 }
 #boatsTitle{
 	margin-bottom: 5px;
@@ -146,7 +191,7 @@ body{
 }
 @keyframes destroyed_boat_animation{
 	0%{
-		color: rgba(255, 0, 0, 0.25)
+		color: rgba(255, 0, 0, 0.3)
 	}
 	25%{
 		color: rgba(255, 0, 0, 0.4)
@@ -155,9 +200,9 @@ body{
 		color: rgba(255, 0, 0, 0.3)
 	}
 	75%{
-		color: rgba(255, 0, 0, 0.45);
+		color: rgba(255, 0, 0, 0.5);
 	}
 	100%{
-		color:rgba(255, 0, 0, 0.3)
+		color:rgba(255, 0, 0, 0.4)
 	}
 }
