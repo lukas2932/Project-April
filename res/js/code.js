@@ -13,12 +13,19 @@ const indicator = document.getElementById("indicator");
 
 const rotateButton = document.getElementById("rotateButton");
 
+const play_again_button = document.getElementById("play_again_button");
+
 const smallEnemyBoat = document.getElementById("smallEnemyBoat");
 const mediumEnemyBoat = document.getElementById("mediumEnemyBoat");
 const longEnemyBoat = document.getElementById("longEnemyBoat");
 const boatsTitle = document.getElementById("boatsTitle");
 
 const texts = document.getElementById("texts");
+const ships = document.getElementById("ships");
+
+const smallText = document.getElementById("smallText");
+const mediumText = document.getElementById("mediumText");
+const longText = document.getElementById("longText");
 
 let selected = false;
 let rotateSelected = false 
@@ -30,6 +37,10 @@ let counter_three = 2;
 let small_enemy_boat_counter = 0;
 let medium_enemy_boat_counter = 0;
 let long_enemy_boat_counter = 0;
+
+let small_boat_counter = 3;
+let medium_boat_counter = 3;
+let long_boat_counter = 2;
 
 
 window.onload = () => {
@@ -43,6 +54,7 @@ window.onload = () => {
                 smallShip.style.display = "none";
                 main.style.zIndex = "-1";
                 clearInterval(s_interval);
+                smallText.style.display = "none";
             }
         },1)
         if(!selected){
@@ -53,20 +65,20 @@ window.onload = () => {
                 box.onmouseover = () => {
                     let temporarly = window.getComputedStyle(box);
                     if(temporarly.backgroundColor === "rgba(0, 0, 0, 0)"){
-                        box.style.backgroundColor = "rgba(0, 0, 0, 0.4)";
+                        box.style.backgroundColor = "rgba(0, 0, 0, 0.3)";
                         box.addEventListener('mouseout', () => {
                             let temporarly2 = window.getComputedStyle(box);
-                            if(temporarly2.backgroundColor === "rgba(0, 0, 0, 0.4)"){
+                            if(temporarly2.backgroundColor === "rgba(0, 0, 0, 0.3)"){
                                 box.style.background = "none"
                             }
                             if(temporarly2.backgroundColor === "rgb(0, 0, 0)"){
                                 box.style.backgroundColor = "rgb(0, 0, 0)"
                             }
-                        })
+                        }, {once : true})
                     }
                     box.onclick = () =>{
                         let temporarly = window.getComputedStyle(box);
-                        if(temporarly.backgroundColor !== "rgba(0, 0, 0, 0.4)"){
+                        if(temporarly.backgroundColor !== "rgba(0, 0, 0, 0.3)"){
                             info.innerHTML = "This position is already taken";
                             setTimeout(() => {
                                 info.innerHTML = "Chose your positions."
@@ -99,7 +111,8 @@ window.onload = () => {
                 mediumShip.style.display = "none";
                 main.style.zIndex = "-1";
                 clearInterval(m_interval);
-                rotateButton.style.display = "none"
+                rotateButton.style.display = "none";
+                mediumText.style.display = "none";
             }
         },1)
         if(!selected){
@@ -116,9 +129,10 @@ window.onload = () => {
                     [...boxes].forEach((box) => {
                         box.onmouseover = () => {
                             let temporarly_one = window.getComputedStyle(box);
-                            let num_one = Number(box.dataset.number) + 7;
-                            let temporarly_two = window.getComputedStyle(boxes[num_one]) 
-        
+                            if(Number(box.dataset.number) <= 62){
+                                let num_one = Number(box.dataset.number) + 7;
+                                let temporarly_two = window.getComputedStyle(boxes[num_one]) 
+                            
                             if(temporarly_one.backgroundColor === "rgba(0, 0, 0, 0)" && temporarly_two.backgroundColor === "rgba(0, 0, 0, 0)"){
                                 box.style.backgroundColor = "rgba(45, 84, 255, 0.4)";
                                 box.style.borderBottomLeftRadius = "1em";
@@ -139,13 +153,13 @@ window.onload = () => {
                                 }, {once : true})
                             }
                             if(temporarly_one.backgroundColor === "rgba(0, 0, 0, 0)" && temporarly_two.backgroundColor !== "rgba(0, 0, 0, 0)"){
-                                box.style.backgroundColor = "rgba(45, 84, 255, 0.4)";
+                                box.style.backgroundColor = "rgba(255, 0, 0, 0.4)";
                                 box.style.borderBottomLeftRadius = "1em";
                                 box.style.borderBottomRightRadius = "1em";
                                 box.addEventListener('mouseout', () => {
                                     box.style.background = "none";
                                     box.style.borderRadius = "10em 10em";
-                                })
+                                }, {once : true})
                             }
                             box.onclick = () =>{
                                 let temporarly = window.getComputedStyle(box);
@@ -168,7 +182,16 @@ window.onload = () => {
                                     mediumShip.innerHTML = counter_two;
                                 }
                             }
+                        }else{
+                            box.style.backgroundColor = "rgba(255, 0, 0, 0.4)";
+                            box.style.borderBottomLeftRadius = "1em"
+                            box.style.borderBottomRightRadius = "1em";
+                            box.addEventListener('mouseout',() => {
+                                box.style.background = "none";
+                                box.style.borderRadius = "10em";
+                            }, {once : true})
                         }
+                    }
                     })
                 }else{
                     rotateSelected = false;
@@ -179,7 +202,20 @@ window.onload = () => {
                             let temporarly_one = window.getComputedStyle(box);
                             let num_one = Number(box.dataset.number) + 1;
                             let temporarly_two = window.getComputedStyle(boxes[num_one]) 
+
+                            if(temporarly_one.backgroundColor === "rgb(45, 84, 255)"){
+                                box.style.backgroundColor = "rgb(45, 84, 255)";
+                            }
                             
+                            if(temporarly_one.backgroundColor === "rgba(0, 0, 0, 0)" && (Number(box.dataset.number) === 6 || Number(box.dataset.number) === 13 || Number(box.dataset.number) === 20 || Number(box.dataset.number) === 27 || Number(box.dataset.number) === 34 || Number(box.dataset.number) === 41 || Number(box.dataset.number) === 48 || Number(box.dataset.number) === 55 || Number(box.dataset.number) === 62 || Number(box.dataset.number) === 69 )){
+                                box.style.backgroundColor = "rgba(255, 0, 0, 0.4)"
+                                box.style.borderTopRightRadius = "1em";
+                                box.style.borderBottomRightRadius = "1em";
+                                box.addEventListener('mouseout',() => {
+                                    box.style.borderRadius = "10em";
+                                    box.style.background = "none";
+                                }, {once : true})
+                            }
                             if(temporarly_one.backgroundColor === "rgba(0, 0, 0, 0)" && temporarly_two.backgroundColor === "rgba(0, 0, 0, 0)"){
                                 box.style.backgroundColor = "rgba(45, 84, 255, 0.4)";
                                 box.style.borderTopRightRadius = "1em";
@@ -200,13 +236,13 @@ window.onload = () => {
                                 }, {once : true})
                             }
                             if(temporarly_one.backgroundColor === "rgba(0, 0, 0, 0)" && temporarly_two.backgroundColor !== "rgba(0, 0, 0, 0)"){
-                                box.style.backgroundColor = "rgba(45, 84, 255, 0.4)";
+                                box.style.backgroundColor = "rgba(255, 0, 0, 0.4)";
                                 box.style.borderTopRightRadius = "1em";
                                 box.style.borderBottomRightRadius = "1em";
                                 box.addEventListener('mouseout', () => {
                                     box.style.background = "none";
                                     box.style.borderRadius = "10em 10em"
-                                })
+                                }, {once : true})
                             }
                             box.onclick = () =>{
                                 let temporarly = window.getComputedStyle(box);
@@ -238,9 +274,19 @@ window.onload = () => {
                     let temporarly_one = window.getComputedStyle(box);
                     let num_one = Number(box.dataset.number) + 1;
                     let temporarly_two = window.getComputedStyle(boxes[num_one]) 
+
+                    if(temporarly_one.backgroundColor === "rgb(45, 84, 255)"){
+                        box.style.backgroundColor = "rgb(45, 84, 255)";
+                    }
                             
-                    if(temporarly_one.backgroundColor === "rgba(0, 0, 0, 0)" && Number(box.dataset.number) === 6){
-                        console.log(1)
+                    if(temporarly_one.backgroundColor === "rgba(0, 0, 0, 0)" && (Number(box.dataset.number) === 6 || Number(box.dataset.number) === 13 || Number(box.dataset.number) === 20 || Number(box.dataset.number) === 27 || Number(box.dataset.number) === 34 || Number(box.dataset.number) === 41 || Number(box.dataset.number) === 48 || Number(box.dataset.number) === 55 || Number(box.dataset.number) === 62 || Number(box.dataset.number) === 69 )){
+                        box.style.backgroundColor = "rgba(255, 0, 0, 0.4)"
+                        box.style.borderTopRightRadius = "1em";
+                        box.style.borderBottomRightRadius = "1em";
+                        box.addEventListener('mouseout',() => {
+                            box.style.borderRadius = "10em";
+                            box.style.background = "none";
+                        }, {once : true})
                     }
                     if(temporarly_one.backgroundColor === "rgba(0, 0, 0, 0)" && temporarly_two.backgroundColor === "rgba(0, 0, 0, 0)"){
                         box.style.backgroundColor = "rgba(45, 84, 255, 0.4)";
@@ -262,13 +308,13 @@ window.onload = () => {
                         }, {once : true})
                     }
                     if(temporarly_one.backgroundColor === "rgba(0, 0, 0, 0)" && temporarly_two.backgroundColor !== "rgba(0, 0, 0, 0)"){
-                        box.style.backgroundColor = "rgba(45, 84, 255, 0.4)";
+                        box.style.backgroundColor = "rgba(255, 0, 0, 0.4)";
                         box.style.borderTopRightRadius = "1em 1em";
                         box.style.borderBottomRightRadius = "1em 1em";
                         box.addEventListener('mouseout', () => {
                             box.style.background = "none";
                             box.style.borderRadius = "10em 10em"
-                        })
+                        }, {once : true})
                     }
                     box.onclick = () =>{
                         let temporarly = window.getComputedStyle(box);
@@ -316,6 +362,7 @@ window.onload = () => {
                 main.style.zIndex = "-1";
                 clearInterval(l_interval);
                 rotateButton.style.display = "none";
+                longText.style.display = "none";
             }
         },1)
         if(!selected){
@@ -332,98 +379,125 @@ window.onload = () => {
                         rotateButton.style.backgroundColor = "rgba(0, 0, 0, 0.2)";
                         box.onmouseover = () => {
                             let temporarly_one = window.getComputedStyle(box);
-                            let num_one = Number(box.dataset.number) + 7;
-                            let temporarly_two = window.getComputedStyle(boxes[num_one]);
-                            let num_two = Number(box.dataset.number) + 14;
-                            let temporarly_three = window.getComputedStyle(boxes[num_two]) 
+
+                            if(Number(box.dataset.number) <= 62){
+                                let num_one = Number(box.dataset.number) + 7;
+                                let temporarly_two = window.getComputedStyle(boxes[num_one]);
+
+                                if(Number(box.dataset.number) <= 55){
+                                    let num_two = Number(box.dataset.number) + 14;
+                                    let temporarly_three = window.getComputedStyle(boxes[num_two]) 
         
-                            if(temporarly_one.backgroundColor === "rgba(0, 0, 0, 0)" && temporarly_two.backgroundColor === "rgba(0, 0, 0, 0)" && temporarly_three.backgroundColor === "rgba(0, 0, 0, 0)"){
-                                box.style.backgroundColor = "rgba(255, 165, 0, 0.4)";
-                                box.style.borderBottomLeftRadius = "1em";
-                                box.style.borderBottomRightRadius = "1em";
-                                boxes[Number(box.dataset.number) + 7].style.backgroundColor = "rgba(255, 165, 0, 0.4)";
-                                boxes[Number(box.dataset.number) + 7].style.borderRadius = "1em";
-                                boxes[Number(box.dataset.number) + 14].style.backgroundColor = "rgba(255, 165, 0, 0.4)";
-                                boxes[Number(box.dataset.number) + 14].style.borderTopLeftRadius = "1em";
-                                boxes[Number(box.dataset.number) + 14].style.borderTopRightRadius = "1em";
-                                box.addEventListener('mouseout', () => {
-                                    if(temporarly_one.backgroundColor === "rgb(255, 165, 0)" && temporarly_two.backgroundColor === "rgb(255, 165, 0)" && temporarly_three.backgroundColor === "rgb(255, 165, 0)"){
-                                        box.style.backgroundColor = "rgb(255, 165, 0)";
-                                        boxes[Number(box.dataset.number) + 7].style.background = "rgb(255, 165, 0)";
-                                        boxes[Number(box.dataset.number) + 14].style.background = "rgb(255, 165, 0)";
-                                    }else{
-                                        box.style.background = "none";
-                                        box.style.borderRadius = "10em";
-                                        boxes[Number(box.dataset.number) + 7].style.background = "none";
-                                        boxes[Number(box.dataset.number) + 7].style.borderRadius = "10em 10em";
-                                        boxes[Number(box.dataset.number) + 14].style.background = "none";
-                                        boxes[Number(box.dataset.number) + 14].style.borderRadius = "10em 10em";
+                                    if(temporarly_one.backgroundColor === "rgba(0, 0, 0, 0)" && temporarly_two.backgroundColor === "rgba(0, 0, 0, 0)" && temporarly_three.backgroundColor === "rgba(0, 0, 0, 0)"){
+                                        box.style.backgroundColor = "rgba(255, 165, 0, 0.4)";
+                                        box.style.borderBottomLeftRadius = "1em";
+                                        box.style.borderBottomRightRadius = "1em";
+                                        boxes[Number(box.dataset.number) + 7].style.backgroundColor = "rgba(255, 165, 0, 0.4)";
+                                        boxes[Number(box.dataset.number) + 7].style.borderRadius = "1em";
+                                        boxes[Number(box.dataset.number) + 14].style.backgroundColor = "rgba(255, 165, 0, 0.4)";
+                                        boxes[Number(box.dataset.number) + 14].style.borderTopLeftRadius = "1em";
+                                        boxes[Number(box.dataset.number) + 14].style.borderTopRightRadius = "1em";
+                                        box.addEventListener('mouseout', () => {
+                                            if(temporarly_one.backgroundColor === "rgb(255, 165, 0)" && temporarly_two.backgroundColor === "rgb(255, 165, 0)" && temporarly_three.backgroundColor === "rgb(255, 165, 0)"){
+                                                box.style.backgroundColor = "rgb(255, 165, 0)";
+                                                boxes[Number(box.dataset.number) + 7].style.background = "rgb(255, 165, 0)";
+                                                boxes[Number(box.dataset.number) + 14].style.background = "rgb(255, 165, 0)";
+                                            }else{
+                                                box.style.background = "none";
+                                                box.style.borderRadius = "10em";
+                                                boxes[Number(box.dataset.number) + 7].style.background = "none";
+                                                boxes[Number(box.dataset.number) + 7].style.borderRadius = "10em 10em";
+                                                boxes[Number(box.dataset.number) + 14].style.background = "none";
+                                                boxes[Number(box.dataset.number) + 14].style.borderRadius = "10em 10em";
+                                            }
+                                        }, {once : true})
                                     }
-                                }, {once : true})
-                            }
-                            if(temporarly_one.backgroundColor === "rgba(0, 0, 0, 0)" && temporarly_two.backgroundColor !== "rgba(0, 0, 0, 0)" &&  temporarly_three.backgroundColor !== "rgba(0, 0, 0, 0)"){
-                                box.style.backgroundColor = "rgba(255, 165, 0, 0.4)";
-                                box.style.borderBottomLeftRadius = "1em";
-                                box.style.borderBottomRightRadius = "1em";
-                                box.addEventListener('mouseout', () => {
-                                    box.style.background = "none";
-                                    box.style.borderRadius = "10em";
-                                })
-                            }
-                            if(temporarly_one.backgroundColor === "rgba(0, 0, 0, 0)" && temporarly_two.backgroundColor === "rgba(0, 0, 0, 0)" && temporarly_three.backgroundColor !== "rgba(0, 0, 0, 0)"){
-                                box.style.backgroundColor = "rgba(255, 165, 0, 0.4)";
-                                box.style.borderBottomLeftRadius = "1em";
-                                box.style.borderBottomRightRadius = "1em";
-                                boxes[Number(box.dataset.number) + 7].style.backgroundColor = "rgba(255, 165, 0, 0.4)";
-                                boxes[Number(box.dataset.number) + 7].style.borderRadius = "1em 1em";
-                                box.addEventListener('mouseout', () => {
-                                    box.style.background = "none";
-                                    box.style.borderRadius = "10em 10em";
-                                    boxes[Number(box.dataset.number) + 7].style.background = "none";
-                                    boxes[Number(box.dataset.number) + 7].style.borderRadius = "10em 10em";
-                                })
-                            }
-                            if(temporarly_one.backgroundColor === "rgba(0, 0, 0, 0)" && temporarly_two.backgroundColor !== "rgba(0, 0, 0, 0)" && temporarly_three.backgroundColor === "rgba(0, 0, 0, 0)"){
-                                box.style.backgroundColor = "rgba(255, 165, 0, 0.4)";
-                                box.style.borderBottomLeftRadius = "1em";
-                                box.style.borderBottomRightRadius = "1em";
-                                boxes[Number(box.dataset.number) + 14].style.backgroundColor = "rgba(255, 165, 0, 0.4)";
-                                boxes[Number(box.dataset.number) + 14].style.borderTopLeftRadius = "1em";
-                                boxes[Number(box.dataset.number) + 14].style.borderTopRightRadius = "1em";
-                                box.addEventListener('mouseout', () => {
-                                    box.style.background = "none";
-                                    box.style.borderRadius = "10em 10em";
-                                    boxes[Number(box.dataset.number) + 14].style.background = "none";
-                                    boxes[Number(box.dataset.number) + 14].style.borderRadius = "10em 10em";
-                                })
-                            }
-                            box.onclick = () =>{
-                                let temporarly = window.getComputedStyle(box);
-                                let temporarly2 = window.getComputedStyle(boxes[Number(box.dataset.number) + 7])
-                                let temporarly3 = window.getComputedStyle(boxes[Number(box.dataset.number) + 14])
-                                if(temporarly.backgroundColor !== "rgba(255, 165, 0, 0.4)" || temporarly2.backgroundColor !== "rgba(255, 165, 0, 0.4)" || temporarly3.backgroundColor !== "rgba(255, 165, 0, 0.4)"){
-                                    info.innerHTML = "This position is already taken";
-                                    setTimeout(() => {
-                                        info.innerHTML = "Chose your positions."
-                                    }, 2500)
+                                    if(temporarly_one.backgroundColor === "rgba(0, 0, 0, 0)" && temporarly_two.backgroundColor !== "rgba(0, 0, 0, 0)" &&  temporarly_three.backgroundColor !== "rgba(0, 0, 0, 0)"){
+                                        box.style.backgroundColor = "rgba(255, 0, 0, 0.4)";
+                                        box.style.borderBottomLeftRadius = "1em";
+                                        box.style.borderBottomRightRadius = "1em";
+                                        box.addEventListener('mouseout', () => {
+                                            box.style.background = "none";
+                                            box.style.borderRadius = "10em";
+                                        })
+                                    }
+                                    if(temporarly_one.backgroundColor === "rgba(0, 0, 0, 0)" && temporarly_two.backgroundColor === "rgba(0, 0, 0, 0)" && temporarly_three.backgroundColor !== "rgba(0, 0, 0, 0)"){
+                                        box.style.backgroundColor = "rgba(255, 0, 0, 0.4)";
+                                        box.style.borderBottomLeftRadius = "1em";
+                                        box.style.borderBottomRightRadius = "1em";
+                                        boxes[Number(box.dataset.number) + 7].style.backgroundColor = "rgba(255, 0, 0, 0.4)";
+                                        boxes[Number(box.dataset.number) + 7].style.borderRadius = "1em 1em";
+                                        box.addEventListener('mouseout', () => {
+                                            box.style.background = "none";
+                                            box.style.borderRadius = "10em 10em";
+                                            boxes[Number(box.dataset.number) + 7].style.background = "none";
+                                            boxes[Number(box.dataset.number) + 7].style.borderRadius = "10em 10em";
+                                        })
+                                    }
+                                    if(temporarly_one.backgroundColor === "rgba(0, 0, 0, 0)" && temporarly_two.backgroundColor !== "rgba(0, 0, 0, 0)" && temporarly_three.backgroundColor === "rgba(0, 0, 0, 0)"){
+                                        box.style.backgroundColor = "rgba(255, 0, 0, 0.4)";
+                                        box.style.borderBottomLeftRadius = "1em";
+                                        box.style.borderBottomRightRadius = "1em";
+                                        boxes[Number(box.dataset.number) + 14].style.backgroundColor = "rgba(255, 0, 0, 0.4)";
+                                        boxes[Number(box.dataset.number) + 14].style.borderTopLeftRadius = "1em";
+                                        boxes[Number(box.dataset.number) + 14].style.borderTopRightRadius = "1em";
+                                        box.addEventListener('mouseout', () => {
+                                            box.style.background = "none";
+                                            box.style.borderRadius = "10em 10em";
+                                            boxes[Number(box.dataset.number) + 14].style.background = "none";
+                                            boxes[Number(box.dataset.number) + 14].style.borderRadius = "10em 10em";
+                                        })
+                                    }
+                                    box.onclick = () =>{
+                                        let temporarly = window.getComputedStyle(box);
+                                        let temporarly2 = window.getComputedStyle(boxes[Number(box.dataset.number) + 7])
+                                        let temporarly3 = window.getComputedStyle(boxes[Number(box.dataset.number) + 14])
+                                        if(temporarly.backgroundColor !== "rgba(255, 165, 0, 0.4)" || temporarly2.backgroundColor !== "rgba(255, 165, 0, 0.4)" || temporarly3.backgroundColor !== "rgba(255, 165, 0, 0.4)"){
+                                            info.innerHTML = "This position is already taken";
+                                            setTimeout(() => {
+                                                info.innerHTML = "Chose your positions."
+                                            }, 2500)
+                                        }else{
+                                            box.style.backgroundColor = "rgb(255, 165, 0)";
+                                            box.style.borderBottomLeftRadius = "1em";
+                                            box.style.borderBottomRightRadius = "1em";
+                                            box.classList.add('firstPartOfLongShipVertical');
+                                            boxes[Number(box.dataset.number) + 7].style.backgroundColor = "rgb(255, 165, 0)";
+                                            boxes[Number(box.dataset.number) + 7].style.borderBottomLeftRadius = "1em";
+                                            boxes[Number(box.dataset.number) + 7].style.borderBottomRightRadius = "1em";
+                                            boxes[Number(box.dataset.number) + 7].style.borderTopRightRadius = "1em";
+                                            boxes[Number(box.dataset.number) + 7].style.borderTopLeftRadius = "1em";
+                                            boxes[Number(box.dataset.number) + 7].classList.add('centerPartOfLongShipVertical');
+                                            boxes[Number(box.dataset.number) + 14].style.backgroundColor = "rgb(255, 165, 0)";
+                                            boxes[Number(box.dataset.number) + 14].style.borderTopLeftRadius = "1em";
+                                            boxes[Number(box.dataset.number) + 14].style.borderTopRightRadius = "1em";
+                                            boxes[Number(box.dataset.number) + 14].classList.add('lastPartOfLongShipVertical');
+                                            counter_three--;
+                                            longShip.innerHTML = counter_three;
+                                        }
+                                    }
                                 }else{
-                                    box.style.backgroundColor = "rgb(255, 165, 0)";
+                                    box.style.backgroundColor = "rgba(255, 0, 0, 0.4)";
                                     box.style.borderBottomLeftRadius = "1em";
                                     box.style.borderBottomRightRadius = "1em";
-                                    box.classList.add('firstPartOfLongShipVertical');
-                                    boxes[Number(box.dataset.number) + 7].style.backgroundColor = "rgb(255, 165, 0)";
-                                    boxes[Number(box.dataset.number) + 7].style.borderBottomLeftRadius = "1em";
-                                    boxes[Number(box.dataset.number) + 7].style.borderBottomRightRadius = "1em";
-                                    boxes[Number(box.dataset.number) + 7].style.borderTopRightRadius = "1em";
-                                    boxes[Number(box.dataset.number) + 7].style.borderTopLeftRadius = "1em";
-                                    boxes[Number(box.dataset.number) + 7].classList.add('centerPartOfLongShipVertical');
-                                    boxes[Number(box.dataset.number) + 14].style.backgroundColor = "rgb(255, 165, 0)";
-                                    boxes[Number(box.dataset.number) + 14].style.borderTopLeftRadius = "1em";
-                                    boxes[Number(box.dataset.number) + 14].style.borderTopRightRadius = "1em";
-                                    boxes[Number(box.dataset.number) + 14].classList.add('lastPartOfLongShipVertical');
-                                    counter_three--;
-                                    longShip.innerHTML = counter_three;
+                                    boxes[Number(box.dataset.number) + 7].style.backgroundColor  = "rgba(255, 0, 0, 0.4)";
+                                    boxes[Number(box.dataset.number) + 7].style.borderRadius = "1em 1em";
+                                    box.addEventListener('mouseout',() => {
+                                        box.style.background = "none";
+                                        box.style.borderRadius = "10em 10em";
+                                        boxes[Number(box.dataset.number) + 7].style.background = "none";
+                                        boxes[Number(box.dataset.number) + 7].style.borderRadius = "10em 10em";
+                                    }, {once : true})
+
                                 }
+                            }else{
+                                box.style.backgroundColor = "rgba(255, 0, 0, 0.4)"
+                                box.style.borderBottomLeftRadius = "1em"
+                                box.style.borderBottomRightRadius = "1em";
+                                box.addEventListener('mouseout',() => {
+                                    box.style.background = "none";
+                                    box.style.borderRadius = "10em 10em";
+                                }, {once : true})
                             }
                         }
                     })
@@ -435,11 +509,206 @@ window.onload = () => {
                     [...boxes].forEach((box) => {
                         box.onmouseover = () => {
                             let temporarly_one = window.getComputedStyle(box);
-                            let num_one = Number(box.dataset.number) + 1;
-                            let temporarly_two = window.getComputedStyle(boxes[num_one]);
-                            let num_two = Number(box.dataset.number) + 2;
-                            let temporarly_three = window.getComputedStyle(boxes[num_two]) 
+                            if(Number(box.dataset.number) <= 68){
+                                let num_one = Number(box.dataset.number) + 1;
+                                let temporarly_two = window.getComputedStyle(boxes[num_one]);
+                                if(Number(box.dataset.number) <= 67){
+                                    let num_two = Number(box.dataset.number) + 2;
+                                    let temporarly_three = window.getComputedStyle(boxes[num_two]);
         
+                                    if(temporarly_one.backgroundColor === "rgba(0, 0, 0, 0)" && (Number(box.dataset.number) === 6 || Number(box.dataset.number) === 13 || Number(box.dataset.number) === 20 || Number(box.dataset.number) === 27 || Number(box.dataset.number) === 34 || Number(box.dataset.number) === 41 || Number(box.dataset.number) === 48 || Number(box.dataset.number) === 55 || Number(box.dataset.number) === 62 || Number(box.dataset.number) === 69 )){
+                                        box.style.backgroundColor = "rgba(255, 0, 0, 0.4)"
+                                        box.style.borderTopRightRadius = "1em";
+                                        box.style.borderBottomRightRadius = "1em";
+                                        box.addEventListener('mouseout',() => {
+                                            box.style.borderRadius = "10em";
+                                            box.style.background = "none";
+                                        }, {once : true})
+                                    }
+                                    
+                                    if(temporarly_one.backgroundColor === "rgba(0, 0, 0, 0)" && temporarly_two.backgroundColor === "rgba(0, 0, 0, 0)" && (Number(box.dataset.number) === 5 || Number(box.dataset.number) === 12 || Number(box.dataset.number) === 19 || Number(box.dataset.number) === 26 || Number(box.dataset.number) === 33 || Number(box.dataset.number) === 40 || Number(box.dataset.number) === 47 || Number(box.dataset.number) === 54 || Number(box.dataset.number) === 61 || Number(box.dataset.number) === 68 )){
+                                        box.style.backgroundColor = "rgba(255, 0, 0, 0.4)";
+                                        box.style.borderTopRightRadius = "1em";
+                                        box.style.borderBottomRightRadius = "1em";
+                                        boxes[Number(box.dataset.number) + 1].style.backgroundColor = "rgba(255, 0, 0, 0.4)";
+                                        boxes[Number(box.dataset.number) + 1].style.borderRadius = "1em 1em";
+                                        box.addEventListener('mouseout',() => {
+                                            box.style.borderRadius = "10em";
+                                            box.style.background = "none";
+                                            boxes[Number(box.dataset.number) + 1].style.background = "none";
+                                            boxes[Number(box.dataset.number) + 1].style.borderRadius = "10em 10em";
+                                        }, {once : true})
+                                    } 
+                                    if(temporarly_one.backgroundColor === "rgba(0, 0, 0, 0)" && temporarly_two.backgroundColor === "rgba(0, 0, 0, 0)" && temporarly_three.backgroundColor !== "rgba(0, 0, 0, 0)"){
+                                        box.style.backgroundColor = "rgba(255, 0, 0, 0.4)";
+                                        box.style.borderTopRightRadius = "1em";
+                                        box.style.borderBottomRightRadius = "1em";
+                                        boxes[Number(box.dataset.number) + 1].style.backgroundColor = "rgba(255, 0, 0, 0.4)";
+                                        boxes[Number(box.dataset.number) + 1].style.borderRadius = "1em";
+                                        box.addEventListener('mouseout', () => {
+                                            box.style.background = "none";
+                                            box.style.borderRadius = "10em 10em";
+                                            boxes[Number(box.dataset.number) + 1].style.background = "none";
+                                            boxes[Number(box.dataset.number) + 1].style.borderRadius = "10em 10em";
+                                        }, {once : true})
+                                    }
+        
+                                    if(temporarly_one.backgroundColor === "rgba(0, 0, 0, 0)" && temporarly_two.backgroundColor === "rgba(0, 0, 0, 0)" && temporarly_three.backgroundColor === "rgba(0, 0, 0, 0)"){
+                                        box.style.backgroundColor = "rgba(255, 165, 0, 0.4)";
+                                        box.style.borderTopRightRadius = "1em";
+                                        box.style.borderBottomRightRadius = "1em";
+                                        boxes[Number(box.dataset.number) + 1].style.backgroundColor = "rgba(255, 165, 0, 0.4)";
+                                        boxes[Number(box.dataset.number) + 1].style.borderRadius = "1em 1em";
+                                        boxes[Number(box.dataset.number) + 2].style.backgroundColor = "rgba(255, 165, 0, 0.4)";
+                                        boxes[Number(box.dataset.number) + 2].style.borderBottomLeftRadius = "1em";
+                                        boxes[Number(box.dataset.number) + 2].style.borderTopLeftRadius = "1em";
+                                        box.addEventListener('mouseout', () => {
+                                            if(temporarly_one.backgroundColor === "rgb(255, 165, 0)" && temporarly_two.backgroundColor === "rgb(255, 165, 0)" && temporarly_three.backgroundColor === "rgb(255, 165, 0)"){
+                                                box.style.backgroundColor = "rgb(255, 165, 0)";
+                                                boxes[Number(box.dataset.number) + 1].style.background = "rgb(255, 165, 0)";
+                                                boxes[Number(box.dataset.number) + 2].style.background = "rgb(255, 165, 0)";
+                                            }else{
+                                                box.style.background = "none";
+                                                box.style.borderRadius = "10em 10em";
+                                                boxes[Number(box.dataset.number) + 1].style.background = "none";
+                                                boxes[Number(box.dataset.number) + 1].style.borderRadius = "10em 10em";
+                                                boxes[Number(box.dataset.number) + 2].style.background = "none";
+                                                boxes[Number(box.dataset.number) + 2].style.borderRadius = "10em 10em";
+                                            }
+                                        }, {once : true})
+                                    }
+                                    if(temporarly_one.backgroundColor === "rgba(0, 0, 0, 0)" && temporarly_two.backgroundColor !== "rgba(0, 0, 0, 0)" &&  temporarly_three.backgroundColor !== "rgba(0, 0, 0, 0)"){
+                                        box.style.backgroundColor = "rgba(255, 0, 0, 0.4)";
+                                        box.style.borderTopRightRadius = "1em";
+                                        box.style.borderBottomRightRadius = "1em";
+                                        box.addEventListener('mouseout', () => {
+                                            box.style.background = "none";
+                                            box.style.borderRadius = "10em 10em";
+                                        }, {once : true})
+                                    }
+                                    if(temporarly_one.backgroundColor === "rgba(0, 0, 0, 0)" && temporarly_two.backgroundColor !== "rgba(0, 0, 0, 0)" && temporarly_three.backgroundColor === "rgba(0, 0, 0, 0)"){
+                                        if(Number(box.dataset.number) !== 5 && Number(box.dataset.number) !== 12 && Number(box.dataset.number) !== 19 && Number(box.dataset.number) !== 26 && Number(box.dataset.number) !== 33 && Number(box.dataset.number) !== 40 && Number(box.dataset.number) !== 47 && Number(box.dataset.number) !== 54 && Number(box.dataset.number) !== 61 ){
+                                            box.style.backgroundColor = "rgba(255, 0, 0, 0.4)";
+                                            box.style.borderTopRightRadius = "1em";
+                                            box.style.borderBottomRightRadius = "1em";
+                                            boxes[Number(box.dataset.number) + 2].style.backgroundColor = "rgba(255, 0, 0, 0.4)";
+                                            boxes[Number(box.dataset.number) + 2].style.borderTopLeftRadius = "1em";
+                                            boxes[Number(box.dataset.number) + 2].style.borderBottomLeftRadius = "1em";
+                                            box.addEventListener('mouseout', () => {
+                                                box.style.background = "none";
+                                                box.style.borderRadius = "10em 10em";
+                                                boxes[Number(box.dataset.number) + 2].style.background = "none";
+                                                boxes[Number(box.dataset.number) + 2].style.borderRadius = "10em 10em";
+                                            }, {once : true})
+                                        }else{
+                                            box.style.backgroundColor = "rgba(255, 0, 0, 0.4)";
+                                            box.style.borderTopRightRadius = "1em";
+                                            box.style.borderBottomRightRadius = "1em";
+                                            box.addEventListener('mouseout', () => {
+                                                box.style.background = "none";
+                                                box.style.borderRadius = "10em 10em";
+                                            }, {once : true})
+                                        }
+                                    }
+                                    box.onclick = () =>{
+                                        let temporarly = window.getComputedStyle(box);
+                                        let temporarly2 = window.getComputedStyle(boxes[Number(box.dataset.number) + 1])
+                                        let temporarly3 = window.getComputedStyle(boxes[Number(box.dataset.number) + 2])
+                                        if(temporarly.backgroundColor !== "rgba(255, 165, 0, 0.4)" || temporarly2.backgroundColor !== "rgba(255, 165, 0, 0.4)" || temporarly3.backgroundColor !== "rgba(255, 165, 0, 0.4)"){
+                                            info.innerHTML = "This position is already taken";
+                                            setTimeout(() => {
+                                                info.innerHTML = "Chose your positions."
+                                            }, 2500)
+                                        }else{
+                                            box.style.backgroundColor = "rgb(255, 165, 0)";
+                                            box.style.borderTopRightRadius = "1em"
+                                            box.style.borderBottomRightRadius = "1em";
+                                            box.classList.add('firstPartOfLongShipLinear');
+                                            boxes[Number(box.dataset.number) + 1].style.backgroundColor = "rgb(255, 165, 0)";
+                                            boxes[Number(box.dataset.number) + 1].style.borderRadius = "1em";
+                                            boxes[Number(box.dataset.number) + 1].classList.add('centerPartOfLongShipLinear');
+                                            boxes[Number(box.dataset.number) + 2].style.backgroundColor = "rgb(255, 165, 0)";
+                                            boxes[Number(box.dataset.number) + 2].style.borderTopLeftRadius = "1em";
+                                            boxes[Number(box.dataset.number) + 2].style.borderBottomLeftRadius = "1em";
+                                            boxes[Number(box.dataset.number) + 2].classList.add('lastPartOfLongShipLinear');
+                                            counter_three--;
+                                            longShip.innerHTML = counter_three;
+                                        }
+                                    }
+                                }else if(Number(box.dataset.number) === 68){
+                                    box.style.backgroundColor = "rgba(255, 0, 0, 0.4)";
+                                    box.style.borderTopRightRadius = "1em";
+                                    box.style.borderBottomRightRadius = "1em";
+                                    boxes[Number(box.dataset.number) + 1].style.backgroundColor = "rgba(255, 0, 0, 0.4)";
+                                    boxes[Number(box.dataset.number) + 1].style.borderRadius = "1em 1em";
+                                    box.addEventListener('mouseout',() => {
+                                        box.style.borderRadius = "10em";
+                                        box.style.background = "none";
+                                        boxes[Number(box.dataset.number) + 1].style.background = "none";
+                                        boxes[Number(box.dataset.number) + 1].style.borderRadius = "10em 10em";
+                                    }, {once : true})
+                                } 
+                            }else{
+                                box.style.backgroundColor = "rgba(255, 0, 0, 0.4)"
+                                box.style.borderTopRightRadius = "1em";
+                                box.style.borderBottomRightRadius = "1em";
+                                box.addEventListener('mouseout',() => {
+                                    box.style.borderRadius = "10em";
+                                    box.style.background = "none";
+                                }, {once : true})
+                            }
+                        }
+                    })
+                }
+            }
+            
+            [...boxes].forEach((box) => {
+                box.onmouseover = () => {
+                    let temporarly_one = window.getComputedStyle(box);
+                    if(Number(box.dataset.number) <= 68){
+                        let num_one = Number(box.dataset.number) + 1;
+                        let temporarly_two = window.getComputedStyle(boxes[num_one]);
+                        if(Number(box.dataset.number) <= 67){
+                            let num_two = Number(box.dataset.number) + 2;
+                            let temporarly_three = window.getComputedStyle(boxes[num_two]);
+
+                            if(temporarly_one.backgroundColor === "rgba(0, 0, 0, 0)" && (Number(box.dataset.number) === 6 || Number(box.dataset.number) === 13 || Number(box.dataset.number) === 20 || Number(box.dataset.number) === 27 || Number(box.dataset.number) === 34 || Number(box.dataset.number) === 41 || Number(box.dataset.number) === 48 || Number(box.dataset.number) === 55 || Number(box.dataset.number) === 62 || Number(box.dataset.number) === 69 )){
+                                box.style.backgroundColor = "rgba(255, 0, 0, 0.4)"
+                                box.style.borderTopRightRadius = "1em";
+                                box.style.borderBottomRightRadius = "1em";
+                                box.addEventListener('mouseout',() => {
+                                    box.style.borderRadius = "10em";
+                                    box.style.background = "none";
+                                }, {once : true})
+                            }
+                            
+                            if(temporarly_one.backgroundColor === "rgba(0, 0, 0, 0)" && temporarly_two.backgroundColor === "rgba(0, 0, 0, 0)" && (Number(box.dataset.number) === 5 || Number(box.dataset.number) === 12 || Number(box.dataset.number) === 19 || Number(box.dataset.number) === 26 || Number(box.dataset.number) === 33 || Number(box.dataset.number) === 40 || Number(box.dataset.number) === 47 || Number(box.dataset.number) === 54 || Number(box.dataset.number) === 61 || Number(box.dataset.number) === 68 )){
+                                box.style.backgroundColor = "rgba(255, 0, 0, 0.4)";
+                                box.style.borderTopRightRadius = "1em";
+                                box.style.borderBottomRightRadius = "1em";
+                                boxes[Number(box.dataset.number) + 1].style.backgroundColor = "rgba(255, 0, 0, 0.4)";
+                                boxes[Number(box.dataset.number) + 1].style.borderRadius = "1em 1em";
+                                box.addEventListener('mouseout',() => {
+                                    box.style.borderRadius = "10em";
+                                    box.style.background = "none";
+                                    boxes[Number(box.dataset.number) + 1].style.background = "none";
+                                    boxes[Number(box.dataset.number) + 1].style.borderRadius = "10em 10em";
+                                }, {once : true})
+                            } 
+                            if(temporarly_one.backgroundColor === "rgba(0, 0, 0, 0)" && temporarly_two.backgroundColor === "rgba(0, 0, 0, 0)" && temporarly_three.backgroundColor !== "rgba(0, 0, 0, 0)"){
+                                box.style.backgroundColor = "rgba(255, 0, 0, 0.4)";
+                                box.style.borderTopRightRadius = "1em";
+                                box.style.borderBottomRightRadius = "1em";
+                                boxes[Number(box.dataset.number) + 1].style.backgroundColor = "rgba(255, 0, 0, 0.4)";
+                                boxes[Number(box.dataset.number) + 1].style.borderRadius = "1em";
+                                box.addEventListener('mouseout', () => {
+                                    box.style.background = "none";
+                                    box.style.borderRadius = "10em 10em";
+                                    boxes[Number(box.dataset.number) + 1].style.background = "none";
+                                    boxes[Number(box.dataset.number) + 1].style.borderRadius = "10em 10em";
+                                }, {once : true})
+                            }
+
                             if(temporarly_one.backgroundColor === "rgba(0, 0, 0, 0)" && temporarly_two.backgroundColor === "rgba(0, 0, 0, 0)" && temporarly_three.backgroundColor === "rgba(0, 0, 0, 0)"){
                                 box.style.backgroundColor = "rgba(255, 165, 0, 0.4)";
                                 box.style.borderTopRightRadius = "1em";
@@ -465,40 +734,37 @@ window.onload = () => {
                                 }, {once : true})
                             }
                             if(temporarly_one.backgroundColor === "rgba(0, 0, 0, 0)" && temporarly_two.backgroundColor !== "rgba(0, 0, 0, 0)" &&  temporarly_three.backgroundColor !== "rgba(0, 0, 0, 0)"){
-                                box.style.backgroundColor = "rgba(255, 165, 0, 0.4)";
+                                box.style.backgroundColor = "rgba(255, 0, 0, 0.4)";
                                 box.style.borderTopRightRadius = "1em";
                                 box.style.borderBottomRightRadius = "1em";
                                 box.addEventListener('mouseout', () => {
                                     box.style.background = "none";
                                     box.style.borderRadius = "10em 10em";
-                                })
-                            }
-                            if(temporarly_one.backgroundColor === "rgba(0, 0, 0, 0)" && temporarly_two.backgroundColor === "rgba(0, 0, 0, 0)" && temporarly_three.backgroundColor !== "rgba(0, 0, 0, 0)"){
-                                box.style.backgroundColor = "rgba(255, 165, 0, 0.4)";
-                                box.style.borderTopRightRadius = "1em";
-                                box.style.borderBottomRightRadius = "1em";
-                                boxes[Number(box.dataset.number) + 1].style.backgroundColor = "rgba(255, 165, 0, 0.4)";
-                                boxes[Number(box.dataset.number) + 1].style.borderRadius = "10em";
-                                box.addEventListener('mouseout', () => {
-                                    box.style.background = "none";
-                                    box.style.borderRadius = "10em 10em";
-                                    boxes[Number(box.dataset.number) + 1].style.background = "none";
-                                    boxes[Number(box.dataset.number) + 1].style.borderRadius = "10em 10em";
-                                })
+                                }, {once : true})
                             }
                             if(temporarly_one.backgroundColor === "rgba(0, 0, 0, 0)" && temporarly_two.backgroundColor !== "rgba(0, 0, 0, 0)" && temporarly_three.backgroundColor === "rgba(0, 0, 0, 0)"){
-                                box.style.backgroundColor = "rgba(255, 165, 0, 0.4)";
-                                box.style.borderTopRightRadius = "1em";
-                                box.style.borderBottomRightRadius = "1em";
-                                boxes[Number(box.dataset.number) + 2].style.backgroundColor = "rgba(255, 165, 0, 0.4)";
-                                boxes[Number(box.dataset.number) + 2].style.borderTopLeftRadius = "1em";
-                                boxes[Number(box.dataset.number) + 2].style.borderBottomLeftRadius = "1em";
-                                box.addEventListener('mouseout', () => {
-                                    box.style.background = "none";
-                                    box.style.borderRadius = "10em 10em";
-                                    boxes[Number(box.dataset.number) + 2].style.background = "none";
-                                    boxes[Number(box.dataset.number) + 2].style.borderRadius = "10em 10em";
-                                })
+                                if(Number(box.dataset.number) !== 5 && Number(box.dataset.number) !== 12 && Number(box.dataset.number) !== 19 && Number(box.dataset.number) !== 26 && Number(box.dataset.number) !== 33 && Number(box.dataset.number) !== 40 && Number(box.dataset.number) !== 47 && Number(box.dataset.number) !== 54 && Number(box.dataset.number) !== 61 ){
+                                    box.style.backgroundColor = "rgba(255, 0, 0, 0.4)";
+                                    box.style.borderTopRightRadius = "1em";
+                                    box.style.borderBottomRightRadius = "1em";
+                                    boxes[Number(box.dataset.number) + 2].style.backgroundColor = "rgba(255, 0, 0, 0.4)";
+                                    boxes[Number(box.dataset.number) + 2].style.borderTopLeftRadius = "1em";
+                                    boxes[Number(box.dataset.number) + 2].style.borderBottomLeftRadius = "1em";
+                                    box.addEventListener('mouseout', () => {
+                                        box.style.background = "none";
+                                        box.style.borderRadius = "10em 10em";
+                                        boxes[Number(box.dataset.number) + 2].style.background = "none";
+                                        boxes[Number(box.dataset.number) + 2].style.borderRadius = "10em 10em";
+                                    }, {once : true})
+                                }else{
+                                    box.style.backgroundColor = "rgba(255, 0, 0, 0.4)";
+                                    box.style.borderTopRightRadius = "1em";
+                                    box.style.borderBottomRightRadius = "1em";
+                                    box.addEventListener('mouseout', () => {
+                                        box.style.background = "none";
+                                        box.style.borderRadius = "10em 10em";
+                                    }, {once : true})
+                                }
                             }
                             box.onclick = () =>{
                                 let temporarly = window.getComputedStyle(box);
@@ -513,115 +779,39 @@ window.onload = () => {
                                     box.style.backgroundColor = "rgb(255, 165, 0)";
                                     box.style.borderTopRightRadius = "1em"
                                     box.style.borderBottomRightRadius = "1em";
-                                    box.classList.add('firstPartOfLongShipLinear')
+                                    box.classList.add('firstPartOfLongShipLinear');
                                     boxes[Number(box.dataset.number) + 1].style.backgroundColor = "rgb(255, 165, 0)";
                                     boxes[Number(box.dataset.number) + 1].style.borderRadius = "1em";
                                     boxes[Number(box.dataset.number) + 1].classList.add('centerPartOfLongShipLinear');
                                     boxes[Number(box.dataset.number) + 2].style.backgroundColor = "rgb(255, 165, 0)";
                                     boxes[Number(box.dataset.number) + 2].style.borderTopLeftRadius = "1em";
                                     boxes[Number(box.dataset.number) + 2].style.borderBottomLeftRadius = "1em";
-                                    boxes[Number(box.dataset.number) + 2].classList.add('lastPartOfLongShipLinear')
+                                    boxes[Number(box.dataset.number) + 2].classList.add('lastPartOfLongShipLinear');
                                     counter_three--;
                                     longShip.innerHTML = counter_three;
                                 }
                             }
-                        }
-                    })
-                }
-            }
-            
-            [...boxes].forEach((box) => {
-                box.onmouseover = () => {
-                    let temporarly_one = window.getComputedStyle(box);
-                    let num_one = Number(box.dataset.number) + 1;
-                    let temporarly_two = window.getComputedStyle(boxes[num_one]);
-                    let num_two = Number(box.dataset.number) + 2;
-                    let temporarly_three = window.getComputedStyle(boxes[num_two]) 
-
-                    if(temporarly_one.backgroundColor === "rgba(0, 0, 0, 0)" && temporarly_two.backgroundColor === "rgba(0, 0, 0, 0)" && temporarly_three.backgroundColor === "rgba(0, 0, 0, 0)"){
-                        box.style.backgroundColor = "rgba(255, 165, 0, 0.4)";
-                        box.style.borderTopRightRadius = "1em";
-                        box.style.borderBottomRightRadius = "1em";
-                        boxes[Number(box.dataset.number) + 1].style.backgroundColor = "rgba(255, 165, 0, 0.4)";
-                        boxes[Number(box.dataset.number) + 1].style.borderRadius = "1em 1em";
-                        boxes[Number(box.dataset.number) + 2].style.backgroundColor = "rgba(255, 165, 0, 0.4)";
-                        boxes[Number(box.dataset.number) + 2].style.borderBottomLeftRadius = "1em";
-                        boxes[Number(box.dataset.number) + 2].style.borderTopLeftRadius = "1em";
-                        box.addEventListener('mouseout', () => {
-                            if(temporarly_one.backgroundColor === "rgb(255, 165, 0)" && temporarly_two.backgroundColor === "rgb(255, 165, 0)" && temporarly_three.backgroundColor === "rgb(255, 165, 0)"){
-                                box.style.backgroundColor = "rgb(255, 165, 0)";
-                                boxes[Number(box.dataset.number) + 1].style.background = "rgb(255, 165, 0)";
-                                boxes[Number(box.dataset.number) + 2].style.background = "rgb(255, 165, 0)";
-                            }else{
+                        }else if(Number(box.dataset.number) === 68){
+                            box.style.backgroundColor = "rgba(255, 0, 0, 0.4)";
+                            box.style.borderTopRightRadius = "1em";
+                            box.style.borderBottomRightRadius = "1em";
+                            boxes[Number(box.dataset.number) + 1].style.backgroundColor = "rgba(255, 0, 0, 0.4)";
+                            boxes[Number(box.dataset.number) + 1].style.borderRadius = "1em 1em";
+                            box.addEventListener('mouseout',() => {
+                                box.style.borderRadius = "10em";
                                 box.style.background = "none";
-                                box.style.borderRadius = "10em 10em";
                                 boxes[Number(box.dataset.number) + 1].style.background = "none";
                                 boxes[Number(box.dataset.number) + 1].style.borderRadius = "10em 10em";
-                                boxes[Number(box.dataset.number) + 2].style.background = "none";
-                                boxes[Number(box.dataset.number) + 2].style.borderRadius = "10em 10em";
-                            }
+                            }, {once : true})
+                        } 
+                    }else{
+                        box.style.backgroundColor = "rgba(255, 0, 0, 0.4)"
+                        box.style.borderTopRightRadius = "1em";
+                        box.style.borderBottomRightRadius = "1em";
+                        box.addEventListener('mouseout',() => {
+                            box.style.borderRadius = "10em";
+                            box.style.background = "none";
                         }, {once : true})
-                    }
-                    if(temporarly_one.backgroundColor === "rgba(0, 0, 0, 0)" && temporarly_two.backgroundColor !== "rgba(0, 0, 0, 0)" &&  temporarly_three.backgroundColor !== "rgba(0, 0, 0, 0)"){
-                        box.style.backgroundColor = "rgba(255, 165, 0, 0.4)";
-                        box.style.borderTopRightRadius = "1em";
-                        box.style.borderBottomRightRadius = "1em";
-                        box.addEventListener('mouseout', () => {
-                            box.style.background = "none";
-                            box.style.borderRadius = "10em 10em";
-                        })
-                    }
-                    if(temporarly_one.backgroundColor === "rgba(0, 0, 0, 0)" && temporarly_two.backgroundColor === "rgba(0, 0, 0, 0)" && temporarly_three.backgroundColor !== "rgba(0, 0, 0, 0)"){
-                        box.style.backgroundColor = "rgba(255, 165, 0, 0.4)";
-                        box.style.borderTopRightRadius = "1em";
-                        box.style.borderBottomRightRadius = "1em";
-                        boxes[Number(box.dataset.number) + 1].style.backgroundColor = "rgba(255, 165, 0, 0.4)";
-                        boxes[Number(box.dataset.number) + 1].style.borderRadius = "10em";
-                        box.addEventListener('mouseout', () => {
-                            box.style.background = "none";
-                            box.style.borderRadius = "10em 10em";
-                            boxes[Number(box.dataset.number) + 1].style.background = "none";
-                            boxes[Number(box.dataset.number) + 1].style.borderRadius = "10em 10em";
-                        })
-                    }
-                    if(temporarly_one.backgroundColor === "rgba(0, 0, 0, 0)" && temporarly_two.backgroundColor !== "rgba(0, 0, 0, 0)" && temporarly_three.backgroundColor === "rgba(0, 0, 0, 0)"){
-                        box.style.backgroundColor = "rgba(255, 165, 0, 0.4)";
-                        box.style.borderTopRightRadius = "1em";
-                        box.style.borderBottomRightRadius = "1em";
-                        boxes[Number(box.dataset.number) + 2].style.backgroundColor = "rgba(255, 165, 0, 0.4)";
-                        boxes[Number(box.dataset.number) + 2].style.borderTopLeftRadius = "1em";
-                        boxes[Number(box.dataset.number) + 2].style.borderBottomLeftRadius = "1em";
-                        box.addEventListener('mouseout', () => {
-                            box.style.background = "none";
-                            box.style.borderRadius = "10em 10em";
-                            boxes[Number(box.dataset.number) + 2].style.background = "none";
-                            boxes[Number(box.dataset.number) + 2].style.borderRadius = "10em 10em";
-                        })
-                    }
-                    box.onclick = () =>{
-                        let temporarly = window.getComputedStyle(box);
-                        let temporarly2 = window.getComputedStyle(boxes[Number(box.dataset.number) + 1])
-                        let temporarly3 = window.getComputedStyle(boxes[Number(box.dataset.number) + 2])
-                        if(temporarly.backgroundColor !== "rgba(255, 165, 0, 0.4)" || temporarly2.backgroundColor !== "rgba(255, 165, 0, 0.4)" || temporarly3.backgroundColor !== "rgba(255, 165, 0, 0.4)"){
-                            info.innerHTML = "This position is already taken";
-                            setTimeout(() => {
-                                info.innerHTML = "Chose your positions."
-                            }, 2500)
-                        }else{
-                            box.style.backgroundColor = "rgb(255, 165, 0)";
-                            box.style.borderTopRightRadius = "1em"
-                            box.style.borderBottomRightRadius = "1em";
-                            box.classList.add('firstPartOfLongShipLinear');
-                            boxes[Number(box.dataset.number) + 1].style.backgroundColor = "rgb(255, 165, 0)";
-                            boxes[Number(box.dataset.number) + 1].style.borderRadius = "1em";
-                            boxes[Number(box.dataset.number) + 1].classList.add('centerPartOfLongShipLinear');
-                            boxes[Number(box.dataset.number) + 2].style.backgroundColor = "rgb(255, 165, 0)";
-                            boxes[Number(box.dataset.number) + 2].style.borderTopLeftRadius = "1em";
-                            boxes[Number(box.dataset.number) + 2].style.borderBottomLeftRadius = "1em";
-                            boxes[Number(box.dataset.number) + 2].classList.add('lastPartOfLongShipLinear');
-                            counter_three--;
-                            longShip.innerHTML = counter_three;
-                        }
                     }
                 }
             })
@@ -657,7 +847,7 @@ window.onload = () => {
         let isEnemyWinnerCounter = 15;
 
         enemyBoats.style.display = "block";
-        texts.style.justifyContent = "space-between";
+        texts.style.display = "flex";
         main.style.zIndex = "-1";
         indicator.style.display = "block";
         enemyBoats.onclick = () => {
@@ -685,7 +875,7 @@ window.onload = () => {
                     continue;
                 }
             }
-            indicator.innerHTML = "Remaining enemy boxes: " + counter;
+            indicator.innerHTML = "Remaining enemy<br> boxes: " + counter;
 
         }, 10);
         [...boxes].forEach((box) => {
@@ -714,7 +904,7 @@ window.onload = () => {
         let counter_ai = 0;
 
         for(let i = 1; i <= 1; i++){
-            for(let i = 1; i <= 3; i++){
+            for(let j = 1; j <= 3; j++){
                 let randomNum = Math.floor(Math.random() * (69 - 0 + 1) + 0);
                 if(array.includes(randomNum) === false){
                     boxes[randomNum].classList.add('enemy');
@@ -723,7 +913,7 @@ window.onload = () => {
                     console.log(randomNum)
                     small_enemy_boat_counter++;
                 }else{
-                    i--;
+                    j--;
                 }
             }
             for(let j = 1; j <= 3; j++){
@@ -864,10 +1054,15 @@ window.onload = () => {
         start_button.style.display = "none";
 
         info.innerHTML = "The enemy has chosen a boxes.";
-        boatsTitle.innerHTML = "Enemy Boats";
+        boatsTitle.innerHTML = "Enemy boats";
         smallEnemyBoat.innerHTML = "Small ships : " + small_enemy_boat_counter;
         mediumEnemyBoat.innerHTML = "Medium ships: " + medium_enemy_boat_counter;
         longEnemyBoat.innerHTML = "Long ships: " + long_enemy_boat_counter;
+
+        boatsTitle2.innerHTML = "Your boats";
+        smallEnemyBoat.innerHTML = "Small ships : " + small_boat_counter;
+        mediumEnemyBoat.innerHTML = "Medium ships: " + medium_boat_counter;
+        longEnemyBoat.innerHTML = "Long ships: " + long_boat_counter;
         setTimeout(() => {
             info.innerHTML = "Now it's your turn.";
             main.style.zIndex = "1";
@@ -1091,7 +1286,7 @@ window.onload = () => {
                         main.style.zIndex = "-1 ";
                         info.innerHTML = "Miss";
                         box.classList.add('missed');
-                        box.style.backgroundColor = "rgba(0, 0, 0, 0.4)"
+                        box.style.backgroundColor = "rgba(0, 0, 0, 0.6)"
                         setTimeout(() => {
                             info.innerHTML = "Now it's enemy turn.";
                         }, 1000)
@@ -1101,6 +1296,7 @@ window.onload = () => {
                                 box.style.color = "black";
                                 if(box.classList.contains('smallShip') === true){
                                     box.style.backgroundColor = "rgb(0, 0, 0)"
+                                    box.style.borderRadius = "10em 10em"
                                 }
                                 if(box.classList.contains('firstPartOfMediumShipLinear') === true){
                                     box.style.borderTopRightRadius = "1em";
@@ -1175,7 +1371,7 @@ window.onload = () => {
                                     box.style.background = "none"
                                 }
                                 if(box.classList.contains('enemyMissed') === true){
-                                    box.style.backgroundColor = "rgba(0, 0, 0, 0.4)"
+                                    box.style.backgroundColor = "rgba(0, 0, 0, 0.6)"
                                 }
                                 if(box.classList.contains('enemyHit') === true){
                                     box.style.backgroundColor = "rgba(255, 0, 0, 0.4)";
@@ -1207,7 +1403,7 @@ window.onload = () => {
                                 isEnemyWinnerCounter--;
                             }else{
                                 boxes[randomNum].classList.add('enemyMissed');
-                                boxes[randomNum].style.backgroundColor = "rgba(0, 0, 0, 0.4)";
+                                boxes[randomNum].style.backgroundColor = "rgba(0, 0, 0, 0.6)";
                             }
                         }, 1500)
                         setTimeout(() => {
@@ -1218,10 +1414,13 @@ window.onload = () => {
                                     box.style.background = "none"
                                 }
                                 if(box.classList.contains('missed') === true){
-                                    box.style.backgroundColor = "rgba(0, 0, 0, 0.4)"
+                                    box.style.backgroundColor = "rgba(0, 0, 0, 0.6)"
                                 }
                                 if(box.classList.contains('enemyMissed') === true){
                                     box.style.background = "none"
+                                }
+                                if(box.classList.contains('missed') === true && box.classList.contains('enemyMissed') === true){
+                                    box.style.backgroundColor = "rgba(0, 0, 0, 0.6)";
                                 }
                                 if(box.classList.contains('hit') === true){
                                     box.style.backgroundColor = "rgba(255, 0, 0, 0.4)";
@@ -1326,10 +1525,23 @@ window.onload = () => {
                 if(isPlayerWinnerCounter <= 0){
                     info.innerHTML = "You won the game.";
                     clearInterval(winner);
-                    main.style.zIndex
+                    main.style.zIndex = "-1";
+                    play_again_button.style.display = "block";
+                    play_again_button.innerHTML = "Play Again";
+                    enemyBoats.style.display = "none";
+                    play_again_button.onclick = () => {
+                        location.reload();
+                    }
                 }
                 if(isEnemyWinnerCounter <= 0){
                     info.innerHTML = "The enemy won the game. You lost.";
+                    main.style.zIndex = "-1";
+                    play_again_button.style.display = "block";
+                    play_again_button.innerHTML = "Play Again";
+                    enemyBoats.style.display = "none";
+                    play_again_button.onclick = () => {
+                        location.reload();
+                    }
                     clearInterval(winner);
                 }
             }, 10)
@@ -1338,6 +1550,5 @@ window.onload = () => {
 }
 
 //Pole okolo lodi v konfiguraci, aby nebyly moc u sebe
-//Az se znici moje lod, tak zšedne
-//Udelat Play again
+//Trochu zlepsit ai, aby se po urcitym kole strefilo do lode
 
