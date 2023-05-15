@@ -1301,6 +1301,9 @@ window.onload = () => {
                         box.style.animation = "none"
                         box.style.backgroundColor = "rgb(255, 0, 0, 0.4)";
                         info.innerHTML = "You hit an oponent!";
+                        setTimeout(() => {
+                            info.innerHTML = "You have another chance"
+                        }, 500);
                         if(box.classList.contains('hit')){
                             box.style.color = "rgba(255, 0, 0, 0.2)"
                         }
@@ -1771,6 +1774,3 @@ window.onload = () => {
         }, 1500)
     }
 }
-
-//Pole okolo lodi v konfiguraci, aby nebyly moc u sebe
-//Trochu zlepsit ai, aby se po urcitym kole strefilo do lode
