@@ -167,8 +167,9 @@ body{
 	height: 100%;
 	top:-2px;
 	left:-2px;
-	opacity: 0;
+	opacity: var(--opacityRotate, 0);
 	border: 3px solid rgba(0, 0, 0, 0.4);
+	background-color: var(--backgroundColor, none);
 	border-radius: 0.5em 0.5em;
 	animation: var(--animationRotate, none);
 }
@@ -204,6 +205,46 @@ body{
 	margin-bottom: 5px;
 	margin-top: 5px;
 }
+#start_button{
+	position: relative;
+	padding: 5px;
+}
+#start_button::after{
+	content: '';
+	z-index: -1;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top:-2px;
+	left:-2px;
+	opacity: 0;
+	border: 3px solid rgba(0, 0, 0, 0.4);
+	background-color: rgba(0, 0, 0, 0.2);
+	border-radius: 0.5em 0.5em;
+}
+#start_button:hover::after{
+	animation: universal_hover_animation 1.5s forwards infinite;
+}
+#play_again_button{
+	position: relative;
+	padding: 5px;
+}
+#play_again_button::after{
+	content: '';
+	z-index: -1;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top:-2px;
+	left:-2px;
+	opacity: 0;
+	border: 3px solid rgba(0, 0, 0, 0.4);
+	background-color: rgba(0, 0, 0, 0.2);
+	border-radius: 0.5em 0.5em;
+}
+#play_again_button:hover::after{
+	animation: universal_hover_animation 1.5s forwards infinite;
+}
 @keyframes destroyed_boat_animation{
 	0%{
 		color: rgba(255, 0, 0, 0.3)
@@ -221,6 +262,40 @@ body{
 		color:rgba(255, 0, 0, 0.4)
 	}
 }
+@keyframes hover_boat_animation{
+	0%{
+		background-color: rgba(255, 0, 0, 0.1)
+	}
+	25%{
+		background-color: rgba(255, 0, 0, 0.15)
+	}
+	50%{
+		background-color: rgba(255, 0, 0, 0.2)
+	}
+	75%{
+		background-color: rgba(255, 0, 0, 0.15);
+	}
+	100%{
+		background-color:rgba(255, 0, 0, 0.1)
+	}
+}
+@keyframes boat_selected_animation{
+	0%{
+		border:4px solid rgba(255, 255, 0, 0.5)
+	}
+	25%{
+		border:4px solid rgba(255, 255, 0, 0.6)
+	}
+	50%{
+		border:4px solid rgba(255, 255, 0, 0.7)
+	}
+	75%{
+		border:4px solid rgba(255, 255, 0, 0.6)
+	}
+	100%{
+		border:4px solid rgba(255, 255, 0, 0.5)
+	}
+}
 @keyframes universal_hover_animation{
 	0%{
 		opacity: 0.1;
@@ -236,7 +311,7 @@ body{
 	}
 	30%{
 		opacity: 0.15;
-		background-color: rgba(0, 0, 0, 0.15);
+		background-color: rgba(0, 0, 0, 0.2);
 	}
 	40%{
 		opacity: 0.2;
@@ -244,11 +319,11 @@ body{
 	}
 	50%{
 		opacity: 0.2;
-		background-color: rgba(0, 0, 0, 0.2);
+		background-color: rgba(0, 0, 0, 0.3);
 	}
 	60%{
 		opacity: 0.2;
-		background-color: rgba(0, 0, 0, 0.2);
+		background-color: rgba(0, 0, 0, 0.3);
 	}
 	70%{
 		opacity: 0.2;
@@ -256,11 +331,11 @@ body{
 	}
 	80%{
 		opacity: 0.15;
-		background-color: rgba(0, 0, 0, 0.15);
+		background-color: rgba(0, 0, 0, 0.2);
 	}
 	90%{
 		opacity: 0.15;
-		background-color: rgba(0, 0, 0, 0.15);
+		background-color: rgba(0, 0, 0, 0.1);
 	}
 	100%{
 		opacity: 0.1;
