@@ -145,6 +145,32 @@ window.onload = () => {
                 }
             })
         }
+        mediumShip.addEventListener('click', () => {
+            smallShip.style.border = "none";
+            selected = false;
+            smallShip.onmouseover = () => {
+                smallShip.style.animation = "boat_selected_animation 1s forwards infinite";
+                smallShip.addEventListener('mouseout', () => {
+                    smallShip.style.animation = "none";
+                }, {once : true})
+                smallShip.addEventListener('click', () => {
+                    smallShip.style.animation = "none";
+                }, {once : true})
+            }
+        }, {once : true});
+        longShip.addEventListener('click', () => {
+            smallShip.style.border = "none";
+            selected = false;
+            smallShip.onmouseover = () => {
+                smallShip.style.animation = "boat_selected_animation 1s forwards infinite";
+                smallShip.addEventListener('mouseout', () => {
+                    smallShip.style.animation = "none";
+                }, {once : true})
+                smallShip.addEventListener('click', () => {
+                    smallShip.style.animation = "none";
+                }, {once : true})
+            }
+        }, {once : true});
     }
     // || 
 
@@ -435,6 +461,28 @@ window.onload = () => {
             smallShip.addEventListener('click', () => {
                 mediumShip.style.border = "none";
                 selected = false;
+                mediumShip.onmouseover = () => {
+                    mediumShip.style.animation = "boat_selected_animation 1s forwards infinite";
+                    mediumShip.addEventListener('mouseout', () => {
+                        mediumShip.style.animation = "none";
+                    }, {once : true})
+                    mediumShip.addEventListener('click', () => {
+                        mediumShip.style.animation = "none";
+                    }, {once : true})
+                }
+            }, {once : true});
+            longShip.addEventListener('click', () => {
+                mediumShip.style.border = "none";
+                selected = false;
+                mediumShip.onmouseover = () => {
+                    mediumShip.style.animation = "boat_selected_animation 1s forwards infinite";
+                    mediumShip.addEventListener('mouseout', () => {
+                        mediumShip.style.animation = "none";
+                    }, {once : true})
+                    mediumShip.addEventListener('click', () => {
+                        mediumShip.style.animation = "none";
+                    }, {once : true})
+                }
             }, {once : true});
         }
         else{
@@ -974,6 +1022,32 @@ window.onload = () => {
             rotateButton.style.background = "none";
             rotateButton.style.border = "none";
         }
+        mediumShip.addEventListener('click', () => {
+            longShip.style.border = "none";
+            selected = false;
+            longShip.onmouseover = () => {
+                longShip.style.animation = "boat_selected_animation 1s forwards infinite";
+                longShip.addEventListener('mouseout', () => {
+                    longShip.style.animation = "none";
+                }, {once : true})
+                longShip.addEventListener('click', () => {
+                    longShip.style.animation = "none";
+                }, {once : true})
+            }
+        }, {once : true});
+        smallShip.addEventListener('click', () => {
+            longShip.style.border = "none";
+            selected = false;
+            longShip.onmouseover = () => {
+                longShip.style.animation = "boat_selected_animation 1s forwards infinite";
+                longShip.addEventListener('mouseout', () => {
+                    longShip.style.animation = "none";
+                }, {once : true})
+                longShip.addEventListener('click', () => {
+                    longShip.style.animation = "none";
+                }, {once : true})
+            }
+        }, {once : true});
     }
     let start_interval = setInterval(() => {
         if(counter_one <= 0 && counter_two <= 0 && counter_three <= 0){
@@ -1697,3 +1771,6 @@ window.onload = () => {
         }, 1500)
     }
 }
+
+//Pole okolo lodi v konfiguraci, aby nebyly moc u sebe
+//Trochu zlepsit ai, aby se po urcitym kole strefilo do lode
