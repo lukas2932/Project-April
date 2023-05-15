@@ -121,6 +121,13 @@ window.onload = () => {
             selected = true;
             rotateButton.style.display = "block";
             texts.style.justifyContent = "center";
+            //Zde jsem skoncil
+            rotateButton.onmouseover = () => {
+                rotateButton.style.setProperty('--animationRotate', 'universal_hover_animation 1.5s forwards infinite');
+                rotateButton.addEventListener('mouseout', () => {
+                    rotateButton.style.setProperty('--animationRotate', 'none');
+                }, {once : true})
+            }
             rotateButton.onclick = () => {
                 if(!rotateSelected){
                     rotateSelected = true;
