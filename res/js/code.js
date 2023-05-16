@@ -1653,7 +1653,7 @@ window.onload = () => {
                                 setTimeout(() => {
                                     setTimeout(() => {
                                         info.innerHTML = "Now it's your turn.";
-                                    }, 500)
+                                    }, 250)
                                     main.style.zIndex = "1 ";
                                     [...boxes].forEach((box) => {
                                         if(box.classList.contains('smallShip') === true || box.classList.contains('mediumShip') === true || box.classList.contains('longShip') === true){
@@ -1764,7 +1764,7 @@ window.onload = () => {
                                             box.style.animation = "destroyed_boat_animation 1.5s forwards infinite";
                                         }
                                     })
-                                }, 2500)
+                                }, 2000)
                             }
                         }, 1500)
                     }
