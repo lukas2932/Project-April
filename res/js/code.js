@@ -93,6 +93,7 @@ window.onload = () => {
                 })
             }
             smallShip.style.border = "3px solid yellow";
+            rotateButton.style.display = "none";
             main.style.zIndex = "1";
             selected = true;
             [...boxes].forEach((box) => {
@@ -197,6 +198,9 @@ window.onload = () => {
             rotateButton.style.display = "block";
             texts.style.justifyContent = "center";
             //Zde jsem skoncil
+            rotateButton.style.setProperty('--opacityRotate','0');
+            rotateButton.style.setProperty('--backgroundColor','none');
+            rotateButton.style.setProperty('--animationRotate','none');
             rotateButton.onmouseover = () => {
                 rotateButton.style.setProperty('--animationRotate', 'universal_hover_animation 1.5s forwards infinite');
                 rotateButton.addEventListener('mouseout', () => {
@@ -495,6 +499,9 @@ window.onload = () => {
                     mediumShip.style.animation = "none";
                 }, {once : true})
             }
+            rotateButton.style.setProperty('--opacityRotate', '0');
+            rotateButton.style.setProperty('--backgroundColor', 'none');
+            rotateButton.style.setProperty('--animationRotate', 'none');
             rotateButton.style.display = "none"
             mediumShip.style.border = "none";
             texts.style.justifyContent = "space-between";
@@ -527,6 +534,9 @@ window.onload = () => {
             main.style.zIndex = "1";
             rotateButton.style.display = "block";
             texts.style.justifyContent = "center";
+            rotateButton.style.setProperty('--opacityRotate','0');
+            rotateButton.style.setProperty('--backgroundColor','none');
+            rotateButton.style.setProperty('--animationRotate','none');
             rotateButton.onmouseover = () => {
                 rotateButton.style.setProperty('--animationRotate', 'universal_hover_animation 1.5s forwards infinite');
                 rotateButton.addEventListener('mouseout', () => {
@@ -1005,6 +1015,9 @@ window.onload = () => {
             
         }
         else{
+            rotateButton.style.setProperty('--opacityRotate', '0');
+            rotateButton.style.setProperty('--backgroundColor', 'none');
+            rotateButton.style.setProperty('--animationRotate', 'none');
             longShip.onmouseover = () => {
                 longShip.style.animation = "boat_selected_animation 1s forwards infinite";
                 longShip.addEventListener('mouseout', () => {
@@ -1301,9 +1314,6 @@ window.onload = () => {
                         box.style.animation = "none"
                         box.style.backgroundColor = "rgb(255, 0, 0, 0.4)";
                         info.innerHTML = "You hit an oponent!";
-                        setTimeout(() => {
-                            info.innerHTML = "You have another chance"
-                        }, 500);
                         if(box.classList.contains('hit')){
                             box.style.color = "rgba(255, 0, 0, 0.2)"
                         }
@@ -1499,6 +1509,11 @@ window.onload = () => {
                             }
                         }
                         isPlayerWinnerCounter--;
+                        if(isPlayerWinnerCounter > 0){
+                            setTimeout(() => {
+                                info.innerHTML = "You have another chance"
+                            }, 400);
+                        }
                     }else{
                         main.style.zIndex = "-1 ";
                         info.innerHTML = "Miss";
@@ -1611,139 +1626,147 @@ window.onload = () => {
                                 
                             });
                         }, 1000)
+                        let canGO = false;
                         setTimeout(() => {
-                            for(let i = 1; i <= 1; i++){
-                                let randomNum = Math.floor(Math.random() * (69 - 0 + 1) + 0);
-                                console.log(randomNum);
-                                if(arrayEnemyMisses.includes(randomNum) === false){
-                                    if(boxes[randomNum].classList.contains('smallShip') === true || boxes[randomNum].classList.contains('mediumShip') === true || boxes[randomNum].classList.contains('longShip') === true){
-                                        boxes[randomNum].classList.add('enemyHit');
-                                        boxes[randomNum].style.backgroundColor = "rgba(255, 0, 0, 0.4)";
-                                        arrayEnemyMisses.push(randomNum);
-                                        isEnemyWinnerCounter--;
+                                for(let i = 1; i <= 1; i++){
+                                    let randomNum = Math.floor(Math.random() * (69 - 0 + 1) + 0);
+                                    console.log(randomNum);
+                                    if(arrayEnemyMisses.includes(randomNum) === false){
+                                        if(boxes[randomNum].classList.contains('smallShip') === true || boxes[randomNum].classList.contains('mediumShip') === true || boxes[randomNum].classList.contains('longShip') === true){
+                                            boxes[randomNum].classList.add('enemyHit');
+                                            boxes[randomNum].style.backgroundColor = "rgba(255, 0, 0, 0.4)";
+                                            arrayEnemyMisses.push(randomNum);
+                                            isEnemyWinnerCounter--;
+                                            info.innerHTML = "Enemy hit you. Enemy got another chance";
+                                            i--;
+                                        }else{
+                                            boxes[randomNum].classList.add('enemyMissed');
+                                            boxes[randomNum].style.backgroundColor = "rgba(0, 0, 0, 0.6)";
+                                            arrayEnemyMisses.push(randomNum);
+                                            canGO = true;
+                                        }
                                     }else{
-                                        boxes[randomNum].classList.add('enemyMissed');
-                                        boxes[randomNum].style.backgroundColor = "rgba(0, 0, 0, 0.6)";
-                                        arrayEnemyMisses.push(randomNum);
+                                        i--;
                                     }
-                                }else{
-                                    i--;
-                                }
+                            }
+                            if(canGO === true){
+                                setTimeout(() => {
+                                    setTimeout(() => {
+                                        info.innerHTML = "Now it's your turn.";
+                                    }, 500)
+                                    main.style.zIndex = "1 ";
+                                    [...boxes].forEach((box) => {
+                                        if(box.classList.contains('smallShip') === true || box.classList.contains('mediumShip') === true || box.classList.contains('longShip') === true){
+                                            box.style.background = "none"
+                                        }
+                                        if(box.classList.contains('missed') === true){
+                                            box.style.backgroundColor = "rgba(0, 0, 0, 0.6)"
+                                        }
+                                        if(box.classList.contains('enemyMissed') === true){
+                                            box.style.background = "none"
+                                        }
+                                        if(box.classList.contains('missed') === true && box.classList.contains('enemyMissed') === true){
+                                            box.style.backgroundColor = "rgba(0, 0, 0, 0.6)";
+                                        }
+                                        if(box.classList.contains('hit') === true){
+                                            box.style.backgroundColor = "rgba(255, 0, 0, 0.4)";
+                                        }
+                                        if(box.classList.contains('firstPartOfMediumShipLinear') === true){
+                                            box.style.borderRadius = "10em 10em"
+                                        }
+                                        if(box.classList.contains('lastPartOfMediumShipLinear') === true){
+                                            box.style.borderRadius = "10em 10em"
+                                        }
+                                        if(box.classList.contains('firstPartOfMediumShipVertical') === true){
+                                            box.style.borderRadius = "10em 10em"
+                                        }
+                                        if(box.classList.contains('lastPartOfMediumShipVertical') === true){
+                                            box.style.borderRadius = "10em 10em"
+                                        }
+                                        if(box.classList.contains('firstPartOfLongShipLinear') === true){
+                                            box.style.borderRadius = "10em 10em"
+                                        }
+                                        if(box.classList.contains('centerPartOfLongShipLinear') === true){
+                                            box.style.borderRadius = "10em 10em"
+                                        }
+                                        if(box.classList.contains('lastPartOfLongShipLinear') === true){
+                                            box.style.borderRadius = "10em 10em"
+                                        }
+                                        if(box.classList.contains('firstPartOfLongShipVertical')){
+                                            box.style.borderRadius = "10em 10em"
+                                        }
+                                        if(box.classList.contains('centerPartOfLongShipVertical')){
+                                            box.style.borderRadius = "10em 10em"
+                                        }
+                                        if(box.classList.contains('lastPartOfLongShipVertical')){
+                                            box.style.borderRadius = "10em 10em"
+                                        }
+                                        if(box.classList.contains('destroyed_enemy_first_part_of_medium_ship_linear') === true){
+                                            box.style.borderTopRightRadius = "1em";
+                                            box.style.borderBottomRightRadius = "1em";
+                                            box.style.backgroundColor = "rgba(255, 0, 0, 0.55)";
+                                            box.style.animation = "destroyed_boat_animation 1.5s forwards infinite";
+                                        }
+                                        if(box.classList.contains('destroyed_enemy_last_part_of_medium_ship_linear') === true){
+                                            box.style.borderTopLeftRadius = "1em";
+                                            box.style.borderBottomLeftRadius = "1em";
+                                            box.style.backgroundColor = "rgba(255, 0, 0, 0.55)"
+                                            box.style.animation = "destroyed_boat_animation 1.5s forwards infinite";
+                                        }
+                                        if(box.classList.contains('destroyed_enemy_first_part_of_medium_ship_vertical') === true){
+                                            box.style.borderBottomLeftRadius = "1em";
+                                            box.style.borderBottomRightRadius = "1em";
+                                            box.style.backgroundColor = "rgba(255, 0, 0, 0.55)"
+                                            box.style.animation = "destroyed_boat_animation 1.5s forwards infinite";
+                                        }
+                                        if(box.classList.contains('destroyed_enemy_last_part_of_medium_ship_vertical') === true){
+                                            box.style.borderTopLeftRadius = "1em";
+                                            box.style.borderTopRightRadius = "1em";
+                                            box.style.backgroundColor = "rgba(255, 0, 0, 0.55)"
+                                            box.style.animation = "destroyed_boat_animation 1.5s forwards infinite";
+                                        }
+                                        if(box.classList.contains('destroyed_enemy_first_part_of_long_ship_linear') === true){
+                                            box.style.borderTopRightRadius = "1em";
+                                            box.style.borderBottomRightRadius = "1em";
+                                            box.style.backgroundColor = "rgba(255, 0, 0, 0.55)"
+                                            box.style.animation = "destroyed_boat_animation 1.5s forwards infinite";
+                                        }
+                                        if(box.classList.contains('destroyed_enemy_center_part_of_long_ship_linear') === true){
+                                            box.style.borderRadius = "1em";
+                                            box.style.backgroundColor = "rgba(255, 0, 0, 0.55)"
+                                            box.style.animation = "destroyed_boat_animation 1.5s forwards infinite";
+                                        }
+                                        if(box.classList.contains('destroyed_enemy_last_part_of_long_ship_linear') === true){
+                                            box.style.borderTopLeftRadius = "1em";
+                                            box.style.borderBottomLeftRadius = "1em";
+                                            box.style.backgroundColor = "rgba(255, 0, 0, 0.55)"
+                                            box.style.animation = "destroyed_boat_animation 1.5s forwards infinite";
+                                        }
+                                        if(box.classList.contains('destroyed_enemy_first_part_of_long_ship_vertical') === true){
+                                            box.style.borderBottomLeftRadius = "1em";
+                                            box.style.borderBottomRightRadius = "1em";
+                                            box.style.backgroundColor = "rgba(255, 0, 0, 0.55)"
+                                            box.style.animation = "destroyed_boat_animation 1.5s forwards infinite";
+                                        }
+                                        if(box.classList.contains('destroyed_enemy_center_part_of_long_ship_vertical') === true){
+                                            box.style.borderRadius = "1em";
+                                            box.style.backgroundColor = "rgba(255, 0, 0, 0.55)"
+                                            box.style.animation = "destroyed_boat_animation 1.5s forwards infinite";
+                                        }
+                                        if(box.classList.contains('destroyed_enemy_last_part_of_long_ship_vertical') === true){
+                                            box.style.borderTopLeftRadius = "1em";
+                                            box.style.borderTopRightRadius = "1em";
+                                            box.style.backgroundColor = "rgba(255, 0, 0, 0.55)"
+                                            box.style.animation = "destroyed_boat_animation 1.5s forwards infinite";
+                                        }
+                                        if(box.classList.contains('DestroyedSmallShipEnemy') === true){
+                                            box.style.backgroundColor = "rgba(255, 0, 0, 0.55)"
+                                            box.style.animation = "destroyed_boat_animation 1.5s forwards infinite";
+                                        }
+                                    })
+                                }, 2500)
                             }
                         }, 1500)
-                        setTimeout(() => {
-                            info.innerHTML = "Now it's your turn.";
-                            main.style.zIndex = "1 ";
-                            [...boxes].forEach((box) => {
-                                if(box.classList.contains('smallShip') === true || box.classList.contains('mediumShip') === true || box.classList.contains('longShip') === true){
-                                    box.style.background = "none"
-                                }
-                                if(box.classList.contains('missed') === true){
-                                    box.style.backgroundColor = "rgba(0, 0, 0, 0.6)"
-                                }
-                                if(box.classList.contains('enemyMissed') === true){
-                                    box.style.background = "none"
-                                }
-                                if(box.classList.contains('missed') === true && box.classList.contains('enemyMissed') === true){
-                                    box.style.backgroundColor = "rgba(0, 0, 0, 0.6)";
-                                }
-                                if(box.classList.contains('hit') === true){
-                                    box.style.backgroundColor = "rgba(255, 0, 0, 0.4)";
-                                }
-                                if(box.classList.contains('firstPartOfMediumShipLinear') === true){
-                                    box.style.borderRadius = "10em 10em"
-                                }
-                                if(box.classList.contains('lastPartOfMediumShipLinear') === true){
-                                    box.style.borderRadius = "10em 10em"
-                                }
-                                if(box.classList.contains('firstPartOfMediumShipVertical') === true){
-                                    box.style.borderRadius = "10em 10em"
-                                }
-                                if(box.classList.contains('lastPartOfMediumShipVertical') === true){
-                                    box.style.borderRadius = "10em 10em"
-                                }
-                                if(box.classList.contains('firstPartOfLongShipLinear') === true){
-                                    box.style.borderRadius = "10em 10em"
-                                }
-                                if(box.classList.contains('centerPartOfLongShipLinear') === true){
-                                    box.style.borderRadius = "10em 10em"
-                                }
-                                if(box.classList.contains('lastPartOfLongShipLinear') === true){
-                                    box.style.borderRadius = "10em 10em"
-                                }
-                                if(box.classList.contains('firstPartOfLongShipVertical')){
-                                    box.style.borderRadius = "10em 10em"
-                                }
-                                if(box.classList.contains('centerPartOfLongShipVertical')){
-                                    box.style.borderRadius = "10em 10em"
-                                }
-                                if(box.classList.contains('lastPartOfLongShipVertical')){
-                                    box.style.borderRadius = "10em 10em"
-                                }
-                                if(box.classList.contains('destroyed_enemy_first_part_of_medium_ship_linear') === true){
-                                    box.style.borderTopRightRadius = "1em";
-                                    box.style.borderBottomRightRadius = "1em";
-                                    box.style.backgroundColor = "rgba(255, 0, 0, 0.55)";
-                                    box.style.animation = "destroyed_boat_animation 1.5s forwards infinite";
-                                }
-                                if(box.classList.contains('destroyed_enemy_last_part_of_medium_ship_linear') === true){
-                                    box.style.borderTopLeftRadius = "1em";
-                                    box.style.borderBottomLeftRadius = "1em";
-                                    box.style.backgroundColor = "rgba(255, 0, 0, 0.55)"
-                                    box.style.animation = "destroyed_boat_animation 1.5s forwards infinite";
-                                }
-                                if(box.classList.contains('destroyed_enemy_first_part_of_medium_ship_vertical') === true){
-                                    box.style.borderBottomLeftRadius = "1em";
-                                    box.style.borderBottomRightRadius = "1em";
-                                    box.style.backgroundColor = "rgba(255, 0, 0, 0.55)"
-                                    box.style.animation = "destroyed_boat_animation 1.5s forwards infinite";
-                                }
-                                if(box.classList.contains('destroyed_enemy_last_part_of_medium_ship_vertical') === true){
-                                    box.style.borderTopLeftRadius = "1em";
-                                    box.style.borderTopRightRadius = "1em";
-                                    box.style.backgroundColor = "rgba(255, 0, 0, 0.55)"
-                                    box.style.animation = "destroyed_boat_animation 1.5s forwards infinite";
-                                }
-                                if(box.classList.contains('destroyed_enemy_first_part_of_long_ship_linear') === true){
-                                    box.style.borderTopRightRadius = "1em";
-                                    box.style.borderBottomRightRadius = "1em";
-                                    box.style.backgroundColor = "rgba(255, 0, 0, 0.55)"
-                                    box.style.animation = "destroyed_boat_animation 1.5s forwards infinite";
-                                }
-                                if(box.classList.contains('destroyed_enemy_center_part_of_long_ship_linear') === true){
-                                    box.style.borderRadius = "1em";
-                                    box.style.backgroundColor = "rgba(255, 0, 0, 0.55)"
-                                    box.style.animation = "destroyed_boat_animation 1.5s forwards infinite";
-                                }
-                                if(box.classList.contains('destroyed_enemy_last_part_of_long_ship_linear') === true){
-                                    box.style.borderTopLeftRadius = "1em";
-                                    box.style.borderBottomLeftRadius = "1em";
-                                    box.style.backgroundColor = "rgba(255, 0, 0, 0.55)"
-                                    box.style.animation = "destroyed_boat_animation 1.5s forwards infinite";
-                                }
-                                if(box.classList.contains('destroyed_enemy_first_part_of_long_ship_vertical') === true){
-                                    box.style.borderBottomLeftRadius = "1em";
-                                    box.style.borderBottomRightRadius = "1em";
-                                    box.style.backgroundColor = "rgba(255, 0, 0, 0.55)"
-                                    box.style.animation = "destroyed_boat_animation 1.5s forwards infinite";
-                                }
-                                if(box.classList.contains('destroyed_enemy_center_part_of_long_ship_vertical') === true){
-                                    box.style.borderRadius = "1em";
-                                    box.style.backgroundColor = "rgba(255, 0, 0, 0.55)"
-                                    box.style.animation = "destroyed_boat_animation 1.5s forwards infinite";
-                                }
-                                if(box.classList.contains('destroyed_enemy_last_part_of_long_ship_vertical') === true){
-                                    box.style.borderTopLeftRadius = "1em";
-                                    box.style.borderTopRightRadius = "1em";
-                                    box.style.backgroundColor = "rgba(255, 0, 0, 0.55)"
-                                    box.style.animation = "destroyed_boat_animation 1.5s forwards infinite";
-                                }
-                                if(box.classList.contains('DestroyedSmallShipEnemy') === true){
-                                    box.style.backgroundColor = "rgba(255, 0, 0, 0.55)"
-                                    box.style.animation = "destroyed_boat_animation 1.5s forwards infinite";
-                                }
-                            })
-                        }, 3500)
                     }
                 },{once : true})
             })
