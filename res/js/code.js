@@ -653,27 +653,39 @@ window.onload = () => {
                                         }
                                     }
                                 }else{
-                                    box.style.backgroundColor = "rgba(255, 0, 0, 0.4)";
-                                    box.style.borderBottomLeftRadius = "1em";
+                                    if(temporarly_one.backgroundColor === "rgba(0, 0, 0, 0)" && temporarly_two.backgroundColor === "rgba(0, 0, 0, 0)"){
+                                        box.style.backgroundColor = "rgba(255, 0, 0, 0.4)";
+                                        box.style.borderBottomLeftRadius = "1em";
+                                        box.style.borderBottomRightRadius = "1em";
+                                        boxes[Number(box.dataset.number) + 7].style.backgroundColor  = "rgba(255, 0, 0, 0.4)";
+                                        boxes[Number(box.dataset.number) + 7].style.borderRadius = "1em 1em";
+                                        box.addEventListener('mouseout',() => {
+                                            box.style.background = "none";
+                                            box.style.borderRadius = "10em 10em";
+                                            boxes[Number(box.dataset.number) + 7].style.background = "none";
+                                            boxes[Number(box.dataset.number) + 7].style.borderRadius = "10em 10em";
+                                        }, {once : true})
+                                    }
+                                    if(temporarly_one.backgroundColor === "rgba(0, 0, 0, 0)" && temporarly_two.backgroundColor !== "rgba(0, 0, 0, 0)"){
+                                        box.style.backgroundColor = "rgba(255, 0, 0, 0.4)";
+                                        box.style.borderBottomLeftRadius = "1em";
+                                        box.style.borderBottomRightRadius = "1em";
+                                        box.addEventListener('mouseout',() => {
+                                            box.style.background = "none";
+                                            box.style.borderRadius = "10em 10em";
+                                        }, {once : true})
+                                    }
+                                }
+                            }else{
+                                if(temporarly_one.backgroundColor === "rgba(0, 0, 0, 0)"){
+                                    box.style.backgroundColor = "rgba(255, 0, 0, 0.4)"
+                                    box.style.borderBottomLeftRadius = "1em"
                                     box.style.borderBottomRightRadius = "1em";
-                                    boxes[Number(box.dataset.number) + 7].style.backgroundColor  = "rgba(255, 0, 0, 0.4)";
-                                    boxes[Number(box.dataset.number) + 7].style.borderRadius = "1em 1em";
                                     box.addEventListener('mouseout',() => {
                                         box.style.background = "none";
                                         box.style.borderRadius = "10em 10em";
-                                        boxes[Number(box.dataset.number) + 7].style.background = "none";
-                                        boxes[Number(box.dataset.number) + 7].style.borderRadius = "10em 10em";
                                     }, {once : true})
-
                                 }
-                            }else{
-                                box.style.backgroundColor = "rgba(255, 0, 0, 0.4)"
-                                box.style.borderBottomLeftRadius = "1em"
-                                box.style.borderBottomRightRadius = "1em";
-                                box.addEventListener('mouseout',() => {
-                                    box.style.background = "none";
-                                    box.style.borderRadius = "10em 10em";
-                                }, {once : true})
                             }
                         }
                     })
@@ -981,26 +993,40 @@ window.onload = () => {
                                 }
                             }
                         }else if(Number(box.dataset.number) === 68){
-                            box.style.backgroundColor = "rgba(255, 0, 0, 0.4)";
+                            if(temporarly_one.backgroundColor === "rgba(0, 0, 0, 0)" && temporarly_two.backgroundColor === "rgba(0, 0, 0, 0)"){
+                                box.style.backgroundColor = "rgba(255, 0, 0, 0.4)";
+                                box.style.borderTopRightRadius = "1em";
+                                box.style.borderBottomRightRadius = "1em";
+                                boxes[Number(box.dataset.number) + 1].style.backgroundColor = "rgba(255, 0, 0, 0.4)";
+                                boxes[Number(box.dataset.number) + 1].style.borderRadius = "1em 1em";
+                                box.addEventListener('mouseout',() => {
+                                    box.style.borderRadius = "10em";
+                                    box.style.background = "none";
+                                    boxes[Number(box.dataset.number) + 1].style.background = "none";
+                                    boxes[Number(box.dataset.number) + 1].style.borderRadius = "10em 10em";
+                                }, {once : true})
+                            }
+                            if(temporarly_one.backgroundColor === "rgba(0, 0, 0, 0)" && temporarly_two.backgroundColor !== "rgba(0, 0, 0, 0)"){
+                                box.style.backgroundColor = "rgba(255, 0, 0, 0.4)";
+                                box.style.borderTopRightRadius = "1em";
+                                box.style.borderBottomRightRadius = "1em";
+                                box.addEventListener('mouseout',() => {
+                                    box.style.borderRadius = "10em";
+                                    box.style.background = "none";
+                                }, {once : true})
+
+                            }
+                        } 
+                    }else{
+                        if(temporarly_one.backgroundColor === "rgba(0, 0, 0, 0)"){
+                            box.style.backgroundColor = "rgba(255, 0, 0, 0.4)"
                             box.style.borderTopRightRadius = "1em";
                             box.style.borderBottomRightRadius = "1em";
-                            boxes[Number(box.dataset.number) + 1].style.backgroundColor = "rgba(255, 0, 0, 0.4)";
-                            boxes[Number(box.dataset.number) + 1].style.borderRadius = "1em 1em";
                             box.addEventListener('mouseout',() => {
                                 box.style.borderRadius = "10em";
                                 box.style.background = "none";
-                                boxes[Number(box.dataset.number) + 1].style.background = "none";
-                                boxes[Number(box.dataset.number) + 1].style.borderRadius = "10em 10em";
                             }, {once : true})
-                        } 
-                    }else{
-                        box.style.backgroundColor = "rgba(255, 0, 0, 0.4)"
-                        box.style.borderTopRightRadius = "1em";
-                        box.style.borderBottomRightRadius = "1em";
-                        box.addEventListener('mouseout',() => {
-                            box.style.borderRadius = "10em";
-                            box.style.background = "none";
-                        }, {once : true})
+                        }
                     }
                 }
             })
