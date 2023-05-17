@@ -1797,3 +1797,6 @@ window.onload = () => {
         }, 1500)
     }
 }
+//lepsi hover
+//bug konfigurace
+//ai s dvouma kolama
