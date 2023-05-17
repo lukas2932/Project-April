@@ -1824,5 +1824,4 @@ window.onload = () => {
     }
 }
 //lepsi hover
-//bug konfigurace
 //ai s dvouma kolama
