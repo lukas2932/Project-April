@@ -273,13 +273,15 @@ window.onload = () => {
                                 }
                             }
                         }else{
-                            box.style.backgroundColor = "rgba(255, 0, 0, 0.4)";
-                            box.style.borderBottomLeftRadius = "1em"
-                            box.style.borderBottomRightRadius = "1em";
-                            box.addEventListener('mouseout',() => {
-                                box.style.background = "none";
-                                box.style.borderRadius = "10em";
-                            }, {once : true})
+                            if(temporarly_one.backgroundColor === "rgba(0, 0, 0, 0)"){
+                                box.style.backgroundColor = "rgba(255, 0, 0, 0.4)";
+                                box.style.borderBottomLeftRadius = "1em"
+                                box.style.borderBottomRightRadius = "1em";
+                                box.addEventListener('mouseout',() => {
+                                    box.style.background = "none";
+                                    box.style.borderRadius = "10em";
+                                }, {once : true})
+                            }
                         }
                     }
                     })
@@ -364,13 +366,16 @@ window.onload = () => {
                                     }
                                 }
                             }else{
-                                box.style.borderTopRightRadius = "1em";
-                                box.style.borderBottomRightRadius = "1em";
-                                box.style.backgroundColor = "rgba(255, 0, 0, 0.4)"
-                                box.addEventListener('mouseout', () => {
-                                    box.style.borderRadius = "10em 10em";
-                                    box.style.background = "none"
-                                })
+                                if(temporarly_one.backgroundColor === "rgba(0, 0, 0, 0)"){
+                                    box.style.borderTopRightRadius = "1em";
+                                    box.style.borderBottomRightRadius = "1em";
+                                    box.style.backgroundColor = "rgba(255, 0, 0, 0.4)"
+                                    box.addEventListener('mouseout', () => {
+                                        box.style.borderRadius = "10em 10em";
+                                        box.style.background = "none"
+                                    })
+                                    
+                                }
                             }
                         }
                     })
@@ -452,13 +457,16 @@ window.onload = () => {
                             }
                         }
                     }else{
-                        box.style.borderTopRightRadius = "1em";
-                        box.style.borderBottomRightRadius = "1em";
-                        box.style.backgroundColor = "rgba(255, 0, 0, 0.4)"
-                        box.addEventListener('mouseout', () => {
-                            box.style.borderRadius = "10em 10em";
-                            box.style.background = "none"
-                        })
+                        if(temporarly_one.backgroundColor === "rgba(0, 0, 0, 0)"){
+                            box.style.borderTopRightRadius = "1em";
+                            box.style.borderBottomRightRadius = "1em";
+                            box.style.backgroundColor = "rgba(255, 0, 0, 0.4)"
+                            box.addEventListener('mouseout', () => {
+                                box.style.borderRadius = "10em 10em";
+                                box.style.background = "none"
+                            })
+                            
+                        }
                     }
                 }
             })
@@ -1825,4 +1833,3 @@ window.onload = () => {
 }
 //lepsi hover
 //ai s dvouma kolama
-// bug s medium ship hover - posledni radek
