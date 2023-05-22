@@ -1825,3 +1825,4 @@ window.onload = () => {
 }
 //lepsi hover
 //ai s dvouma kolama
+// bug s medium ship hover - posledni radek
